@@ -4,6 +4,19 @@
 
 > *<sup>1</sup>University of Rochester, <sup>2</sup>Sony Group Corporation, <sup>3</sup>MIT-IBM Watson AI Lab*
 
+<p align="center">
+  <a href="https://arxiv.org/abs/XXXX.XXXXX" target="_blank">
+    <img src="https://img.shields.io/badge/arXiv-Paper-red.svg?style=for-the-badge&logo=arxiv" alt="arXiv Paper">
+  </a>
+  <a href="https://huggingface.co/datasets/YOUR_DATASET_PATH" target="_blank">
+    <img src="https://img.shields.io/badge/Huggingface-Dataset-blue.svg?style=for-the-badge&logo=huggingface" alt="Huggingface Dataset">
+  </a>
+  <a href="https://huggingface.co/YOUR_MODEL_PATH" target="_blank">
+    <img src="https://img.shields.io/badge/Huggingface-Model-green.svg?style=for-the-badge&logo=huggingface" alt="Huggingface Model">
+  </a>
+</p>
+
+
 ## Video-R4 Training Framework
 <img src="assets/training_framework.png" width="100%">
 
