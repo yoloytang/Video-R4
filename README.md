@@ -20,7 +20,7 @@
 </p>
 
 ## 🌟 News
-- [2025-11-23] Introducing Video-R4, a reinforced video agent with visual rumination for text-rich video reasoning. The [arXiv paper](https://arxiv.org/abs/2511.xxxxx) has been released. Code coming soon.
+- [2025-11-23] Introducing Video-R4, a reinforced video agent with visual rumination for text-rich video reasoning. The [arXiv paper](https://arxiv.org/abs/2511.xxxxx) has been released. Code, model, and dataset are coming soon.
 
 
 ## 🚀 Video-R4 Training Framework
