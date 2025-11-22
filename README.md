@@ -30,3 +30,14 @@
 
 ## Performance
 <img src="assets/bar.png" width="100%">
+
+## Citation
+If you find this work useful, please consider citing:
+```bibtex
+@article{tang2025video-r4,
+  title={Video-R4: Reinforcing Text-Rich Video Reasoning with Visual Rumination},
+  author={Tang, Yunlong and Shimada, Daiku and Hua, Hang and Huang, Chao and Bi, Jing and Feris, Rogerio and Xu, Chenliang},
+  journal={arXiv preprint arXiv:2511.xxxxx},
+  year={2025}
+}
+```
