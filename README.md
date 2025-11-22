@@ -5,13 +5,13 @@
 > *<sup>1</sup>University of Rochester, <sup>2</sup>Sony Group Corporation, <sup>3</sup>MIT-IBM Watson AI Lab*
 
 ### Video-R4
-<img src="assets/teaser.png" width="100%">
+<img src="assets/vis_1.png" width="100%">
 
 ### Data Curation Pipeline
 <img src="assets/data_pipeline.png" width="100%">
 
 
-### Video-R4 Training Framework
+### Training Framework
 
 <img src="assets/training_framework.png" width="100%">
 
