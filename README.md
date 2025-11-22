@@ -4,7 +4,7 @@
 
 > *<sup>1</sup>University of Rochester, <sup>2</sup>Sony Group Corporation, <sup>3</sup>MIT-IBM Watson AI Lab*
 
-<p align="center">
+<p align="left">
   <a href="https://arxiv.org/abs/XXXX.XXXXX" target="_blank">
     <img src="https://img.shields.io/badge/arXiv-Paper-ff7575.svg?style=for-the-badge&logo=arxiv" alt="arXiv Paper">
   </a>
