@@ -4,6 +4,8 @@
 
 > *<sup>1</sup>University of Rochester, <sup>2</sup>Sony Group Corporation, <sup>3</sup>MIT-IBM Watson AI Lab*
 
-### Training Framework
+### Video-R4 Training Framework
+
+<img src="assets/bar.png" width="100%">
 
 <img src="assets/training_framework.png" width="100%">
