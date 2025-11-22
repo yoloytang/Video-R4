@@ -1,0 +1,1444 @@
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> MMPerspective </title>
+
+  <link rel="icon" href="./static/images/logo.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="stylesheet" href="./static/css/leaderboard.css">
+  <link rel="stylesheet" href="./static/css/video-player.css">
+
+  <!-- <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator_bulma.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script> -->
+  <script type="text/javascript" src="static/js/sort-table.js" defer></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/explorer-index.js"></script>
+  <script src="./static/js/question_card.js"></script>
+
+  <script src="./static/js/leaderboard_testmini.js"></script>
+  <!-- <script src="./data/results/output_folders.js" defer></script>
+  <script src="./data/results/model_scores.js" defer></script>
+
+  <script src="./visualizer/data/data_public.js" defer></script> -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const columns = [4, 5, 6, 7, 8, 9];
+        columns.forEach(colIndex => {
+            let maxVal = -Infinity;
+            let maxCell = null;
+            let cells = document.querySelectorAll(`#results tbody tr td:nth-child(${colIndex + 1})`);
+            cells.forEach(cell => {
+                let cellValue = parseFloat(cell.textContent);
+                if (cellValue > maxVal) {
+                    maxVal = cellValue;
+                    maxCell = cell;
+                }
+            });
+            if (maxCell) {
+                maxCell.style.fontWeight = "bold";
+            }
+        });
+    });
+</script>
+
+</head>
+<body>
+
+<nav class="navbar" role="navigation" aria-label="main navigation">
+  <div class="navbar-brand">
+    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+      <span aria-hidden="true"></span>
+    </a>
+  </div>
+  <div class="navbar-menu">
+    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+
+  <div class="navbar-item has-dropdown is-hoverable">
+        <p style="font-size:18px; display: inline; margin-right: -2px; margin-top: 12px;">🔥</p>
+        <a class="navbar-link">
+          More Research
+        </a>
+        <div class="navbar-dropdown">
+          <a class="navbar-item" href="https://github.com/yunlong10/VidComposition">
+            <b>VidComposition</b> 
+          </a>
+
+          <a class="navbar-item" href="https://github.com/yunlong10/Awesome-LLMs-for-Video-Understanding">
+            <b>Video-LLM Survey</b> 
+          </a>
+
+          <a class="navbar-item" href="https://github.com/hanghuacs/MMComposition">
+            <b>MMComposition</b> 
+          </a>
+
+          <a class="navbar-item" href="https://hanghuacs.github.io/MMIG-Bench/">
+            <b>MMIG-Bench</b> 
+          </a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+<style>
+  /* rainbow text start */
+.rainbow {
+  text-align: center;
+  text-decoration: underline;
+  font-size: 32px;
+  font-family: monospace;
+  letter-spacing: 5px;
+}
+.rainbow_text_animated {
+  background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: rainbow_animation 6s ease-in-out infinite;
+  background-size: 400% 100%;
+}
+
+@keyframes rainbow_animation {
+  0%,100% {
+      background-position: 0 0;
+  }
+
+  50% {
+      background-position: 100% 0;
+  }
+}
+/* rainbow text done */
+</style>
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title is-bold">
+            <img src="static/images/logo.png" style="width:1.6em;vertical-align: middle" alt="Logo"/>
+            <span class="rainbow_text_animated" style="vertical-align: middle">MMPerspective</span>
+            </h1>
+          <h2 class="subtitle is-3 publication-subtitle" style="margin-bottom: 0px;">
+            Do MLLMs Understand Perspective? A Comprehensive Benchmark for Perspective Perception, Reasoning, and Robustness
+          </h2>
+          <br>
+          <p class="rainbow" style="font-size: 1.3em; margin-bottom: 10px; text-decoration: none;">
+            <span class="rainbow_text_animated" style="text-decoration: none;">NeurIPS 2025</span>
+          </p>
+          <div class="is-size-5 publication-authors" style="width: 80%; margin: 20px auto;" >
+            <span class="author-block"><a href="https://yunlong10.github.io">Yunlong Tang</a><sup style="color:#6fbf73;">1</sup>*,</span>
+            <span class="author-block"><a href="https://andypinxinliu.github.io/">Pinxin Liu</a><sup style="color:#6fbf73;">1</sup>*,</span>
+            <span class="author-block"><a href="https://zhangyun04.github.io/">Zhangyun Tan</a><sup style="color:#6fbf73;">1</sup>*,</span>
+            <span class="author-block"><a href="https://fmmarkmq.github.io/">Mingqian Feng</a><sup style="color:#6fbf73;">1</sup>,</span>
+            <span class="author-block"><a href="">Rui Mao</a><sup style="color:#6fbf73;">1</sup>,</span>
+            <span class="author-block"><a href="https://wikichao.github.io/">Chao Huang</a><sup style="color:#6fbf73;">1</sup>,</span>
+            <span class="author-block"><a href="https://jing-bi.github.io/">Jing Bi</a><sup style="color:#6fbf73;">1</sup>,</span>
+            <span class="author-block"><a href="https://shawn-yzxiao.github.io/">Yunzhong Xiao</a><sup style="color:#ed4b82;">2</sup>,</span>
+            <span class="author-block"><a href="https://liangsusan-git.github.io/">Susan Liang</a><sup style="color:#6fbf73;">1</sup>,</span>
+            <span class="author-block"><a href="https://hanghuacs.owlstown.net/">Hang Hua</a><sup style="color:#6fbf73;">1</sup>,</span>
+            <span class="author-block"><a href="https://alivosoughi.com/">Ali Vosoughi</a><sup style="color:#6fbf73;">1</sup>,</span>
+            <span class="author-block"><a href="https://songluchuan.github.io/">Luchuan Song</a><sup style="color:#6fbf73;">1</sup>,</span>
+            <span class="author-block"><a href="https://zhangaipi.github.io/">Zeliang Zhang</a><sup style="color:#6fbf73;">1</sup>,</span>
+            <span class="author-block"><a href="https://www.cs.rochester.edu/~cxu22/index.html">Chenliang Xu</a>&dagger;<sup style="color:#6fbf73;">1</sup></span><br>
+            <!-- <span class="author-block" style="font-size:24px"><a href="https://github.com/BradyFU/Video-MME">MMComposition Team</a></span> -->
+            <br>
+            <span class="author-block" style="font-size:18px">* Equal Contribution, &dagger; Corresponding Author</span>
+
+        </div>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup style="color:#6fbf73">1</sup>University of Rochester,</span>
+            <!-- <span class="author-block"><sup style="color:#6fbf73;">1</sup></span> -->
+            <span class="author-block"><sup style="color:#ed4b82">2</sup>Carnegie Mellon University</span>
+            <!-- <span class="paper-block"><b style="color:#f41c1c">ICLR 2024 Oral</b> (85 in 7304, 1.2%)</span> -->
+          </div>
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a href="https://arxiv.org/abs/2505.20426"
+                   class="external-link button is-normal is-rounded is-dark">
+                <!-- <a href="https://lupantech.github.io/papers/arxiv23_mathvista.pdf"
+                   class="external-link button is-normal is-rounded is-dark"> -->
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/yunlong10/MMPerspective"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://github.com/yunlong10/MMPerspective"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <!-- <i class="far fa-images"></i> -->
+                      <p style="font-size:18px">📊</p>
+                  </span>
+                  <span>Dataset</span>
+                </a>
+              </span> 
+              <!-- Leaderboard Link. -->
+              <span class="link-block">
+                <a href="#leaderboard"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <p style="font-size:18px">🏆</p>
+                  </span>
+                  <span>Leaderboard</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a href="#citation"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <p style="font-size:18px">📃</p>
+                  </span>
+                  <span>Cite</span>
+                </a>
+              </span>
+
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+    
+
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="margin-bottom: 2vh;">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        
+        <h2 class="title is-3">Introduction</h2>
+        <div class="content has-text-justified">
+          <!-- Understanding perspective is fundamental to human visual perception, yet the extent to which multimodal large language models (MLLMs) internalize perspective geometry remains unclear. We introduce MMPerspective, the first benchmark specifically designed to systematically evaluate MLLMs' understanding of perspective through 10 carefully crafted tasks across three complementary dimensions: Perspective Perception, Reasoning, and Robustness. Our benchmark comprises 2,711 real-world and synthetic image instances with 5,083 question-answer pairs that probe key capabilities like vanishing point perception, perspective type reasoning, and line relationship understanding. Through evaluating 43 state-of-the-art MLLMs, we uncover significant limitations: while models show competence on basic perceptual tasks, they struggle with compositional reasoning and maintaining spatial consistency. Our analysis reveals patterns between model architecture, scale, and perspective capabilities, highlighting robustness bottlenecks and benefits of chain-of-thought prompting. -->
+
+          Perspective has long served as a cornerstone for representing three-dimensional reality on two-dimensional surfaces, enabling humans to infer spatial structure and depth from flat images. This capability is central to artistic creation, scientific visualization, and machine perception. While some research has attempted to enable models to detect vanishing points and key lines, these approaches often rely on precise mathematical models or specialized datasets, struggling to capture perspective-related semantics or generalize to broader tasks.
+
+          Recent multimodal large language models like GPT-4 and Gemini have shown powerful visual perception capabilities, but their perspective understanding remains untested. While these models excel at high-level vision-language tasks, existing benchmarks rarely evaluate geometric reasoning abilities. It remains unclear whether MLLMs can identify vanishing points, understand line convergence, reason about spatial relationships, or maintain consistent interpretations across viewpoints.
+
+          Our key contributions are:
+
+            <ol> <li>We introduce <strong>MMPerspective</strong>, the first dedicated benchmark for evaluating perspective understanding in MLLMs, spanning 10 tasks across three dimensions, consisting of 2,711 instances and 5,083 QA pairs.</li>
+            <li>We conduct a comprehensive evaluation of 43 representative MLLMs and reveal key limitations in perspective perception, reasoning, and robustness.</li>
+            <li>We offer new insights into current model bottlenecks and provide guidance toward building geometry-aware, spatially grounded multimodal systems.</li> </ol>
+
+</div>
+<img src="static/images/mmperspective.png" />
+
+</div>
+</div>
+<!--/ Abstract. -->
+
+</div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-full has-text-centered content">
+        <h2 class="title is-3" id="leaderboard">🏆 Leaderboard</h2>
+        <div class="content">
+            <p>
+              <strong>Performance of MLLMs on MMPerspective.</strong> Models are grouped by size and ranked by overall accuracy. Best scores in each group are bolded.
+            </p>
+            <table class="js-sort-table js-sort-asc" id="results" style="margin-left: auto; margin-right: auto;">
+                <thead>
+                    <tr>
+                        <th rowspan="1" style="vertical-align: middle; width: 180px;"><strong>Model</strong></th>
+                        <th colspan="4" style="vertical-align: middle;"><strong>Perspective Perception</strong></th>
+                        <th colspan="5" style="vertical-align: middle;"><strong>Perspective Reasoning</strong></th>
+                        <th colspan="3" style="vertical-align: middle;"><strong>P'Percep & P'Reason</strong></th>
+                        <th rowspan="1" style="vertical-align: middle;"><strong>Robustness</strong></th>
+                    </tr>
+                    <tr>
+                        <th style="vertical-align: middle;">Model</th>
+                        <th style="vertical-align: middle;">VPP</th>
+                        <th style="vertical-align: middle;">CLP</th>
+                        <th style="vertical-align: middle;">VAP</th>
+                        <th style="vertical-align: middle;">LDP</th>
+                        <th style="vertical-align: middle;">PTR</th>
+                        <th style="vertical-align: middle;">LRR</th>
+                        <th style="vertical-align: middle;">OVR</th>
+                        <th style="vertical-align: middle;">PTS</th>
+                        <th style="vertical-align: middle;">VPC</th>
+                        <th style="vertical-align: middle;">P Acc</th>
+                        <th style="vertical-align: middle;">R Acc</th>
+                        <th style="vertical-align: middle;">Overall</th>
+                        <th style="vertical-align: middle;">P'Robust</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr style="background-color: #e9edf6;">
+                        <td colspan="14" style="text-align: center;"><em>MLLMs: < 7B</em></td>
+                    </tr>
+                    <tr>
+                        <td>InternVL2.5-2B</td>
+                        <td><strong>47.4</strong></td>
+                        <td>22.8</td>
+                        <td>13.0</td>
+                        <td><strong>65.3</strong></td>
+                        <td><strong>62.2</strong></td>
+                        <td>31.8</td>
+                        <td>16.6</td>
+                        <td>30.0</td>
+                        <td><strong>50.0</strong></td>
+                        <td>37.1</td>
+                        <td><strong>38.1</strong></td>
+                        <td><strong>37.7</strong></td>
+                        <td><strong>46.5</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Qwen2.5-VL-3B</td>
+                        <td>27.6</td>
+                        <td>22.8</td>
+                        <td>56.8</td>
+                        <td>55.1</td>
+                        <td>32.3</td>
+                        <td>32.5</td>
+                        <td>15.9</td>
+                        <td><strong>39.4</strong></td>
+                        <td>44.7</td>
+                        <td>40.6</td>
+                        <td>33.0</td>
+                        <td>36.3</td>
+                        <td>6.4</td>
+                    </tr>
+                    <tr>
+                        <td>InternVL2.5-4B</td>
+                        <td>32.1</td>
+                        <td>26.0</td>
+                        <td><strong>59.3</strong></td>
+                        <td>64.2</td>
+                        <td>28.2</td>
+                        <td>30.5</td>
+                        <td>10.7</td>
+                        <td>37.1</td>
+                        <td>36.8</td>
+                        <td><strong>45.4</strong></td>
+                        <td>28.7</td>
+                        <td>36.1</td>
+                        <td>20.6</td>
+                    </tr>
+                    <tr>
+                        <td>InternVL3-2B</td>
+                        <td>22.4</td>
+                        <td><strong>28.5</strong></td>
+                        <td>50.0</td>
+                        <td>44.6</td>
+                        <td>43.1</td>
+                        <td>31.1</td>
+                        <td><strong>34.4</strong></td>
+                        <td>25.4</td>
+                        <td>43.0</td>
+                        <td>36.4</td>
+                        <td>35.4</td>
+                        <td>35.8</td>
+                        <td>23.9</td>
+                    </tr>
+                    <tr>
+                        <td>InternVL2-4B</td>
+                        <td>26.9</td>
+                        <td>12.2</td>
+                        <td>54.3</td>
+                        <td>60.4</td>
+                        <td>18.0</td>
+                        <td><strong>40.4</strong></td>
+                        <td>18.8</td>
+                        <td>24.4</td>
+                        <td>45.6</td>
+                        <td>38.4</td>
+                        <td>29.4</td>
+                        <td>33.4</td>
+                        <td>7.9</td>
+                    </tr>
+                    <tr>
+                        <td>Qwen2-VL-2B</td>
+                        <td>12.2</td>
+                        <td>19.5</td>
+                        <td>49.4</td>
+                        <td>35.8</td>
+                        <td>23.3</td>
+                        <td>24.5</td>
+                        <td>28.9</td>
+                        <td>32.9</td>
+                        <td>47.4</td>
+                        <td>29.2</td>
+                        <td>31.4</td>
+                        <td>30.4</td>
+                        <td>4.7</td>
+                    </tr>
+                    <tr>
+                        <td>InternVL3-1B</td>
+                        <td>19.9</td>
+                        <td>13.0</td>
+                        <td>53.7</td>
+                        <td>20.7</td>
+                        <td>16.3</td>
+                        <td>8.6</td>
+                        <td>23.7</td>
+                        <td>21.6</td>
+                        <td>47.4</td>
+                        <td>26.8</td>
+                        <td>23.5</td>
+                        <td>25.0</td>
+                        <td>13.8</td>
+                    </tr>
+                    <tr>
+                        <td>InternVL2-1B</td>
+                        <td>20.5</td>
+                        <td>20.3</td>
+                        <td>15.4</td>
+                        <td>24.2</td>
+                        <td>24.1</td>
+                        <td>11.3</td>
+                        <td>24.0</td>
+                        <td>22.1</td>
+                        <td>44.7</td>
+                        <td>20.1</td>
+                        <td>25.2</td>
+                        <td>23.0</td>
+                        <td>6.7</td>
+                    </tr>
+                    <tr>
+                        <td>LLaVA-OV-1B</td>
+                        <td>13.5</td>
+                        <td>14.6</td>
+                        <td>35.8</td>
+                        <td>24.2</td>
+                        <td>15.2</td>
+                        <td>19.2</td>
+                        <td>19.5</td>
+                        <td>22.1</td>
+                        <td>40.4</td>
+                        <td>22.0</td>
+                        <td>23.3</td>
+                        <td>22.7</td>
+                        <td>7.8</td>
+                    </tr>
+                    <tr>
+                        <td>InternVL2-2B</td>
+                        <td>26.9</td>
+                        <td>26.0</td>
+                        <td>3.1</td>
+                        <td>36.8</td>
+                        <td>18.8</td>
+                        <td>12.6</td>
+                        <td>23.1</td>
+                        <td>21.1</td>
+                        <td>34.2</td>
+                        <td>23.2</td>
+                        <td>22.0</td>
+                        <td>22.5</td>
+                        <td>12.3</td>
+                    </tr>
+                    <tr>
+                        <td>InternVL2.5-1B</td>
+                        <td>14.7</td>
+                        <td>23.6</td>
+                        <td>0.6</td>
+                        <td>33.0</td>
+                        <td>20.1</td>
+                        <td>11.3</td>
+                        <td>13.3</td>
+                        <td>34.7</td>
+                        <td>45.6</td>
+                        <td>18.0</td>
+                        <td>25.0</td>
+                        <td>21.9</td>
+                        <td>18.2</td>
+                    </tr>
+                    <tr style="background-color: #e9edf6;">
+                        <td colspan="14" style="text-align: center;"><em>MLLMs: 7B - 9B</em></td>
+                    </tr>
+                    <tr>
+                        <td>InternVL2.5-8B</td>
+                        <td>38.5</td>
+                        <td>17.9</td>
+                        <td>53.1</td>
+                        <td>75.4</td>
+                        <td>40.8</td>
+                        <td>48.3</td>
+                        <td>34.7</td>
+                        <td>24.9</td>
+                        <td>67.5</td>
+                        <td>46.2</td>
+                        <td>43.3</td>
+                        <td><strong>44.6</strong></td>
+                        <td>22.3</td>
+                    </tr>
+                    <tr>
+                        <td>Qwen2.5-VL-7B</td>
+                        <td>35.3</td>
+                        <td>29.3</td>
+                        <td><strong>70.4</strong></td>
+                        <td>73.7</td>
+                        <td>42.4</td>
+                        <td>44.4</td>
+                        <td>32.1</td>
+                        <td>28.6</td>
+                        <td>44.7</td>
+                        <td>52.1</td>
+                        <td>38.5</td>
+                        <td>44.5</td>
+                        <td>15.3</td>
+                    </tr>
+                    <tr>
+                        <td>Qwen2-VL-7B</td>
+                        <td>34.6</td>
+                        <td>25.2</td>
+                        <td>63.0</td>
+                        <td>64.2</td>
+                        <td>57.1</td>
+                        <td>49.0</td>
+                        <td>27.3</td>
+                        <td>31.0</td>
+                        <td>46.5</td>
+                        <td>46.7</td>
+                        <td>42.2</td>
+                        <td>44.2</td>
+                        <td>25.5</td>
+                    </tr>
+                    <tr>
+                        <td>InternVL3-9B</td>
+                        <td>37.2</td>
+                        <td><strong>33.3</strong></td>
+                        <td>63.0</td>
+                        <td>77.5</td>
+                        <td>30.7</td>
+                        <td><strong>53.0</strong></td>
+                        <td>27.9</td>
+                        <td>23.9</td>
+                        <td>43.9</td>
+                        <td>52.8</td>
+                        <td>35.9</td>
+                        <td>43.4</td>
+                        <td>7.3</td>
+                    </tr>
+                    <tr>
+                        <td>InternVL3-8B</td>
+                        <td><strong>42.3</strong></td>
+                        <td>27.6</td>
+                        <td>67.9</td>
+                        <td><strong>81.8</strong></td>
+                        <td>38.1</td>
+                        <td>46.4</td>
+                        <td>20.8</td>
+                        <td>23.9</td>
+                        <td>32.5</td>
+                        <td><strong>54.9</strong></td>
+                        <td>32.3</td>
+                        <td>42.4</td>
+                        <td>15.9</td>
+                    </tr>
+                    <tr>
+                        <td>LLaVA-OV-7B</td>
+                        <td>34.0</td>
+                        <td><strong>33.3</strong></td>
+                        <td>51.2</td>
+                        <td>57.9</td>
+                        <td>44.9</td>
+                        <td><strong>53.0</strong></td>
+                        <td>19.8</td>
+                        <td><strong>35.2</strong></td>
+                        <td>49.1</td>
+                        <td>44.1</td>
+                        <td>40.4</td>
+                        <td>42.0</td>
+                        <td>15.9</td>
+                    </tr>
+                    <tr>
+                        <td>Eagle-X4-8B</td>
+                        <td>39.1</td>
+                        <td>17.1</td>
+                        <td>46.9</td>
+                        <td>47.7</td>
+                        <td><strong>65.3</strong></td>
+                        <td>37.1</td>
+                        <td>18.2</td>
+                        <td>32.9</td>
+                        <td><strong>68.4</strong></td>
+                        <td>37.7</td>
+                        <td><strong>44.4</strong></td>
+                        <td>41.4</td>
+                        <td><strong>55.3</strong></td>
+                    </tr>
+                    <tr>
+                        <td>InternVL2-8B</td>
+                        <td>33.3</td>
+                        <td>19.5</td>
+                        <td>59.3</td>
+                        <td>73.3</td>
+                        <td>27.1</td>
+                        <td>36.4</td>
+                        <td><strong>42.5</strong></td>
+                        <td>22.1</td>
+                        <td>48.2</td>
+                        <td>46.4</td>
+                        <td>35.3</td>
+                        <td>40.2</td>
+                        <td>7.9</td>
+                    </tr>
+                    <tr>
+                        <td>LLaVA-Next-m-7B</td>
+                        <td>35.9</td>
+                        <td>21.1</td>
+                        <td>35.2</td>
+                        <td>50.5</td>
+                        <td>17.7</td>
+                        <td>37.7</td>
+                        <td>15.6</td>
+                        <td>27.2</td>
+                        <td>46.5</td>
+                        <td>35.7</td>
+                        <td>28.9</td>
+                        <td>31.9</td>
+                        <td>16.4</td>
+                    </tr>
+                    <tr>
+                        <td>Eagle-X5-7B</td>
+                        <td>25.0</td>
+                        <td>26.0</td>
+                        <td>24.7</td>
+                        <td>34.7</td>
+                        <td>22.1</td>
+                        <td>46.4</td>
+                        <td>15.6</td>
+                        <td>20.7</td>
+                        <td>42.1</td>
+                        <td>27.6</td>
+                        <td>29.4</td>
+                        <td>28.6</td>
+                        <td>15.9</td>
+                    </tr>
+                    <tr>
+                        <td>LLaVA-Next-v-7B</td>
+                        <td>16.7</td>
+                        <td>20.3</td>
+                        <td>40.7</td>
+                        <td>39.6</td>
+                        <td>16.3</td>
+                        <td>44.4</td>
+                        <td>19.8</td>
+                        <td>16.4</td>
+                        <td>7.0</td>
+                        <td>29.3</td>
+                        <td>20.8</td>
+                        <td>24.6</td>
+                        <td>16.4</td>
+                    </tr>
+                    <tr style="background-color: #e9edf6;">
+                        <td colspan="14" style="text-align: center;"><em>MLLMs: 10B - 30B</em></td>
+                    </tr>
+                    <tr>
+                        <td>InternVL2.5-26B</td>
+                        <td>41.7</td>
+                        <td><strong>35.0</strong></td>
+                        <td>55.6</td>
+                        <td><strong>81.8</strong></td>
+                        <td>65.5</td>
+                        <td><strong>46.4</strong></td>
+                        <td>43.5</td>
+                        <td><strong>34.3</strong></td>
+                        <td>46.5</td>
+                        <td><strong>53.5</strong></td>
+                        <td><strong>47.2</strong></td>
+                        <td><strong>50.0</strong></td>
+                        <td>33.7</td>
+                    </tr>
+                    <tr>
+                        <td>InternVL3-14B</td>
+                        <td>39.1</td>
+                        <td>26.0</td>
+                        <td><strong>73.5</strong></td>
+                        <td>73.3</td>
+                        <td>36.5</td>
+                        <td>34.4</td>
+                        <td><strong>54.5</strong></td>
+                        <td>28.2</td>
+                        <td>54.4</td>
+                        <td>53.0</td>
+                        <td>41.6</td>
+                        <td>46.7</td>
+                        <td>13.5</td>
+                    </tr>
+                    <tr>
+                        <td>InternVL2-26B</td>
+                        <td>28.2</td>
+                        <td><strong>35.0</strong></td>
+                        <td>61.1</td>
+                        <td>74.0</td>
+                        <td>50.7</td>
+                        <td>41.7</td>
+                        <td>28.9</td>
+                        <td>28.6</td>
+                        <td>43.0</td>
+                        <td>49.6</td>
+                        <td>38.6</td>
+                        <td>43.5</td>
+                        <td>26.5</td>
+                    </tr>
+                    <tr>
+                        <td>Eagle-X4-13B</td>
+                        <td><strong>42.3</strong></td>
+                        <td>26.8</td>
+                        <td>41.4</td>
+                        <td>44.6</td>
+                        <td>65.8</td>
+                        <td>20.5</td>
+                        <td>28.2</td>
+                        <td>31.0</td>
+                        <td><strong>57.9</strong></td>
+                        <td>38.8</td>
+                        <td>40.7</td>
+                        <td>39.8</td>
+                        <td><strong>53.8</strong></td>
+                    </tr>
+                    <tr>
+                        <td>LLaVA-Next-13B</td>
+                        <td>7.7</td>
+                        <td>17.1</td>
+                        <td>54.3</td>
+                        <td>34.7</td>
+                        <td><strong>66.7</strong></td>
+                        <td>24.5</td>
+                        <td>13.0</td>
+                        <td>26.8</td>
+                        <td>43.9</td>
+                        <td>28.5</td>
+                        <td>35.0</td>
+                        <td>32.1</td>
+                        <td>51.1</td>
+                    </tr>
+                    <tr style="background-color: #e9edf6;">
+                        <td colspan="14" style="text-align: center;"><em>MLLMs: 30B - 70B</em></td>
+                    </tr>
+                    <tr>
+                        <td>InternVL2.5-38B</td>
+                        <td><strong>46.8</strong></td>
+                        <td><strong>36.6</strong></td>
+                        <td>67.9</td>
+                        <td>89.5</td>
+                        <td>58.4</td>
+                        <td>51.7</td>
+                        <td>38.3</td>
+                        <td><strong>44.1</strong></td>
+                        <td>44.7</td>
+                        <td>60.2</td>
+                        <td><strong>47.5</strong></td>
+                        <td><strong>53.1</strong></td>
+                        <td>19.1</td>
+                    </tr>
+                    <tr>
+                        <td>InternVL3-38B</td>
+                        <td>45.5</td>
+                        <td>35.0</td>
+                        <td><strong>71.0</strong></td>
+                        <td><strong>90.9</strong></td>
+                        <td>37.3</td>
+                        <td>43.0</td>
+                        <td><strong>56.8</strong></td>
+                        <td>37.6</td>
+                        <td>43.0</td>
+                        <td><strong>60.6</strong></td>
+                        <td>43.5</td>
+                        <td>51.1</td>
+                        <td>9.1</td>
+                    </tr>
+                    <tr>
+                        <td>Qwen2.5-VL-32B</td>
+                        <td>35.9</td>
+                        <td>22.8</td>
+                        <td>68.5</td>
+                        <td>73.7</td>
+                        <td><strong>62.0</strong></td>
+                        <td>37.7</td>
+                        <td>33.8</td>
+                        <td>35.2</td>
+                        <td>45.6</td>
+                        <td>50.2</td>
+                        <td>42.9</td>
+                        <td>46.1</td>
+                        <td><strong>25.5</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Eagle-X5-34B</td>
+                        <td>36.5</td>
+                        <td>28.5</td>
+                        <td>60.5</td>
+                        <td>79.6</td>
+                        <td>19.5</td>
+                        <td>51.0</td>
+                        <td>24.0</td>
+                        <td>39.0</td>
+                        <td><strong>63.2</strong></td>
+                        <td>51.3</td>
+                        <td>39.3</td>
+                        <td>44.6</td>
+                        <td>16.0</td>
+                    </tr>
+                    <tr>
+                        <td>InternVL2-40B</td>
+                        <td>26.3</td>
+                        <td>22.0</td>
+                        <td>66.0</td>
+                        <td>76.1</td>
+                        <td>43.2</td>
+                        <td><strong>55.0</strong></td>
+                        <td>27.3</td>
+                        <td>25.8</td>
+                        <td>47.4</td>
+                        <td>47.6</td>
+                        <td>39.7</td>
+                        <td>43.2</td>
+                        <td>12.6</td>
+                    </tr>
+                    <tr style="background-color: #e9edf6;">
+                        <td colspan="14" style="text-align: center;"><em>MLLMs: > 70B</em></td>
+                    </tr>
+                    <tr>
+                        <td>InternVL3-78B</td>
+                        <td>43.6</td>
+                        <td><strong>39.8</strong></td>
+                        <td>69.8</td>
+                        <td>89.1</td>
+                        <td>55.9</td>
+                        <td><strong>57.6</strong></td>
+                        <td>40.3</td>
+                        <td>38.0</td>
+                        <td><strong>42.1</strong></td>
+                        <td><strong>60.6</strong></td>
+                        <td>46.8</td>
+                        <td><strong>52.9</strong></td>
+                        <td>25.5</td>
+                    </tr>
+                    <tr>
+                        <td>InternVL2.5-72B</td>
+                        <td><strong>47.4</strong></td>
+                        <td>30.1</td>
+                        <td>67.3</td>
+                        <td>89.5</td>
+                        <td>65.2</td>
+                        <td>53.6</td>
+                        <td><strong>41.9</strong></td>
+                        <td>32.4</td>
+                        <td>37.7</td>
+                        <td>58.6</td>
+                        <td>46.2</td>
+                        <td>51.7</td>
+                        <td>29.7</td>
+                    </tr>
+                    <tr>
+                        <td>Qwen2.5-VL-72B</td>
+                        <td>41.7</td>
+                        <td>31.7</td>
+                        <td>67.9</td>
+                        <td>82.1</td>
+                        <td>65.3</td>
+                        <td>38.4</td>
+                        <td>39.9</td>
+                        <td><strong>39.0</strong></td>
+                        <td>38.6</td>
+                        <td>55.8</td>
+                        <td>44.3</td>
+                        <td>49.4</td>
+                        <td>24.3</td>
+                    </tr>
+                    <tr>
+                        <td>Qwen2-VL-72B</td>
+                        <td>34.6</td>
+                        <td>18.7</td>
+                        <td>70.4</td>
+                        <td>82.5</td>
+                        <td>68.8</td>
+                        <td>52.3</td>
+                        <td>38.6</td>
+                        <td>35.2</td>
+                        <td><strong>42.1</strong></td>
+                        <td>51.5</td>
+                        <td><strong>47.4</strong></td>
+                        <td>49.2</td>
+                        <td>25.0</td>
+                    </tr>
+                    <tr>
+                        <td>LLaVA-OV-72B</td>
+                        <td>25.6</td>
+                        <td>26.0</td>
+                        <td><strong>75.9</strong></td>
+                        <td>81.1</td>
+                        <td><strong>81.4</strong></td>
+                        <td>55.6</td>
+                        <td>22.4</td>
+                        <td>28.2</td>
+                        <td>31.6</td>
+                        <td>52.2</td>
+                        <td>43.8</td>
+                        <td>47.5</td>
+                        <td><strong>53.1</strong></td>
+                    </tr>
+                    <tr>
+                        <td>LLaVA-Next-72B</td>
+                        <td>21.8</td>
+                        <td>21.1</td>
+                        <td>66.0</td>
+                        <td>32.3</td>
+                        <td>65.7</td>
+                        <td>49.7</td>
+                        <td>22.4</td>
+                        <td>27.2</td>
+                        <td>30.7</td>
+                        <td>35.3</td>
+                        <td>39.1</td>
+                        <td>37.4</td>
+                        <td>33.2</td>
+                    </tr>
+                    <tr>
+                        <td>InternVL2-72B</td>
+                        <td>26.9</td>
+                        <td>18.7</td>
+                        <td>57.4</td>
+                        <td>56.8</td>
+                        <td>56.1</td>
+                        <td>47.0</td>
+                        <td>24.7</td>
+                        <td>24.4</td>
+                        <td>7.9</td>
+                        <td>40.0</td>
+                        <td>32.0</td>
+                        <td>35.6</td>
+                        <td>22.9</td>
+                    </tr>
+                    <tr style="background-color: #e9edf6;">
+                        <td colspan="14" style="text-align: center;"><em>MLLMs: Proprietary</em></td>
+                    </tr>
+                    <tr>
+                        <td>Gemini-2-flash (CoT)</td>
+                        <td><strong>69.2</strong></td>
+                        <td><strong>49.6</strong></td>
+                        <td>72.8</td>
+                        <td>87.4</td>
+                        <td>78.7</td>
+                        <td>32.5</td>
+                        <td><strong>40.9</strong></td>
+                        <td>39.9</td>
+                        <td>43.9</td>
+                        <td><strong>69.8</strong></td>
+                        <td><strong>47.2</strong></td>
+                        <td><strong>57.2</strong></td>
+                        <td>45.9</td>
+                    </tr>
+                    <tr>
+                        <td>GPT-4o (CoT)</td>
+                        <td>45.5</td>
+                        <td>46.3</td>
+                        <td>70.4</td>
+                        <td><strong>88.8</strong></td>
+                        <td>81.4</td>
+                        <td><strong>47.0</strong></td>
+                        <td>34.4</td>
+                        <td>37.6</td>
+                        <td>34.2</td>
+                        <td>62.7</td>
+                        <td>46.9</td>
+                        <td>54.0</td>
+                        <td><strong>49.9</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Gemini-2-flash</td>
+                        <td>64.7</td>
+                        <td>35.0</td>
+                        <td><strong>73.5</strong></td>
+                        <td>87.0</td>
+                        <td>71.3</td>
+                        <td>34.4</td>
+                        <td>29.9</td>
+                        <td><strong>40.8</strong></td>
+                        <td>41.2</td>
+                        <td>65.0</td>
+                        <td>43.5</td>
+                        <td>53.1</td>
+                        <td>30.7</td>
+                    </tr>
+                    <tr>
+                        <td>GPT-4o</td>
+                        <td>42.9</td>
+                        <td>35.0</td>
+                        <td>66.0</td>
+                        <td>86.0</td>
+                        <td><strong>82.0</strong></td>
+                        <td>41.7</td>
+                        <td>29.9</td>
+                        <td>33.8</td>
+                        <td>32.5</td>
+                        <td>57.5</td>
+                        <td>44.0</td>
+                        <td>50.0</td>
+                        <td><strong>49.9</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Gemini-1.5-flash (CoT)</td>
+                        <td>30.1</td>
+                        <td>28.5</td>
+                        <td>66.7</td>
+                        <td>79.3</td>
+                        <td>51.0</td>
+                        <td>39.7</td>
+                        <td>20.1</td>
+                        <td>31.5</td>
+                        <td>35.1</td>
+                        <td>51.1</td>
+                        <td>35.5</td>
+                        <td>42.4</td>
+                        <td>15.3</td>
+                    </tr>
+                    <tr>
+                        <td>GPT-4o-mini</td>
+                        <td>35.3</td>
+                        <td>24.4</td>
+                        <td>43.2</td>
+                        <td>71.6</td>
+                        <td>43.1</td>
+                        <td>29.8</td>
+                        <td>14.6</td>
+                        <td>31.0</td>
+                        <td><strong>45.6</strong></td>
+                        <td>43.6</td>
+                        <td>32.8</td>
+                        <td>37.6</td>
+                        <td>10.8</td>
+                    </tr>
+                    <tr>
+                        <td>Gemini-1.5-flash</td>
+                        <td>26.9</td>
+                        <td>25.2</td>
+                        <td>59.3</td>
+                        <td>70.5</td>
+                        <td>26.4</td>
+                        <td>27.8</td>
+                        <td>18.2</td>
+                        <td>26.8</td>
+                        <td>22.8</td>
+                        <td>45.5</td>
+                        <td>24.4</td>
+                        <td>33.8</td>
+                        <td>10.6</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+  </div>
+</section>
+
+<!-- DATASET SECTION -->
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+  <h1 class="title is-1 mathvista_other">
+    <span class="mathvista_other" style="vertical-align: middle">Benchmark</span>
+  </h1>
+  </div>
+</section>
+            
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths" style="width: 100%;height: 80%;">
+        <h2 class="title is-3">Data Examples</h2>
+        <div class="content has-text-justified">
+          <p style="text-align: center;", class="mt-3"><strong></strong>
+          </p>
+
+        <div id="results-carousel" class="carousel results-carousel">  
+          
+            <div class="content has-text-centered">
+
+              <img src="static/images/samples/CLP.png" style="width: 90%;"/>
+              <!-- <p style="margin-bottom: 30px;">Critical Line Perception</p> -->
+              <!-- <p style="margin-bottom: 30px;">🔗<a href="https://www.youtube.com/watch?v=VFntoBRGF1A">Full Video Link</a></p> -->
+            
+            </div>
+          
+            <div class="content has-text-centered">
+
+              <img src="static/images/samples/LDP.png" style="width: 78%;"/>
+              <!-- <p style="margin-bottom: 30px;">Len Distortion Perception</p> -->
+            
+            </div>
+
+            <div class="content has-text-centered">
+
+              <img src="static/images/samples/LRR.png" style="width: 95%;"/>
+              <!-- <p style="margin-bottom: 30px;">Line Relationship Reasoning</p> -->
+            
+            </div>
+
+            <div class="content has-text-centered">
+
+              <img src="static/images/samples/OVR.png" style="width: 95%;"/>
+              <!-- <p style="margin-bottom: 30px;">Out-of-View Reasoning</p> -->
+            
+            </div>
+
+
+            <div class="content has-text-centered">
+
+              <img src="static/images/samples/PTR.png" style="width: 95%;"/>
+              <!-- <p style="margin-bottom: 30px;">Perspective Type Reasoning</p> -->
+            
+            </div>
+
+
+            <div class="content has-text-centered">
+
+              <img src="static/images/samples/PTS.png" style="width: 95%;"/>
+              <!-- <p style="margin-bottom: 30px;">Perspective Transformation Spotting</p> -->
+            
+            </div>
+
+
+            <div class="content has-text-centered">
+
+              <img src="static/images/samples/VAP.png" style="width: 85%;"/>
+              <!-- <p style="margin-bottom: 30px;">View Angle Perception</p> -->
+            
+            </div>
+
+
+            <div class="content has-text-centered">
+
+              <img src="static/images/samples/VPC.png" style="width: 85%;"/>
+              <!-- <p style="margin-bottom: 30px;">Vanishing Point Perception</p> -->
+            
+            </div>
+
+
+            <div class="content has-text-centered">
+
+              <img src="static/images/samples/VPP.png" style="width: 95%;"/>
+              <!-- <p style="margin-bottom: 30px;">Vanishing Point Perception</p> -->
+            
+            </div>
+
+            <div class="content has-text-centered">
+
+              <img src="static/images/samples/robustness.png" style="width: 43%;"/>
+              <p style="margin-bottom: 30px;">Samples for Robustness Evaluation</p>
+            
+            </div>
+
+
+        </div>
+
+          
+        </div>
+      </div> 
+
+        </div>
+      </div>
+    </div>
+    
+
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content has-text-centered">
+          <h2 class="title is-3" style="margin-top: 30px;">Benchmark Statistics</h2>
+          
+          <!-- bing tu -->
+          <div class="container-wrapper">
+            <div id="container"></div>
+            <div id="image-container">
+              <img src="static/images/radar_half.png" alt="data-composition" style="max-width: 50%; display: inline-block; margin-right: 200px;"/>
+            </div>
+          </div>
+        <script type="text/javascript" src="https://registry.npmmirror.com/echarts/5.5.0/files/dist/echarts.min.js"></script>
+        <script type="text/javascript" src="static/js/bingtu.js"></script>
+
+        <p style="text-align: center; margin-left: auto; margin-right: auto; width: 50%;"> 
+            (Left) <strong>Task Categorie Hierarchy</strong>: MMPerspective consists of 3 key task types and 10 subcategories. <br> (Right) <strong>SOTA Comparison</strong>: Performance of SOTA MLLMs on MMPerspective.<br/>
+        </p>
+
+        </div>
+      </div>
+    </div>
+
+    <br><br>
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content has-text-centered">
+          <h2 class="title is-3">Data Curation Pipeline</h2>
+          <img src="static/images/data_pipeline.png" alt="data-composition" style="max-width: 60%;"/>
+          <p style="text-align: center; margin-left: auto; margin-right: auto; width: 50%;" >
+            The data curation pipeline for MMPerspective.
+          </p>
+
+          <!-- <img src="static/images/dataset_comparison.png" alt="data-composition" style="max-width: 50%;"/> -->
+          <!-- <p style="text-align: center; margin-left: auto; margin-right: auto; width: 50%;" >
+            The comparison of various benchmarks encompasses several key aspects: 
+                the total number of videos, the number of clips, the average duration of the videos, the method of video annotation (manual denoted as M, automated as A), 
+                the average number of QA pair tokens, the average number of subtitle tokens, whether the videos cover multiple duration levels, 
+                whether the videos are sourced from a broad range of open domains, and whether provide subtitle together with audio information. 
+                It is important to note that if a dataset includes multiple task formats, our comparison focuses solely on the multiple-choice segment.
+          </p> -->
+        </div>
+      </div>
+    </div>
+    
+  </div>
+</section>
+
+
+
+<!-- RESULTS SECTION -->
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 mathvista_other">Experiment Results</h1>
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container">
+    <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths" style="width: 100%;height: 80%;">
+        <h2 class="title is-3">Results Analysis</h2>
+        <div class="content has-text-justified">
+          <p style="text-align: center;", class="mt-3"><strong></strong>
+          </p>
+
+        <div id="results-carousel" class="carousel results-carousel">  
+          
+            <div class="content has-text-centered">
+
+              <img src="static/images/results/all_radar.png" style="width: 80%;"/>
+              <p style="margin-bottom: 30px;">SOTA Models Performance on MMPerspective</p>
+              <!-- <p style="margin-bottom: 30px;">🔗<a href="https://www.youtube.com/watch?v=VFntoBRGF1A">Full Video Link</a></p> -->
+            
+            </div>
+          
+            <div class="content has-text-centered">
+
+              <img src="static/images/results/heatmap_combine_OverallAcc_Robustness_00.png" style="width: 80%;"/>
+              <p style="margin-bottom: 30px;">Heatmaps illustrating the relationship between model size and performance, measured by P\&R Overall Accuracy and Robustness. Darker colors indicate higher performance. Each line represents a model family, with sizes increasing from left to right.</p>
+            
+            </div>
+
+
+            <div class="content has-text-centered">
+
+              <img src="static/images/results/vlm2_00.png" style="width: 80%;"/>
+              <p style="margin-bottom: 30px;">Correlation analysis between performance and size across MLLM families: (a) Overall accuracy vs. model size ($r = 0.81$), (b) Robustness vs. model size ($r = 0.34$), (c) Overall accuracy vs. encoder size ($r = 0.51$), (d) Robustness vs. encoder size ($r = 0.15$). Total model scaling strongly impacts perspective understanding, while vision encoder size has a limited influence on robustness.</p>
+            
+            </div>
+
+
+            <div class="content has-text-centered">
+
+              <img src="static/images/results/within-cross_a.png" style="width: 50%;"/>
+              <p style="margin-bottom: 30px;">Error pattern analysis across model families: Cumulative distribution of phi coefficients shows significantly higher correlations within families than across families (Cohen's d=0.33, p < 0.001).</p>
+            
+            </div>
+
+
+            <div class="content has-text-centered">
+
+              <img src="static/images/results/within-cross_b.png" style="width: 70%;"/>
+              <p style="margin-bottom: 30px;">Task-wise breakdown reveals perception tasks (VAP, CLP) exhibit the strongest family-specific patterns, while reasoning tasks (VPC, LRR) show weaker family effects.</p>
+            
+            </div>
+
+            <div class="content has-text-centered">
+
+              <img src="static/images/results/level_3_fine_fixed.png" style="width: 70%;"/>
+              <p style="margin-bottom: 30px;">Difficulty Distribution of MMPerspective</p>
+            
+            </div>
+
+
+
+
+        </div>
+
+          
+        </div>
+      </div> 
+
+        </div>
+      </div>
+    </div>
+
+    <section class="section">
+      <div class="container">
+        <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths" style="width: 100%;height: 80%;">
+            <h2 class="title is-3">Chain-of-Thought Examples</h2>
+            <div class="content has-text-justified">
+              <p style="text-align: center;", class="mt-3"><strong></strong>
+              </p>
+    
+            <div id="results-carousel" class="carousel results-carousel">    
+    
+                <div class="content has-text-centered">
+    
+                  <img src="static/images/CoT/cot_gpt_1.png" style="width: 75%;"/>
+                  <!-- <p style="margin-bottom: 30px;">View Angle Perception</p> -->
+                
+                </div>
+    
+    
+                <div class="content has-text-centered">
+    
+                  <img src="static/images/CoT/cot_gpt_2.png" style="width: 85%;"/>
+                  <!-- <p style="margin-bottom: 30px;">Vanishing Point Perception</p> -->
+                
+                </div>
+    
+                <div class="content has-text-centered">
+    
+                  <img src="static/images/CoT/cot_gemini_1.png" style="width: 70%;"/>
+                  <!-- <p style="margin-bottom: 30px;">Perspective Transformation Spotting</p> -->
+                
+                </div>
+    
+    
+                <div class="content has-text-centered">
+    
+                  <img src="static/images/CoT/cot_gemini_2.png" style="width: 60%;"/>
+                  <!-- <p style="margin-bottom: 30px;">Vanishing Point Perception</p> -->
+                
+                </div>
+
+                <div class="content has-text-centered">
+    
+                  <img src="static/images/CoT/cot_failure_gemini2_lrr_00.png" style="width: 60%;"/>
+                  <!-- <p style="margin-bottom: 30px;">Vanishing Point Perception</p> -->
+                
+                </div>
+    
+                <div class="content has-text-centered">
+    
+                  <img src="static/images/CoT/cot_failure_gemini2_pts_00.png" style="width: 60%;"/>
+                  <!-- <p style="margin-bottom: 30px;">Perspective Transformation Spotting</p> -->
+                
+                </div>
+    
+    
+                <div class="content has-text-centered">
+    
+                  <img src="static/images/CoT/cot_failure_gpt4o_ptr_00.png" style="width: 60%;"/>
+                  <!-- <p style="margin-bottom: 30px;">Vanishing Point Perception</p> -->
+                
+                </div>
+    
+    
+            </div>
+    
+              
+            </div>
+          </div> 
+    
+            </div>
+          </div>
+        </div>
+
+
+
+
+<br><br>
+
+<section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+  <h1 class="title is-1 mathvista_other">
+    <span class="mathvista_other" style="vertical-align: middle" id="citation">Citation</span>
+  </h1>
+  </div>
+</section>
+<!-- </section> -->
+<!-- <section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 mathvista_other" id="citation">Citation</h1>
+  </div>
+</section> -->
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <pre><code>
+      @article{tang2025mmperspective,
+        title={MMPerspective: Do MLLMs Understand Perspective? A Comprehensive Benchmark for Perspective Perception, Reasoning, and Robustness},
+        author={Tang, Yunlong and Liu, Pinxin and Tan, Zhangyun and Feng, Mingqian and Mao, Rui and Huang, Chao and Bi, Jing and Xiao, Yunzhong and Liang, Susan and Hua, Hang and others},
+        journal={The Thirty-ninth Annual Conference on Neural Information Processing Systems Datasets and Benchmarks Track},
+        year={2025}
+      }
+</code></pre>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container" style="width: 60%;">
+  <style>
+      pre {
+        background-color: #f4f4f4;
+        padding: 5px; /* 调整padding为5px */
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        overflow-x: auto; /* 允许水平滚动 */
+    }
+    code {
+        font-family: Consolas, "Courier New", monospace;
+        color: #d63384; /* 代码文本颜色 */
+    }
+  </style>
+
+  </div>
+</section>
+
+<footer class="footer">
+  <!-- <div class="container"> -->
+    <div class="content has-text-centered">
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p style="text-align: center;">
+            This website is adapted from <a href="https://mathvista.github.io/">MathVista</a>, licensed under a <a rel="license"
+                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  <!-- </div> -->
+</footer>
+
+</body>
+</html>
