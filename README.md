@@ -19,22 +19,22 @@
   </a>
 </p>
 
-## News
+## 🌟 News
 - [2025-11-23] Introducing Video-R4, a reinforced video agent with visual rumination for text-rich video reasoning. The [arXiv paper](https://arxiv.org/abs/2511.xxxxx) has been released. Code coming soon.
 
 
-## Video-R4 Training Framework
+## 🚀 Video-R4 Training Framework
 <img src="assets/training_framework.png" width="100%">
 
 
-## Data Curation Pipeline
+## 📊 Data Curation Pipeline
 <img src="assets/data_pipeline.png" width="100%">
 
 
-## Performance
+## 📈 Performance
 <img src="assets/bar.png" width="100%">
 
-## Installation
+## 📦 Installation
 ```bash
 conda create -n video-r4 python=3.10
 conda activate video-r4
@@ -44,7 +44,7 @@ pip install -r requirements.txt
 ```
 
 
-## Citation
+## 📖 Citation
 If you find this work useful, please consider citing:
 ```bibtex
 @article{tang2025video-r4,
@@ -55,7 +55,7 @@ If you find this work useful, please consider citing:
 }
 ```
 
-## Acknowledgments
+## 🤝 Acknowledgments
 
 This work was supported by Sony Group Corporation. We would like to thank Sayaka Nakamura and Jerry Jun Yokono for their insightful discussion.
 
