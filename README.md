@@ -8,11 +8,14 @@
   <a href="https://arxiv.org/abs/XXXX.XXXXX" target="_blank">
     <img src="https://img.shields.io/badge/arXiv-Paper-red.svg?style=for-the-badge&logo=arxiv" alt="arXiv Paper">
   </a>
+  <a href="https://huggingface.co/papers/" target="_blank">
+    <img src="https://img.shields.io/badge/Huggingface-Paper-ffb6c1.svg?style=for-the-badge&logo=huggingface" alt="Huggingface Paper">
+  </a>
   <a href="https://huggingface.co/datasets/YOUR_DATASET_PATH" target="_blank">
     <img src="https://img.shields.io/badge/Huggingface-Dataset-blue.svg?style=for-the-badge&logo=huggingface" alt="Huggingface Dataset">
   </a>
   <a href="https://huggingface.co/YOUR_MODEL_PATH" target="_blank">
-    <img src="https://img.shields.io/badge/Huggingface-Model-green.svg?style=for-the-badge&logo=huggingface" alt="Huggingface Model">
+    <img src="https://img.shields.io/badge/Huggingface-Model-bd7ad9.svg?style=for-the-badge&logo=huggingface" alt="Huggingface Model">
   </a>
 </p>
 
