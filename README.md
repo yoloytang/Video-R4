@@ -8,8 +8,8 @@
   <a href="https://arxiv.org/abs/XXXX.XXXXX" target="_blank">
     <img src="https://img.shields.io/badge/arXiv-Paper-red.svg?style=for-the-badge&logo=arxiv" alt="arXiv Paper">
   </a>
-  <a href="https://huggingface.co/papers/" target="_blank">
-    <img src="https://img.shields.io/badge/Huggingface-Paper-ffb6c1.svg?style=for-the-badge&logo=huggingface" alt="Huggingface Paper">
+  <a href="https://yunlong10.github.io/video-r4-project" target="_blank">
+    <img src="https://img.shields.io/badge/Project%20Page-ffb6c1.svg?style=for-the-badge&logo=github" alt="Project Page">
   </a>
   <a href="https://huggingface.co/datasets/YOUR_DATASET_PATH" target="_blank">
     <img src="https://img.shields.io/badge/Huggingface-Dataset-blue.svg?style=for-the-badge&logo=huggingface" alt="Huggingface Dataset">
