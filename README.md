@@ -6,7 +6,7 @@
 
 <p align="center">
   <a href="https://arxiv.org/abs/XXXX.XXXXX" target="_blank">
-    <img src="https://img.shields.io/badge/arXiv-Paper-red.svg?style=for-the-badge&logo=arxiv" alt="arXiv Paper">
+    <img src="https://img.shields.io/badge/arXiv-Paper-ff7575.svg?style=for-the-badge&logo=arxiv" alt="arXiv Paper">
   </a>
   <a href="https://yunlong10.github.io/video-r4-project" target="_blank">
     <img src="https://img.shields.io/badge/Project%20Page-ffb6c1.svg?style=for-the-badge&logo=github" alt="Project Page">
