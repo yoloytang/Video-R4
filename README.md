@@ -12,7 +12,7 @@
     <img src="https://img.shields.io/badge/Project%20Page-ffb6c1.svg?style=for-the-badge&logo=github" alt="Project Page">
   </a>
   <a href="https://huggingface.co/datasets/YOUR_DATASET_PATH" target="_blank">
-    <img src="https://img.shields.io/badge/Huggingface-Dataset-blue.svg?style=for-the-badge&logo=huggingface" alt="Huggingface Dataset">
+    <img src="https://img.shields.io/badge/Huggingface-Dataset-87ceeb.svg?style=for-the-badge&logo=huggingface" alt="Huggingface Dataset">
   </a>
   <a href="https://huggingface.co/YOUR_MODEL_PATH" target="_blank">
     <img src="https://img.shields.io/badge/Huggingface-Model-bd7ad9.svg?style=for-the-badge&logo=huggingface" alt="Huggingface Model">
