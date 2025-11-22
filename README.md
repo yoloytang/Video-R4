@@ -3,3 +3,7 @@
 > *[Yolo Yunlong Tang](https://yunlong10.github.io/)<sup>1</sup>,  [Daiki Shimada](https://scholar.google.com/citations?user=1uAwouQAAAAJ&hl=en)<sup>2</sup>, [Hang Hua](https://hanghuacs.notion.site/)<sup>3</sup>, [Chao Huang](https://wikichao.github.io/)<sup>1</sup>, [Jing Bi](https://jing.vision/)<sup>1</sup>, [Rogerio Feris](https://www.rogerioferis.org/)<sup>3</sup>, [Chenliang Xu](https://www.cs.rochester.edu/u/cxu22/)<sup>1</sup>*
 
 > *<sup>1</sup>University of Rochester, <sup>2</sup>Sony Group Corporation, <sup>3</sup>MIT-IBM Watson AI Lab*
+
+### Training Framework
+
+<img src="assets/training_framework.png" width="100%">
