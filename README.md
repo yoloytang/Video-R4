@@ -19,6 +19,9 @@
   </a>
 </p>
 
+## News
+- [2025-11-23] Introducing Video-R4, a reinforced video agent with visual rumination for text-rich video reasoning. The [arXiv paper](https://arxiv.org/abs/2511.xxxxx) has been released. Code coming soon.
+
 
 ## Video-R4 Training Framework
 <img src="assets/training_framework.png" width="100%">
@@ -31,6 +34,16 @@
 ## Performance
 <img src="assets/bar.png" width="100%">
 
+## Installation
+```bash
+conda create -n video-r4 python=3.10
+conda activate video-r4
+git clone https://github.com/yunlong10/Video-R4.git
+cd Video-R4
+pip install -r requirements.txt
+```
+
+
 ## Citation
 If you find this work useful, please consider citing:
 ```bibtex
@@ -41,3 +54,22 @@ If you find this work useful, please consider citing:
   year={2025}
 }
 ```
+
+## Acknowledgments
+
+This work was supported by Sony Group Corporation. We would like to thank Sayaka Nakamura and Jerry Jun Yokono for their insightful discussion.
+
+We also thank the authors of the following projects for their contributions:
+- [M4-ViteVQA](https://github.com/bytedance/VTVQA)
+- [SlideVQA](https://github.com/nttmdlab-nlp/SlideVQA)
+- [MP-DocVQA](https://github.com/rubenpt91/MP-DocVQA-Framework)
+- [Open-R1](https://github.com/huggingface/open-r1)
+- [OpenRLHF](https://github.com/OpenRLHF/OpenRLHF)
+- [Ray](https://github.com/ray-project/ray)
+- [Qwen2.5-VL](https://huggingface.co/collections/Qwen/qwen25-vl)
+- [Video-R1](https://github.com/tulerfeng/Video-R1)
+- [Pixel-Reasoner](https://github.com/TIGER-AI-Lab/Pixel-Reasoner)
+- [DeepSeek-R1](https://github.com/deepseek-ai/DeepSeek-R1)
+- [MVBench](https://huggingface.co/datasets/OpenGVLab/MVBench)
+- [Video-MME](https://github.com/MME-Benchmarks/Video-MME)
+- [Video-MMMU](https://videommmu.github.io/)      
