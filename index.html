@@ -94,25 +94,20 @@
           <a class="navbar-link">
             More Research
           </a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item" href="https://github.com/yunlong10/VidComposition">
-              <b>VidComposition</b>
+          <div class="navbar-dropdown" style="text-align: center;">
+
+            <a class="navbar-item" href="https://github.com/yunlong10/Awesome-LLMs-for-Video-Understanding" style="text-align: center;">
+              <b>Video Understanding with LLMs Survey</b>
             </a>
 
-            <a class="navbar-item" href="https://github.com/yunlong10/Awesome-LLMs-for-Video-Understanding">
-              <b>Video-LLM Survey</b>
+            <a class="navbar-item" href="https://github.com/yunlong10/Awesome-Video-LMM-Post-Training" style="text-align: center;">
+              <b>Video-LMM Post-Training Survey</b>
             </a>
 
-            <a class="navbar-item" href="https://github.com/hanghuacs/MMComposition">
-              <b>MMComposition</b>
+            <a class="navbar-item" href="https://github.com/yunlong10/VidComposition" style="text-align: center;">
+              <b>VidComposition Benchmark</b>
             </a>
-            <a class="navbar-item" href="https://github.com/yunlong10/MMPerspective">
-              <b>MMPerspective</b>
-            </a>
-
-            <a class="navbar-item" href="https://hanghuacs.github.io/MMIG-Bench/">
-              <b>MMIG-Bench</b>
-            </a>
+           
           </div>
         </div>
       </div>
@@ -121,7 +116,96 @@
   </nav>
 
   <style>
-    /* rainbow text start */
+    /* Color Scheme: Pink, Blue, Purple */
+    :root {
+      --pink-primary: #ff6b9d;
+      --pink-light: #ffb3d1;
+      --pink-dark: #e6397a;
+      --blue-primary: #4a90e2;
+      --blue-light: #87ceeb;
+      --blue-dark: #2c5aa0;
+      --purple-primary: #9b59b6;
+      --purple-light: #c39bd3;
+      --purple-dark: #7d3c98;
+      --gradient-primary: linear-gradient(135deg, #ff6b9d 0%, #4a90e2 50%, #9b59b6 100%);
+      --gradient-primary-transparent: linear-gradient(135deg, rgba(255, 107, 157, 0.6) 0%, rgba(74, 144, 226, 0.6) 50%, rgba(155, 89, 182, 0.6) 100%);
+      --gradient-soft: linear-gradient(135deg, #ffb3d1 0%, #87ceeb 50%, #c39bd3 100%);
+      --gradient-soft-transparent: linear-gradient(135deg, rgba(255, 179, 209, 0.6) 0%, rgba(135, 206, 235, 0.6) 50%, rgba(195, 155, 211, 0.6) 100%);
+      --bg-light: #faf5ff;
+      --bg-section: #fff5f9;
+    }
+
+    /* Body and Background */
+    body {
+      background: linear-gradient(180deg, #faf5ff 0%, #fff5f9 50%, #f0f4ff 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+
+    /* Navbar Styling */
+    .navbar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(255, 107, 157, 0.1);
+      border-bottom: 2px solid transparent;
+      border-image: var(--gradient-primary);
+      border-image-slice: 1;
+    }
+
+    .navbar-item, .navbar-link {
+      color: #333 !important;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-item:hover, .navbar-link:hover {
+      color: var(--pink-primary) !important;
+      background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(74, 144, 226, 0.1));
+    }
+
+    .navbar-dropdown {
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid rgba(255, 107, 157, 0.2);
+      box-shadow: 0 8px 32px rgba(155, 89, 182, 0.15);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: var(--gradient-soft);
+      padding: 0.75rem 1.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 107, 157, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(74, 144, 226, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(155, 89, 182, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-body {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Title Styling */
+    .publication-title {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 700;
+      text-shadow: none;
+    }
+
+    /* Rainbow text animation - updated with pink/blue/purple */
     .rainbow {
       text-align: center;
       text-decoration: underline;
@@ -131,7 +215,7 @@
     }
 
     .rainbow_text_animated {
-      background: linear-gradient(to right, #6666ff, #0099ff, #00ff00, #ff3399, #6666ff);
+      background: linear-gradient(to right, #ff6b9d, #4a90e2, #9b59b6, #ff6b9d, #4a90e2);
       -webkit-background-clip: text;
       background-clip: text;
       color: transparent;
@@ -140,18 +224,249 @@
     }
 
     @keyframes rainbow_animation {
-
-      0%,
-      100% {
+      0%, 100% {
         background-position: 0 0;
       }
-
       50% {
         background-position: 100% 0;
       }
     }
 
-    /* rainbow text done */
+    /* Author Links */
+    .publication-authors {
+      color: white !important;
+    }
+
+    .publication-authors a {
+      color: white !important;
+      transition: all 0.3s ease;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .publication-authors a:hover {
+      color: var(--pink-light) !important;
+      text-decoration: underline;
+      text-shadow: 0 2px 5px rgba(255, 107, 157, 0.3);
+    }
+
+    .publication-authors sup {
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      font-weight: bold;
+    }
+
+    /* Buttons */
+    .button.is-dark {
+      background: var(--gradient-primary);
+      border: none;
+      color: white;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+    }
+
+    .button.is-dark:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(155, 89, 182, 0.4);
+      background: linear-gradient(135deg, #ff8bb3 0%, #6ba3e8 50%, #b373d3 100%);
+    }
+
+    /* Section Headers */
+    .hero.is-light {
+      background: var(--gradient-soft-transparent);
+      border-radius: 15px;
+      margin: 2rem 0;
+      box-shadow: 0 4px 20px rgba(255, 107, 157, 0.15);
+      padding: 1rem 1.5rem;
+    }
+
+    .hero.is-light .title {
+      color: white;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Section Backgrounds */
+    .section {
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 20px;
+      margin: 2rem 0;
+      padding: 2rem;
+      box-shadow: 0 4px 25px rgba(155, 89, 182, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Hide empty sections */
+    .section:empty {
+      display: none;
+    }
+
+    /* Tables */
+    table {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(74, 144, 226, 0.15);
+    }
+
+    table thead {
+      background: var(--gradient-primary-transparent) !important;
+      color: white;
+    }
+
+    table thead th {
+      color: white !important;
+      font-weight: 600;
+      border: none;
+      background: var(--gradient-primary-transparent) !important;
+    }
+
+    table thead th strong {
+      color: white !important;
+    }
+
+    /* Ensure all table headers have white text and gradient background */
+    table th {
+      color: white !important;
+      background: var(--gradient-primary-transparent) !important;
+    }
+
+    table th strong {
+      color: white !important;
+    }
+
+    table tbody tr {
+      transition: all 0.3s ease;
+    }
+
+    table tbody tr:hover {
+      background: linear-gradient(90deg, rgba(255, 107, 157, 0.1), rgba(74, 144, 182, 0.1));
+      transform: scale(1.01);
+    }
+
+    table tbody tr[style*="background-color: #e3f2fd"] {
+      background: linear-gradient(90deg, rgba(255, 107, 157, 0.2), rgba(74, 144, 226, 0.2)) !important;
+    }
+
+    table tbody td {
+      border-color: rgba(255, 107, 157, 0.1);
+    }
+
+    /* Math Formula Boxes */
+    p[style*="background-color: #f5f5f5"] {
+      background: var(--gradient-soft) !important;
+      border: 2px solid rgba(255, 107, 157, 0.3);
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(155, 89, 182, 0.1);
+    }
+
+    /* Images */
+    img {
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(155, 89, 182, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    img:hover {
+      transform: scale(1.02);
+    }
+
+    /* Titles */
+    .title.is-3, .title.is-5 {
+      color: var(--purple-dark);
+    }
+
+    /* Code Blocks */
+    pre {
+      background: linear-gradient(135deg, #2d1b3d 0%, #1a1a2e 100%);
+      border: 2px solid rgba(255, 107, 157, 0.3);
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(155, 89, 182, 0.2);
+      color: white;
+    }
+
+    code {
+      color: white !important;
+    }
+
+    pre code {
+      color: white !important;
+    }
+
+    /* Copy Button */
+    #BibTeX {
+      position: relative;
+    }
+
+    .copy-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--gradient-primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 14px;
+      box-shadow: 0 4px 12px rgba(155, 89, 182, 0.3);
+      transition: all 0.3s ease;
+      z-index: 10;
+      opacity: 0.9;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .copy-button:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(155, 89, 182, 0.4);
+    }
+
+    .copy-button:active {
+      transform: translateY(0);
+    }
+
+    .copy-button i {
+      font-size: 14px;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--gradient-soft);
+      border-top: 3px solid transparent;
+      border-image: var(--gradient-primary);
+      border-image-slice: 1;
+      margin-top: 3rem;
+      padding: 2rem;
+    }
+
+    /* Links */
+    a {
+      color: var(--blue-primary);
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--pink-primary);
+    }
+
+    /* Content Boxes */
+    .content {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 1.5rem;
+      border-radius: 12px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 2rem 1rem;
+      }
+      
+      .section {
+        padding: 1.5rem;
+        margin: 1rem 0;
+      }
+    }
   </style>
   <section class="hero">
     <div class="hero-body">
@@ -171,26 +486,26 @@
             <!-- </p> -->
             <div class="is-size-5 publication-authors" style="width: 80%; margin: 20px auto;">
               <span class="author-block"><a href="https://yunlong10.github.io">Yolo Yunlong Tang</a><sup
-                  style="color:#1460e3;">1</sup>,</span>
+                  style="color:#4a90e2;">1</sup>,</span>
               <span class="author-block"><a href="https://scholar.google.com/citations?user=1uAwouQAAAAJ&hl=en">Daiki
-                  Shimada</a><sup style="color:#ab0ef4;">2</sup>,</span>
+                  Shimada</a><sup style="color:#9b59b6;">2</sup>,</span>
               <span class="author-block"><a href="https://hanghuacs.owlstown.net/">Hang Hua</a><sup
-                  style="color:#e41037;">3</sup>,</span>
+                  style="color:#ff6b9d;">3</sup>,</span>
               <span class="author-block"><a href="https://wikichao.github.io/">Chao Huang</a><sup
-                  style="color:#1460e3;">1</sup>,</span>
+                  style="color:#4a90e2;">1</sup>,</span>
               <span class="author-block"><a href="https://jing-bi.github.io/">Jing Bi</a><sup
-                  style="color:#1460e3;">1</sup>,</span><br>
+                  style="color:#4a90e2;">1</sup>,</span><br>
               <span class="author-block"><a href="https://www.rogerioferis.org/">Rogerio Feris</a><sup
-                  style="color:#e41037;">3</sup>,</span>
+                  style="color:#ff6b9d;">3</sup>,</span>
               <span class="author-block"><a href="https://www.cs.rochester.edu/~cxu22/index.html">Chenliang Xu</a><sup
-                  style="color:#1460e3;">1</sup></span>
+                  style="color:#4a90e2;">1</sup></span>
               <!-- <span class="author-block" style="font-size:18px">&dagger; Corresponding Author</span> -->
 
             </div>
             <div class="is-size-5 publication-authors">
-              <span class="author-block"><sup style="color:#1460e3">1</sup>University of Rochester,</span>
-              <span class="author-block"><sup style="color:#ab0ef4">2</sup>Sony Group Corporation,</span>
-              <span class="author-block"><sup style="color:#e41037">3</sup>MIT-IBM Watson AI Lab</span>
+              <span class="author-block"><sup style="color:#4a90e2; font-weight: bold;">1</sup>University of Rochester,</span>
+              <span class="author-block"><sup style="color:#9b59b6; font-weight: bold;">2</sup>Sony Group Corporation,</span>
+              <span class="author-block"><sup style="color:#ff6b9d; font-weight: bold;">3</sup>MIT-IBM Watson AI Lab</span>
               <!-- <span class="paper-block"><b style="color:#f41c1c">ICLR 2024 Oral</b> (85 in 7304, 1.2%)</span> -->
             </div>
             <div class="column has-text-centered">
@@ -246,13 +561,14 @@
     </div>
   </section>
 
+
   <section class="section" style="padding-top: 1.5rem;">
     <div class="container" style="margin-bottom: 2vh;">
       <!-- Abstract. -->
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <h2 class="title is-3" style="margin-top: 0;">Introduction</h2>
-          <div class="content has-text-justified">
+          <h2 class="title is-3" style="margin-top: 0px;">Introduction</h2>
+          <div class="content has-text-justified" style="margin-top: -1.5rem;">
             Understanding small, transient textual cues in videos is crucial for text-rich video reasoning tasks.
             Current video QA models often rely on single-pass perception, which can lead to hallucinations when dealing
             with complex visual-textual content. We introduce <strong>Video-R4</strong>, a video reasoning Large
@@ -268,7 +584,7 @@
 
             <div class="content has-text-centered">
               <img src="static/images/bar.png" alt="performance" style="max-width: 100%;" />
-              <p style="margin-top: 15px; font-style: italic; color: #666;">
+              <p style="margin-top: 15px; font-style: italic; color: #7d3c98; text-align: center;">
                 Video-R4-7B achieves state-of-the-art performance on the text-rich video understanding, and is also
                 compatible with the LMMs with the same size on the general video QA benchmarks.
               </p>
@@ -288,117 +604,38 @@
   <section class="hero is-light is-small">
     <div class="hero-body has-text-centered">
       <h1 class="title is-1 mathvista_other">
-        <span class="mathvista_other" style="vertical-align: middle">Method</span>
+        <span class="mathvista_other" style="vertical-align: middle">🔬 Method</span>
       </h1>
     </div>
   </section>
 
   <section class="section">
     <div class="container">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths" style="width: 100%;height: 80%;">
-
-
-
-          <!-- <div id="results-carousel" class="carousel results-carousel">  
-          
-            <div class="content has-text-centered">
-
-              <img src="static/images/samples/CLP.png" style="width: 90%;"/>
-            
-            </div>
-          
-            <div class="content has-text-centered">
-
-              <img src="static/images/samples/LDP.png" style="width: 78%;"/>
-            
-            </div>
-
-            <div class="content has-text-centered">
-
-              <img src="static/images/samples/LRR.png" style="width: 95%;"/>
-            
-            </div>
-
-            <div class="content has-text-centered">
-
-              <img src="static/images/samples/OVR.png" style="width: 95%;"/>
-            
-            </div>
-
-            <div class="content has-text-centered">
-
-              <img src="static/images/samples/PTR.png" style="width: 95%;"/>
-            
-            </div>
-
-            <div class="content has-text-centered">
-
-              <img src="static/images/samples/PTS.png" style="width: 95%;"/>
-            
-            </div>
-
-            <div class="content has-text-centered">
-
-              <img src="static/images/samples/VAP.png" style="width: 85%;"/>
-            
-            </div>
-
-            <div class="content has-text-centered">
-
-              <img src="static/images/samples/VPC.png" style="width: 85%;"/>
-            
-            </div>
-
-            <div class="content has-text-centered">
-
-              <img src="static/images/samples/VPP.png" style="width: 95%;"/>
-            
-            </div>
-
-            <div class="content has-text-centered">
-
-              <img src="static/images/samples/robustness.png" style="width: 43%;"/>
-              <p style="margin-bottom: 30px;">Samples for Robustness Evaluation</p>
-            
-            </div>
-
-        </div> -->
-
-
-
-        </div>
-
-      </div>
-    </div>
-    </div>
-
     <!-- <br><br> -->
-    <div class="columns is-centered">
-      <div class="column">
-        <div class="content has-text-centered">
-          <h2 class="title is-3">📊 Data Curation Pipeline</h2>
-          <img src="static/images/data_pipeline.png" alt="data-composition" style="max-width: 60%;" />
-          <p style="text-align: center; margin-left: auto; margin-right: auto; width: 50%;">
-            The data curation pipeline creates two datasets: Video-R4-CoT-17k (for supervised practice) and
-            Video-R4-RL-30k (for reinforcement learning). The pipeline processes training data with OCR and object
-            detection results, uses rule-based matching, trajectory synthesis, and quality control to generate
-            high-quality training examples.
-          </p>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3" style="margin-bottom: -15px">📊 Data Curation Pipeline</h2>
+        <div class="content has-text-justified" style="max-width: 100%; margin: 0 auto;">
+          <div class="content has-text-centered">
+            <img src="static/images/data_pipeline.png" alt="data-composition" style="max-width: 100%;" />
+            <p style="margin-top: 15px; font-style: italic; color: #7d3c98; text-align: center; max-width: 100%; margin-left: auto; margin-right: auto;">
+              The data curation pipeline creates two datasets: Video-R4-CoT-17k (for supervised practice) and Video-R4-RL-30k (for reinforcement learning). The pipeline processes training data with OCR and object detection results, uses rule-based matching, trajectory synthesis, and quality control to generate high-quality training examples.
+            </p>
+          </div>
         </div>
       </div>
     </div>
 
     <div class="columns is-centered has-text-centered">
       <div class="column is-four-fifths">
-        <h2 class="title is-3">🎯 Reward Design</h2>
-        <div class="content has-text-justified">
+        <h2 class="title is-3" style="margin-bottom: -5px">🎯 Reward Design</h2>
+        <div class="content has-text-justified" style="max-width: 100%; margin: 0 auto;">
           <p>
             Our reward function combines four components: the original reward \(R\) (e.g., answer correctness and
             format), Diversity Reward \(R_{\text{div}}\), Representativeness Reward \(R_{\text{rep}}\), and Curiosity
             Reward \(R_{\text{cur}}\). The overall reward is:
           </p>
-          <p style="text-align: center; margin: 25px 0; padding: 15px; background-color: #f5f5f5; border-radius: 5px;">
+          <p style="text-align: center; margin: 25px 0; padding: 15px; background: linear-gradient(135deg, rgba(255, 179, 209, 0.3), rgba(135, 206, 235, 0.3), rgba(195, 155, 211, 0.3)); border: 2px solid rgba(255, 107, 157, 0.3); border-radius: 10px; box-shadow: 0 2px 10px rgba(155, 89, 182, 0.1);">
             \[R' = R + \lambda_{\text{div}} R_{\text{div}} + \lambda_{\text{rep}} R_{\text{rep}} + \lambda_{\text{cur}}
             R_{\text{cur}}\]
           </p>
@@ -411,7 +648,7 @@
             regions (\(\hat{V}^{r}\)). We define diversity reward to encourage the policy to avoid redundant region
             selections:
           </p>
-          <p style="text-align: center; margin: 20px 0; padding: 15px; background-color: #f5f5f5; border-radius: 5px;">
+          <p style="text-align: center; margin: 20px 0; padding: 15px; background: linear-gradient(135deg, rgba(255, 179, 209, 0.3), rgba(135, 206, 235, 0.3), rgba(195, 155, 211, 0.3)); border: 2px solid rgba(255, 107, 157, 0.3); border-radius: 10px; box-shadow: 0 2px 10px rgba(155, 89, 182, 0.1);">
             \[R_{\mathrm{div}}(\hat{V}^{r}) = \frac{1}{|\hat{V}^{r}| (|\hat{V}^{r}| - 1)} \sum_{i=1}^{|\hat{V}^{r}|}
             \sum_{j \ne i}^{|\hat{V}^{r}|-1} d(v_i, v_{j})\]
           </p>
@@ -427,7 +664,7 @@
             To ensure the selected frames \(\hat{V}^{f}\) remain informative, we encourage them to represent the global
             video frame set \(V\):
           </p>
-          <p style="text-align: center; margin: 20px 0; padding: 15px; background-color: #f5f5f5; border-radius: 5px;">
+          <p style="text-align: center; margin: 20px 0; padding: 15px; background: linear-gradient(135deg, rgba(255, 179, 209, 0.3), rgba(135, 206, 235, 0.3), rgba(195, 155, 211, 0.3)); border: 2px solid rgba(255, 107, 157, 0.3); border-radius: 10px; box-shadow: 0 2px 10px rgba(155, 89, 182, 0.1);">
             \[R_{\mathrm{rep}}(V,\hat{V}^f) = \exp\!\left(-\frac{1}{|V|} \sum_{i=1}^{|V|} \min_{v_j \in \hat{V}^{f[-1]}}
             \| v_i - v_{j} \|_2\right)\]
           </p>
@@ -441,7 +678,7 @@
           <p>
             To balance exploration and prevent overuse of visual operations, we incorporate a curiosity reward:
           </p>
-          <p style="text-align: center; margin: 20px 0; padding: 15px; background-color: #f5f5f5; border-radius: 5px;">
+          <p style="text-align: center; margin: 20px 0; padding: 15px; background: linear-gradient(135deg, rgba(255, 179, 209, 0.3), rgba(135, 206, 235, 0.3), rgba(195, 155, 211, 0.3)); border: 2px solid rgba(255, 107, 157, 0.3); border-radius: 10px; box-shadow: 0 2px 10px rgba(155, 89, 182, 0.1);">
             \[R_{\text{cur}}(\hat{V}_i) = \alpha \left( H - \frac{1}{K}\sum_{j=1}^{K} \mathbb{I}\big[|\hat{V}_j| >
             0\big] \right)_+ \cdot \mathbb{I}\big[|\hat{V}_i| > 0\big] - \beta \left(\,|\hat{V}_i| - N\,\right)_+\]
           </p>
@@ -455,17 +692,19 @@
       </div>
     </div>
 
-    <div class="columns is-centered">
-      <div class="column">
-        <div class="content has-text-centered">
-          <br><br>
-          <h2 class="title is-3">✈️ Training Framework</h2>
-          <img src="static/images/training_framework.png" alt="training-framework" style="max-width: 60%;" />
-          <p style="text-align: center; margin-left: auto; margin-right: auto; width: 50%;">
-            Multi-stage rumination training framework: (1) Deliberate Rumination Practice (DRP) SFT, (2) RL after
-            DRP-SFT, (3) Compositional Rumination Practice (CRP) SFT, (4) RL after CRP-SFT. The framework uses
-            GRPO-based reinforcement learning with rewards for accuracy, diversity, repetition, and curiosity.
-          </p>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3" style="margin-bottom: -15px">✈️ Training Framework</h2>
+        <div class="content has-text-justified" style="max-width: 100%; margin: 0 auto;">
+          <div class="content has-text-centered">
+            <img src="static/images/training_framework.png" alt="training-framework" style="max-width: 100%;" />
+            <p style="margin-top: 15px; font-style: italic; color: #7d3c98; text-align: center; max-width: 100%; margin-left: auto; margin-right: auto;">
+              Multi-stage rumination training framework: (1) Deliberate Rumination Practice (DRP) SFT, (2) RL after DRP-SFT, (3) Compositional Rumination Practice (CRP) SFT, (4) RL after CRP-SFT. The framework uses GRPO-based reinforcement learning with rewards for accuracy, diversity, repetition, and curiosity.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
 
           <!-- <img src="static/images/dataset_comparison.png" alt="data-composition" style="max-width: 50%;"/> -->
           <!-- <p style="text-align: center; margin-left: auto; margin-right: auto; width: 50%;" >
@@ -478,7 +717,6 @@
         </div>
       </div>
     </div>
-
     </div>
   </section>
 
@@ -487,142 +725,15 @@
   <!-- RESULTS SECTION -->
   <section class="hero is-light is-small">
     <div class="hero-body has-text-centered">
-      <h1 class="title is-1 mathvista_other">Experiment Results</h1>
+      <h1 class="title is-1 mathvista_other">📊 Experiment Results</h1>
     </div>
   </section>
 
-
   <section class="section">
-    <div class="container">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths" style="width: 100%;height: 80%;">
-
-          <div class="content has-text-justified">
-            <p style="text-align: center;" , class="mt-3"><strong></strong>
-            </p>
-
-            <!-- <div id="results-carousel" class="carousel results-carousel">  
-          
-            <div class="content has-text-centered">
-
-              <img src="static/images/results/all_radar.png" style="width: 80%;"/>
-              <p style="margin-bottom: 30px;">SOTA Models Performance on MMPerspective</p>
-            
-            </div>
-          
-            <div class="content has-text-centered">
-
-              <img src="static/images/results/heatmap_combine_OverallAcc_Robustness_00.png" style="width: 80%;"/>
-              <p style="margin-bottom: 30px;">Heatmaps illustrating the relationship between model size and performance, measured by P\&R Overall Accuracy and Robustness. Darker colors indicate higher performance. Each line represents a model family, with sizes increasing from left to right.</p>
-            
-            </div>
-
-            <div class="content has-text-centered">
-
-              <img src="static/images/results/vlm2_00.png" style="width: 80%;"/>
-              <p style="margin-bottom: 30px;">Correlation analysis between performance and size across MLLM families: (a) Overall accuracy vs. model size ($r = 0.81$), (b) Robustness vs. model size ($r = 0.34$), (c) Overall accuracy vs. encoder size ($r = 0.51$), (d) Robustness vs. encoder size ($r = 0.15$). Total model scaling strongly impacts perspective understanding, while vision encoder size has a limited influence on robustness.</p>
-            
-            </div>
-
-            <div class="content has-text-centered">
-
-              <img src="static/images/results/within-cross_a.png" style="width: 50%;"/>
-              <p style="margin-bottom: 30px;">Error pattern analysis across model families: Cumulative distribution of phi coefficients shows significantly higher correlations within families than across families (Cohen's d=0.33, p < 0.001).</p>
-            
-            </div>
-
-            <div class="content has-text-centered">
-
-              <img src="static/images/results/within-cross_b.png" style="width: 70%;"/>
-              <p style="margin-bottom: 30px;">Task-wise breakdown reveals perception tasks (VAP, CLP) exhibit the strongest family-specific patterns, while reasoning tasks (VPC, LRR) show weaker family effects.</p>
-            
-            </div>
-
-            <div class="content has-text-centered">
-
-              <img src="static/images/results/level_3_fine_fixed.png" style="width: 70%;"/>
-              <p style="margin-bottom: 30px;">Difficulty Distribution of MMPerspective</p>
-            
-            </div>
-
-        </div> -->
-
-
-          </div>
-        </div>
-
-      </div>
-    </div>
-    </div>
-
-    <section class="section">
-      <div class="container">
-        <div class="columns is-centered has-text-centered">
-          <div class="column is-four-fifths" style="width: 100%;height: 80%;">
-            <!-- <h2 class="title is-3">Chain-of-Thought Examples</h2> -->
-            <div class="content has-text-justified">
-              <p style="text-align: center;" , class="mt-3"><strong></strong>
-              </p>
-
-              <!-- <div id="results-carousel" class="carousel results-carousel">    
-    
-                <div class="content has-text-centered">
-    
-                  <img src="static/images/CoT/cot_gpt_1.png" style="width: 75%;"/>
-                
-                </div>
-    
-                <div class="content has-text-centered">
-    
-                  <img src="static/images/CoT/cot_gpt_2.png" style="width: 85%;"/>
-                
-                </div>
-    
-                <div class="content has-text-centered">
-    
-                  <img src="static/images/CoT/cot_gemini_1.png" style="width: 70%;"/>
-                
-                </div>
-    
-                <div class="content has-text-centered">
-    
-                  <img src="static/images/CoT/cot_gemini_2.png" style="width: 60%;"/>
-                
-                </div>
-
-                <div class="content has-text-centered">
-    
-                  <img src="static/images/CoT/cot_failure_gemini2_lrr_00.png" style="width: 60%;"/>
-                
-                </div>
-    
-                <div class="content has-text-centered">
-    
-                  <img src="static/images/CoT/cot_failure_gemini2_pts_00.png" style="width: 60%;"/>
-                
-                </div>
-    
-                <div class="content has-text-centered">
-    
-                  <img src="static/images/CoT/cot_failure_gpt4o_ptr_00.png" style="width: 60%;"/>
-                
-                </div>
-    
-            </div> -->
-
-
-            </div>
-          </div>
-
-        </div>
-      </div>
-      </div>
-
-      <section class="section">
         <div class="container">
           <div class="columns is-centered">
             <div class="column is-full has-text-centered content">
-              <h2 class="title is-3" id="leaderboard">🏆 Performance on M4-ViteVQA</h2>
+              <h2 class="title is-3" id="leaderboard" style="margin-bottom: -10px">🏆 Performance on M4-ViteVQA</h2>
               <div class="content">
                 <p>
                   <strong>Performance comparison on the testset of the M4-ViteVQA dataset.</strong> Best non-human
@@ -650,12 +761,12 @@
                             2</strong></th>
                       </tr>
                       <tr>
-                        <th style="vertical-align: middle; text-align: center; padding: 8px;">Acc. (%)</th>
-                        <th style="vertical-align: middle; text-align: center; padding: 8px;">ANLS (%)</th>
-                        <th style="vertical-align: middle; text-align: center; padding: 8px;">Acc. (%)</th>
-                        <th style="vertical-align: middle; text-align: center; padding: 8px;">ANLS (%)</th>
-                        <th style="vertical-align: middle; text-align: center; padding: 8px;">Acc. (%)</th>
-                        <th style="vertical-align: middle; text-align: center; padding: 8px;">ANLS (%)</th>
+                        <th style="vertical-align: middle; text-align: center; padding: 8px;"><strong>Acc. (%)</strong></th>
+                        <th style="vertical-align: middle; text-align: center; padding: 8px;"><strong>ANLS (%)</strong></th>
+                        <th style="vertical-align: middle; text-align: center; padding: 8px;"><strong>Acc. (%)</strong></th>
+                        <th style="vertical-align: middle; text-align: center; padding: 8px;"><strong>ANLS (%)</strong></th>
+                        <th style="vertical-align: middle; text-align: center; padding: 8px;"><strong>Acc. (%)</strong></th>
+                        <th style="vertical-align: middle; text-align: center; padding: 8px;"><strong>ANLS (%)</strong></th>
                       </tr>
                     </thead>
                     <tbody>
@@ -803,7 +914,7 @@
                         <td style="text-align: center; padding: 8px;">58.97</td>
                         <td style="text-align: center; padding: 8px;">65.32</td>
                       </tr>
-                      <tr style="background-color: #e3f2fd;">
+                      <tr style="background: linear-gradient(90deg, rgba(255, 107, 157, 0.2), rgba(74, 144, 226, 0.2));">
                         <td style="text-align: left; padding: 8px;"><strong>Video-R4-7B (ours)</strong></td>
                         <td style="text-align: center; padding: 8px;">✓</td>
                         <td style="text-align: center; padding: 8px;">✓</td>
@@ -815,7 +926,7 @@
                         <td style="text-align: center; padding: 8px;"><strong>64.21</strong></td>
                         <td style="text-align: center; padding: 8px;"><strong>69.99</strong></td>
                       </tr>
-                      <tr style="background-color: #f5f5f5;">
+                      <tr style="background: linear-gradient(90deg, rgba(155, 89, 182, 0.15), rgba(74, 144, 226, 0.15));">
                         <td style="text-align: left; padding: 8px; font-weight: normal;">Human</td>
                         <td style="text-align: center; padding: 8px; font-weight: normal;">--</td>
                         <td style="text-align: center; padding: 8px; font-weight: normal;">--</td>
@@ -897,7 +1008,7 @@
                             <td style="text-align: center; padding: 8px; text-decoration: underline;">54.6</td>
                             <td style="text-align: center; padding: 8px;">47.7</td>
                           </tr>
-                          <tr style="background-color: #e3f2fd;">
+                          <tr style="background: linear-gradient(90deg, rgba(255, 107, 157, 0.2), rgba(74, 144, 226, 0.2));">
                             <td style="text-align: left; padding: 8px;"><strong>Video-R4-7B (ours)</strong></td>
                             <td style="text-align: center; padding: 8px; text-decoration: underline;">64.5</td>
                             <td style="text-align: center; padding: 8px;">54.5</td>
@@ -954,7 +1065,7 @@
                             <td style="text-align: center; padding: 8px;">48.28</td>
                             <td style="text-align: center; padding: 8px;">62.01</td>
                           </tr>
-                          <tr style="background-color: #e3f2fd;">
+                          <tr style="background: linear-gradient(90deg, rgba(255, 107, 157, 0.2), rgba(74, 144, 226, 0.2));">
                             <td style="text-align: left; padding: 8px;"><strong>Video-R4-7B (ours)</strong></td>
                             <td style="text-align: center; padding: 8px;">✓</td>
                             <td style="text-align: center; padding: 8px;"><strong>53.21</strong></td>
@@ -1071,7 +1182,7 @@
                             <td style="text-align: center; padding: 8px;">33.5</td>
                             <td style="text-align: center; padding: 8px;">41.7</td>
                           </tr>
-                          <tr style="background-color: #e3f2fd;">
+                          <tr style="background: linear-gradient(90deg, rgba(255, 107, 157, 0.2), rgba(74, 144, 226, 0.2));">
                             <td style="text-align: left; padding: 8px;"><strong>Video-R4-7B (ours)</strong></td>
                             <td style="text-align: center; padding: 8px;">✓</td>
                             <td style="text-align: center; padding: 8px;"><strong>49.5</strong></td>
@@ -1113,18 +1224,39 @@
       <h2 class="title is-3 has-text-centered"> 📺 Visualizations</h2>
       <img src="static/images/vis_1.png" alt="visualization-1"
         style="max-width: 60%; display: block; margin: 0 auto;" />
-      <p style="text-align: center; margin-left: auto; margin-right: auto; width: 50%;">
+      <p style="margin-top: 15px; font-style: italic; color: #7d3c98; text-align: center;">
         Visualization of the iterative visual rumination process.
       </p>
       <br><br>
       <img src="static/images/vis_2.png" alt="visualization-2"
         style="max-width: 60%; display: block; margin: 0 auto;" />
-      <p style="text-align: center; margin-left: auto; margin-right: auto; width: 50%;">
+      <p style="margin-top: 15px; font-style: italic; color: #7d3c98; text-align: center;">
         Visualization of the iterative visual rumination process.
       </p>
 
 
-      <br><br>
+
+      <section class="hero is-light is-small">
+        <div class="hero-body has-text-centered">
+          <h1 class="title is-1 mathvista_other">
+            <span class="mathvista_other" style="vertical-align: middle">🙏 Acknowledgments</span>
+          </h1>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <div class="content has-text-justified" style="max-width: 100%; margin: 0 auto;">
+                <p style="text-align: center;">
+                  This work was supported by Sony Group Corporation. We would like to thank Sayaka Nakamura and Jerry Jun Yokono for their insightful discussion.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <section class="hero is-light is-small">
         <div class="hero-body has-text-centered">
@@ -1142,7 +1274,11 @@
 
       <section class="section" id="BibTeX">
         <div class="container is-max-desktop content">
-          <pre><code>
+          <button id="copyBibtexBtn" class="copy-button" onclick="copyBibtex()" title="Copy to clipboard">
+            <i class="fas fa-copy"></i>
+            <span>Copy</span>
+          </button>
+          <pre><code id="bibtexCode">
       @article{tang2025mmperspective,
         title={Video-R4: Reinforcing Text-Rich Video Reasoning with Visual Rumination},
         author={Tang, Yolo Yunlong and Shimada, Daiki and Hua, Hang and Huang, Chao and Bi, Jing and Feris, Rogerio and Xu, Chenliang},
@@ -1153,33 +1289,9 @@
         </div>
       </section>
 
-      <section class="section">
-        <div class="container" style="width: 60%;">
-          <style>
-            pre {
-              background-color: #f4f4f4;
-              padding: 5px;
-              /* 调整padding为5px */
-              border: 1px solid #ddd;
-              border-radius: 5px;
-              overflow-x: auto;
-              /* 允许水平滚动 */
-            }
-
-            code {
-              font-family: Consolas, "Courier New", monospace;
-              color: #d63384;
-              /* 代码文本颜色 */
-            }
-          </style>
-
-        </div>
-      </section>
 
       <footer class="footer">
         <!-- <div class="container"> -->
-        <div class="content has-text-centered">
-        </div>
         <div class="columns is-centered">
           <div class="column is-8">
             <div class="content">
@@ -1193,6 +1305,28 @@
         </div>
         <!-- </div> -->
       </footer>
+
+  <script>
+    function copyBibtex() {
+      const bibtexCode = document.getElementById('bibtexCode').textContent;
+      const textToCopy = bibtexCode.trim();
+      
+      navigator.clipboard.writeText(textToCopy).then(function() {
+        const btn = document.getElementById('copyBibtexBtn');
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> <span>Copied!</span>';
+        btn.style.background = 'linear-gradient(135deg, #4a90e2 0%, #9b59b6 100%)';
+        
+        setTimeout(function() {
+          btn.innerHTML = originalHTML;
+          btn.style.background = '';
+        }, 2000);
+      }).catch(function(err) {
+        console.error('Failed to copy: ', err);
+        alert('Failed to copy to clipboard');
+      });
+    }
+  </script>
 
 </body>
 
