@@ -1,8 +1,9 @@
 <html>
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title> MMPerspective </title>
+  <title> Video-R4 </title>
 
   <link rel="icon" href="./static/images/logo.png">
 
@@ -14,6 +15,18 @@
   <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
   <link rel="stylesheet" href="./static/css/index.css">
+
+  <!-- MathJax -->
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+  </script>
   <link rel="stylesheet" href="./static/css/leaderboard.css">
   <link rel="stylesheet" href="./static/css/video-player.css">
 
@@ -34,1119 +47,312 @@
 
   <script src="./visualizer/data/data_public.js" defer></script> -->
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        const columns = [4, 5, 6, 7, 8, 9];
-        columns.forEach(colIndex => {
-            let maxVal = -Infinity;
-            let maxCell = null;
-            let cells = document.querySelectorAll(`#results tbody tr td:nth-child(${colIndex + 1})`);
-            cells.forEach(cell => {
-                let cellValue = parseFloat(cell.textContent);
-                if (cellValue > maxVal) {
-                    maxVal = cellValue;
-                    maxCell = cell;
-                }
-            });
-            if (maxCell) {
-                maxCell.style.fontWeight = "bold";
-            }
+    document.addEventListener("DOMContentLoaded", function () {
+      const columns = [4, 5, 6, 7, 8, 9];
+      columns.forEach(colIndex => {
+        let maxVal = -Infinity;
+        let maxCell = null;
+        let cells = document.querySelectorAll(`#results tbody tr td:nth-child(${colIndex + 1})`);
+        cells.forEach(cell => {
+          // Skip Human row - check if the row contains "Human" in the first cell
+          const row = cell.parentElement;
+          const firstCell = row.querySelector('td:first-child');
+          if (firstCell && firstCell.textContent.trim() === 'Human') {
+            return; // Skip this cell
+          }
+
+          let cellValue = parseFloat(cell.textContent);
+          if (!isNaN(cellValue) && cellValue > maxVal) {
+            maxVal = cellValue;
+            maxCell = cell;
+          }
         });
+        if (maxCell) {
+          maxCell.style.fontWeight = "bold";
+        }
+      });
     });
-</script>
+  </script>
 
 </head>
+
 <body>
 
-<nav class="navbar" role="navigation" aria-label="main navigation">
-  <div class="navbar-brand">
-    <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-      <span aria-hidden="true"></span>
-    </a>
-  </div>
-  <div class="navbar-menu">
-    <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
 
-  <div class="navbar-item has-dropdown is-hoverable">
-        <p style="font-size:18px; display: inline; margin-right: -2px; margin-top: 12px;">🔥</p>
-        <a class="navbar-link">
-          More Research
-        </a>
-        <div class="navbar-dropdown">
-          <a class="navbar-item" href="https://github.com/yunlong10/VidComposition">
-            <b>VidComposition</b> 
+        <div class="navbar-item has-dropdown is-hoverable">
+          <p style="font-size:18px; display: inline; margin-right: -2px; margin-top: 12px;">🔥</p>
+          <a class="navbar-link">
+            More Research
           </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item" href="https://github.com/yunlong10/VidComposition">
+              <b>VidComposition</b>
+            </a>
 
-          <a class="navbar-item" href="https://github.com/yunlong10/Awesome-LLMs-for-Video-Understanding">
-            <b>Video-LLM Survey</b> 
-          </a>
+            <a class="navbar-item" href="https://github.com/yunlong10/Awesome-LLMs-for-Video-Understanding">
+              <b>Video-LLM Survey</b>
+            </a>
 
-          <a class="navbar-item" href="https://github.com/hanghuacs/MMComposition">
-            <b>MMComposition</b> 
-          </a>
+            <a class="navbar-item" href="https://github.com/hanghuacs/MMComposition">
+              <b>MMComposition</b>
+            </a>
+            <a class="navbar-item" href="https://github.com/yunlong10/MMPerspective">
+              <b>MMPerspective</b>
+            </a>
 
-          <a class="navbar-item" href="https://hanghuacs.github.io/MMIG-Bench/">
-            <b>MMIG-Bench</b> 
-          </a>
+            <a class="navbar-item" href="https://hanghuacs.github.io/MMIG-Bench/">
+              <b>MMIG-Bench</b>
+            </a>
+          </div>
         </div>
       </div>
+
     </div>
+  </nav>
 
-  </div>
-</nav>
+  <style>
+    /* rainbow text start */
+    .rainbow {
+      text-align: center;
+      text-decoration: underline;
+      font-size: 32px;
+      font-family: monospace;
+      letter-spacing: 5px;
+    }
 
-<style>
-  /* rainbow text start */
-.rainbow {
-  text-align: center;
-  text-decoration: underline;
-  font-size: 32px;
-  font-family: monospace;
-  letter-spacing: 5px;
-}
-.rainbow_text_animated {
-  background: linear-gradient(to right, #6666ff, #0099ff , #00ff00, #ff3399, #6666ff);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  animation: rainbow_animation 6s ease-in-out infinite;
-  background-size: 400% 100%;
-}
+    .rainbow_text_animated {
+      background: linear-gradient(to right, #6666ff, #0099ff, #00ff00, #ff3399, #6666ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: rainbow_animation 6s ease-in-out infinite;
+      background-size: 400% 100%;
+    }
 
-@keyframes rainbow_animation {
-  0%,100% {
-      background-position: 0 0;
-  }
+    @keyframes rainbow_animation {
 
-  50% {
-      background-position: 100% 0;
-  }
-}
-/* rainbow text done */
-</style>
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title is-bold">
-            <img src="static/images/logo.png" style="width:1.6em;vertical-align: middle" alt="Logo"/>
-            <span class="rainbow_text_animated" style="vertical-align: middle">MMPerspective</span>
-            </h1>
-          <h2 class="subtitle is-3 publication-subtitle" style="margin-bottom: 0px;">
-            Do MLLMs Understand Perspective? A Comprehensive Benchmark for Perspective Perception, Reasoning, and Robustness
-          </h2>
-          <br>
-          <p class="rainbow" style="font-size: 1.3em; margin-bottom: 10px; text-decoration: none;">
-            <span class="rainbow_text_animated" style="text-decoration: none;">NeurIPS 2025</span>
-          </p>
-          <div class="is-size-5 publication-authors" style="width: 80%; margin: 20px auto;" >
-            <span class="author-block"><a href="https://yunlong10.github.io">Yunlong Tang</a><sup style="color:#6fbf73;">1</sup>*,</span>
-            <span class="author-block"><a href="https://andypinxinliu.github.io/">Pinxin Liu</a><sup style="color:#6fbf73;">1</sup>*,</span>
-            <span class="author-block"><a href="https://zhangyun04.github.io/">Zhangyun Tan</a><sup style="color:#6fbf73;">1</sup>*,</span>
-            <span class="author-block"><a href="https://fmmarkmq.github.io/">Mingqian Feng</a><sup style="color:#6fbf73;">1</sup>,</span>
-            <span class="author-block"><a href="">Rui Mao</a><sup style="color:#6fbf73;">1</sup>,</span>
-            <span class="author-block"><a href="https://wikichao.github.io/">Chao Huang</a><sup style="color:#6fbf73;">1</sup>,</span>
-            <span class="author-block"><a href="https://jing-bi.github.io/">Jing Bi</a><sup style="color:#6fbf73;">1</sup>,</span>
-            <span class="author-block"><a href="https://shawn-yzxiao.github.io/">Yunzhong Xiao</a><sup style="color:#ed4b82;">2</sup>,</span>
-            <span class="author-block"><a href="https://liangsusan-git.github.io/">Susan Liang</a><sup style="color:#6fbf73;">1</sup>,</span>
-            <span class="author-block"><a href="https://hanghuacs.owlstown.net/">Hang Hua</a><sup style="color:#6fbf73;">1</sup>,</span>
-            <span class="author-block"><a href="https://alivosoughi.com/">Ali Vosoughi</a><sup style="color:#6fbf73;">1</sup>,</span>
-            <span class="author-block"><a href="https://songluchuan.github.io/">Luchuan Song</a><sup style="color:#6fbf73;">1</sup>,</span>
-            <span class="author-block"><a href="https://zhangaipi.github.io/">Zeliang Zhang</a><sup style="color:#6fbf73;">1</sup>,</span>
-            <span class="author-block"><a href="https://www.cs.rochester.edu/~cxu22/index.html">Chenliang Xu</a>&dagger;<sup style="color:#6fbf73;">1</sup></span><br>
-            <!-- <span class="author-block" style="font-size:24px"><a href="https://github.com/BradyFU/Video-MME">MMComposition Team</a></span> -->
-            <br>
-            <span class="author-block" style="font-size:18px">* Equal Contribution, &dagger; Corresponding Author</span>
+      0%,
+      100% {
+        background-position: 0 0;
+      }
 
-        </div>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup style="color:#6fbf73">1</sup>University of Rochester,</span>
-            <!-- <span class="author-block"><sup style="color:#6fbf73;">1</sup></span> -->
-            <span class="author-block"><sup style="color:#ed4b82">2</sup>Carnegie Mellon University</span>
-            <!-- <span class="paper-block"><b style="color:#f41c1c">ICLR 2024 Oral</b> (85 in 7304, 1.2%)</span> -->
-          </div>
+      50% {
+        background-position: 100% 0;
+      }
+    }
+
+    /* rainbow text done */
+  </style>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
           <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href="https://arxiv.org/abs/2505.20426"
-                   class="external-link button is-normal is-rounded is-dark">
-                <!-- <a href="https://lupantech.github.io/papers/arxiv23_mathvista.pdf"
-                   class="external-link button is-normal is-rounded is-dark"> -->
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-              <!-- Code Link. -->
-              <span class="link-block">
-                <a href="https://github.com/yunlong10/MMPerspective"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
-                  </a>
-              </span>
-              <!-- Dataset Link. -->
-              <span class="link-block">
-                <a href="https://github.com/yunlong10/MMPerspective"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <!-- <i class="far fa-images"></i> -->
-                      <p style="font-size:18px">📊</p>
-                  </span>
-                  <span>Dataset</span>
-                </a>
-              </span> 
-              <!-- Leaderboard Link. -->
-              <span class="link-block">
-                <a href="#leaderboard"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <p style="font-size:18px">🏆</p>
-                  </span>
-                  <span>Leaderboard</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="#citation"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <p style="font-size:18px">📃</p>
-                  </span>
-                  <span>Cite</span>
-                </a>
-              </span>
+            <h1 class="title is-1 publication-title is-bold">
+              <span class="rainbow_text_animated" style="vertical-align: middle">Video-R4: Reinforcing Text-Rich Video
+                Reasoning with Visual Rumination</span>
+            </h1>
+            <!-- <h2 class="subtitle is-3 publication-subtitle" style="margin-bottom: 0px;">
+            Reinforcing Text-Rich Video Reasoning with Visual Rumination
+          </h2> -->
+            <!-- <br> -->
+            <!-- <p class="rainbow" style="font-size: 1.3em; margin-bottom: 10px; text-decoration: none;"> -->
+            <!-- <span class="rainbow_text_animated" style="text-decoration: none;">arXiv 2025</span> -->
+            <!-- </p> -->
+            <div class="is-size-5 publication-authors" style="width: 80%; margin: 20px auto;">
+              <span class="author-block"><a href="https://yunlong10.github.io">Yolo Yunlong Tang</a><sup
+                  style="color:#1460e3;">1</sup>,</span>
+              <span class="author-block"><a href="https://scholar.google.com/citations?user=1uAwouQAAAAJ&hl=en">Daiki
+                  Shimada</a><sup style="color:#ab0ef4;">2</sup>,</span>
+              <span class="author-block"><a href="https://hanghuacs.owlstown.net/">Hang Hua</a><sup
+                  style="color:#e41037;">3</sup>,</span>
+              <span class="author-block"><a href="https://wikichao.github.io/">Chao Huang</a><sup
+                  style="color:#1460e3;">1</sup>,</span>
+              <span class="author-block"><a href="https://jing-bi.github.io/">Jing Bi</a><sup
+                  style="color:#1460e3;">1</sup>,</span><br>
+              <span class="author-block"><a href="https://www.rogerioferis.org/">Rogerio Feris</a><sup
+                  style="color:#e41037;">3</sup>,</span>
+              <span class="author-block"><a href="https://www.cs.rochester.edu/~cxu22/index.html">Chenliang Xu</a><sup
+                  style="color:#1460e3;">1</sup></span>
+              <!-- <span class="author-block" style="font-size:18px">&dagger; Corresponding Author</span> -->
 
             </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup style="color:#1460e3">1</sup>University of Rochester,</span>
+              <span class="author-block"><sup style="color:#ab0ef4">2</sup>Sony Group Corporation,</span>
+              <span class="author-block"><sup style="color:#e41037">3</sup>MIT-IBM Watson AI Lab</span>
+              <!-- <span class="paper-block"><b style="color:#f41c1c">ICLR 2024 Oral</b> (85 in 7304, 1.2%)</span> -->
+            </div>
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2511.xxxxx" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/yunlong10/Video-R4"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- Dataset Link. -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/datasets/YOUR_DATASET_PATH"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <!-- <i class="far fa-images"></i> -->
+                      <p style="font-size:18px">📊</p>
+                    </span>
+                    <span>Dataset</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#citation" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <p style="font-size:18px">📃</p>
+                    </span>
+                    <span>Cite</span>
+                  </a>
+                </span>
+
+              </div>
+            </div>
           </div>
+
         </div>
 
       </div>
 
+
     </div>
-    
+  </section>
 
-  </div>
-</section>
+  <section class="section" style="padding-top: 1.5rem;">
+    <div class="container" style="margin-bottom: 2vh;">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3" style="margin-top: 0;">Introduction</h2>
+          <div class="content has-text-justified">
+            Understanding small, transient textual cues in videos is crucial for text-rich video reasoning tasks.
+            Current video QA models often rely on single-pass perception, which can lead to hallucinations when dealing
+            with complex visual-textual content. We introduce <strong>Video-R4</strong>, a video reasoning Large
+            Multimodal Model (LMM) that performs <strong>visual rumination</strong>—an iterative process that mimics how
+            humans process visual information by selecting frames, zooming into informative regions, re-encoding
+            retrieved pixels, and updating the reasoning state, forming a closed-loop read-retrieve-refocus-reinforce
+            cycle for grounded video reasoning. We develop two datasets (<strong>Video-R4-CoT-17k</strong> and
+            <strong>Video-R4-RL-30k</strong>) and a multi-stage rumination learning framework that progressively
+            finetunes a 7B LMM using Supervised Fine-Tuning (SFT) and GRPO-based Reinforcement Learning (RL).
+            <strong>Video-R4-7B</strong> achieves state-of-the-art results on M4-ViteVQA and demonstrates strong
+            generalization to multi-page document QA, slides QA, and generic video QA, proving the effectiveness of
+            iterative rumination for pixel-grounded multimodal reasoning.
 
-<section class="section">
-  <div class="container" style="margin-bottom: 2vh;">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        
-        <h2 class="title is-3">Introduction</h2>
-        <div class="content has-text-justified">
-          <!-- Understanding perspective is fundamental to human visual perception, yet the extent to which multimodal large language models (MLLMs) internalize perspective geometry remains unclear. We introduce MMPerspective, the first benchmark specifically designed to systematically evaluate MLLMs' understanding of perspective through 10 carefully crafted tasks across three complementary dimensions: Perspective Perception, Reasoning, and Robustness. Our benchmark comprises 2,711 real-world and synthetic image instances with 5,083 question-answer pairs that probe key capabilities like vanishing point perception, perspective type reasoning, and line relationship understanding. Through evaluating 43 state-of-the-art MLLMs, we uncover significant limitations: while models show competence on basic perceptual tasks, they struggle with compositional reasoning and maintaining spatial consistency. Our analysis reveals patterns between model architecture, scale, and perspective capabilities, highlighting robustness bottlenecks and benefits of chain-of-thought prompting. -->
+            <div class="content has-text-centered">
+              <img src="static/images/bar.png" alt="performance" style="max-width: 100%;" />
+              <p style="margin-top: 15px; font-style: italic; color: #666;">
+                Video-R4-7B achieves state-of-the-art performance on the text-rich video understanding, and is also
+                compatible with the LMMs with the same size on the general video QA benchmarks.
+              </p>
+            </div>
 
-          Perspective has long served as a cornerstone for representing three-dimensional reality on two-dimensional surfaces, enabling humans to infer spatial structure and depth from flat images. This capability is central to artistic creation, scientific visualization, and machine perception. While some research has attempted to enable models to detect vanishing points and key lines, these approaches often rely on precise mathematical models or specialized datasets, struggling to capture perspective-related semantics or generalize to broader tasks.
+          </div>
+          <!-- <img src="static/images/mmperspective.png" /> -->
 
-          Recent multimodal large language models like GPT-4 and Gemini have shown powerful visual perception capabilities, but their perspective understanding remains untested. While these models excel at high-level vision-language tasks, existing benchmarks rarely evaluate geometric reasoning abilities. It remains unclear whether MLLMs can identify vanishing points, understand line convergence, reason about spatial relationships, or maintain consistent interpretations across viewpoints.
-
-          Our key contributions are:
-
-            <ol> <li>We introduce <strong>MMPerspective</strong>, the first dedicated benchmark for evaluating perspective understanding in MLLMs, spanning 10 tasks across three dimensions, consisting of 2,711 instances and 5,083 QA pairs.</li>
-            <li>We conduct a comprehensive evaluation of 43 representative MLLMs and reveal key limitations in perspective perception, reasoning, and robustness.</li>
-            <li>We offer new insights into current model bottlenecks and provide guidance toward building geometry-aware, spatially grounded multimodal systems.</li> </ol>
-
-</div>
-<img src="static/images/mmperspective.png" />
-
-</div>
-</div>
-<!--/ Abstract. -->
-
-</div>
-</section>
-
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered">
-      <div class="column is-full has-text-centered content">
-        <h2 class="title is-3" id="leaderboard">🏆 Leaderboard</h2>
-        <div class="content">
-            <p>
-              <strong>Performance of MLLMs on MMPerspective.</strong> Models are grouped by size and ranked by overall accuracy. Best scores in each group are bolded.
-            </p>
-            <table class="js-sort-table js-sort-asc" id="results" style="margin-left: auto; margin-right: auto;">
-                <thead>
-                    <tr>
-                        <th rowspan="1" style="vertical-align: middle; width: 180px;"><strong>Model</strong></th>
-                        <th colspan="4" style="vertical-align: middle;"><strong>Perspective Perception</strong></th>
-                        <th colspan="5" style="vertical-align: middle;"><strong>Perspective Reasoning</strong></th>
-                        <th colspan="3" style="vertical-align: middle;"><strong>P'Percep & P'Reason</strong></th>
-                        <th rowspan="1" style="vertical-align: middle;"><strong>Robustness</strong></th>
-                    </tr>
-                    <tr>
-                        <th style="vertical-align: middle;">Model</th>
-                        <th style="vertical-align: middle;">VPP</th>
-                        <th style="vertical-align: middle;">CLP</th>
-                        <th style="vertical-align: middle;">VAP</th>
-                        <th style="vertical-align: middle;">LDP</th>
-                        <th style="vertical-align: middle;">PTR</th>
-                        <th style="vertical-align: middle;">LRR</th>
-                        <th style="vertical-align: middle;">OVR</th>
-                        <th style="vertical-align: middle;">PTS</th>
-                        <th style="vertical-align: middle;">VPC</th>
-                        <th style="vertical-align: middle;">P Acc</th>
-                        <th style="vertical-align: middle;">R Acc</th>
-                        <th style="vertical-align: middle;">Overall</th>
-                        <th style="vertical-align: middle;">P'Robust</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr style="background-color: #e9edf6;">
-                        <td colspan="14" style="text-align: center;"><em>MLLMs: < 7B</em></td>
-                    </tr>
-                    <tr>
-                        <td>InternVL2.5-2B</td>
-                        <td><strong>47.4</strong></td>
-                        <td>22.8</td>
-                        <td>13.0</td>
-                        <td><strong>65.3</strong></td>
-                        <td><strong>62.2</strong></td>
-                        <td>31.8</td>
-                        <td>16.6</td>
-                        <td>30.0</td>
-                        <td><strong>50.0</strong></td>
-                        <td>37.1</td>
-                        <td><strong>38.1</strong></td>
-                        <td><strong>37.7</strong></td>
-                        <td><strong>46.5</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Qwen2.5-VL-3B</td>
-                        <td>27.6</td>
-                        <td>22.8</td>
-                        <td>56.8</td>
-                        <td>55.1</td>
-                        <td>32.3</td>
-                        <td>32.5</td>
-                        <td>15.9</td>
-                        <td><strong>39.4</strong></td>
-                        <td>44.7</td>
-                        <td>40.6</td>
-                        <td>33.0</td>
-                        <td>36.3</td>
-                        <td>6.4</td>
-                    </tr>
-                    <tr>
-                        <td>InternVL2.5-4B</td>
-                        <td>32.1</td>
-                        <td>26.0</td>
-                        <td><strong>59.3</strong></td>
-                        <td>64.2</td>
-                        <td>28.2</td>
-                        <td>30.5</td>
-                        <td>10.7</td>
-                        <td>37.1</td>
-                        <td>36.8</td>
-                        <td><strong>45.4</strong></td>
-                        <td>28.7</td>
-                        <td>36.1</td>
-                        <td>20.6</td>
-                    </tr>
-                    <tr>
-                        <td>InternVL3-2B</td>
-                        <td>22.4</td>
-                        <td><strong>28.5</strong></td>
-                        <td>50.0</td>
-                        <td>44.6</td>
-                        <td>43.1</td>
-                        <td>31.1</td>
-                        <td><strong>34.4</strong></td>
-                        <td>25.4</td>
-                        <td>43.0</td>
-                        <td>36.4</td>
-                        <td>35.4</td>
-                        <td>35.8</td>
-                        <td>23.9</td>
-                    </tr>
-                    <tr>
-                        <td>InternVL2-4B</td>
-                        <td>26.9</td>
-                        <td>12.2</td>
-                        <td>54.3</td>
-                        <td>60.4</td>
-                        <td>18.0</td>
-                        <td><strong>40.4</strong></td>
-                        <td>18.8</td>
-                        <td>24.4</td>
-                        <td>45.6</td>
-                        <td>38.4</td>
-                        <td>29.4</td>
-                        <td>33.4</td>
-                        <td>7.9</td>
-                    </tr>
-                    <tr>
-                        <td>Qwen2-VL-2B</td>
-                        <td>12.2</td>
-                        <td>19.5</td>
-                        <td>49.4</td>
-                        <td>35.8</td>
-                        <td>23.3</td>
-                        <td>24.5</td>
-                        <td>28.9</td>
-                        <td>32.9</td>
-                        <td>47.4</td>
-                        <td>29.2</td>
-                        <td>31.4</td>
-                        <td>30.4</td>
-                        <td>4.7</td>
-                    </tr>
-                    <tr>
-                        <td>InternVL3-1B</td>
-                        <td>19.9</td>
-                        <td>13.0</td>
-                        <td>53.7</td>
-                        <td>20.7</td>
-                        <td>16.3</td>
-                        <td>8.6</td>
-                        <td>23.7</td>
-                        <td>21.6</td>
-                        <td>47.4</td>
-                        <td>26.8</td>
-                        <td>23.5</td>
-                        <td>25.0</td>
-                        <td>13.8</td>
-                    </tr>
-                    <tr>
-                        <td>InternVL2-1B</td>
-                        <td>20.5</td>
-                        <td>20.3</td>
-                        <td>15.4</td>
-                        <td>24.2</td>
-                        <td>24.1</td>
-                        <td>11.3</td>
-                        <td>24.0</td>
-                        <td>22.1</td>
-                        <td>44.7</td>
-                        <td>20.1</td>
-                        <td>25.2</td>
-                        <td>23.0</td>
-                        <td>6.7</td>
-                    </tr>
-                    <tr>
-                        <td>LLaVA-OV-1B</td>
-                        <td>13.5</td>
-                        <td>14.6</td>
-                        <td>35.8</td>
-                        <td>24.2</td>
-                        <td>15.2</td>
-                        <td>19.2</td>
-                        <td>19.5</td>
-                        <td>22.1</td>
-                        <td>40.4</td>
-                        <td>22.0</td>
-                        <td>23.3</td>
-                        <td>22.7</td>
-                        <td>7.8</td>
-                    </tr>
-                    <tr>
-                        <td>InternVL2-2B</td>
-                        <td>26.9</td>
-                        <td>26.0</td>
-                        <td>3.1</td>
-                        <td>36.8</td>
-                        <td>18.8</td>
-                        <td>12.6</td>
-                        <td>23.1</td>
-                        <td>21.1</td>
-                        <td>34.2</td>
-                        <td>23.2</td>
-                        <td>22.0</td>
-                        <td>22.5</td>
-                        <td>12.3</td>
-                    </tr>
-                    <tr>
-                        <td>InternVL2.5-1B</td>
-                        <td>14.7</td>
-                        <td>23.6</td>
-                        <td>0.6</td>
-                        <td>33.0</td>
-                        <td>20.1</td>
-                        <td>11.3</td>
-                        <td>13.3</td>
-                        <td>34.7</td>
-                        <td>45.6</td>
-                        <td>18.0</td>
-                        <td>25.0</td>
-                        <td>21.9</td>
-                        <td>18.2</td>
-                    </tr>
-                    <tr style="background-color: #e9edf6;">
-                        <td colspan="14" style="text-align: center;"><em>MLLMs: 7B - 9B</em></td>
-                    </tr>
-                    <tr>
-                        <td>InternVL2.5-8B</td>
-                        <td>38.5</td>
-                        <td>17.9</td>
-                        <td>53.1</td>
-                        <td>75.4</td>
-                        <td>40.8</td>
-                        <td>48.3</td>
-                        <td>34.7</td>
-                        <td>24.9</td>
-                        <td>67.5</td>
-                        <td>46.2</td>
-                        <td>43.3</td>
-                        <td><strong>44.6</strong></td>
-                        <td>22.3</td>
-                    </tr>
-                    <tr>
-                        <td>Qwen2.5-VL-7B</td>
-                        <td>35.3</td>
-                        <td>29.3</td>
-                        <td><strong>70.4</strong></td>
-                        <td>73.7</td>
-                        <td>42.4</td>
-                        <td>44.4</td>
-                        <td>32.1</td>
-                        <td>28.6</td>
-                        <td>44.7</td>
-                        <td>52.1</td>
-                        <td>38.5</td>
-                        <td>44.5</td>
-                        <td>15.3</td>
-                    </tr>
-                    <tr>
-                        <td>Qwen2-VL-7B</td>
-                        <td>34.6</td>
-                        <td>25.2</td>
-                        <td>63.0</td>
-                        <td>64.2</td>
-                        <td>57.1</td>
-                        <td>49.0</td>
-                        <td>27.3</td>
-                        <td>31.0</td>
-                        <td>46.5</td>
-                        <td>46.7</td>
-                        <td>42.2</td>
-                        <td>44.2</td>
-                        <td>25.5</td>
-                    </tr>
-                    <tr>
-                        <td>InternVL3-9B</td>
-                        <td>37.2</td>
-                        <td><strong>33.3</strong></td>
-                        <td>63.0</td>
-                        <td>77.5</td>
-                        <td>30.7</td>
-                        <td><strong>53.0</strong></td>
-                        <td>27.9</td>
-                        <td>23.9</td>
-                        <td>43.9</td>
-                        <td>52.8</td>
-                        <td>35.9</td>
-                        <td>43.4</td>
-                        <td>7.3</td>
-                    </tr>
-                    <tr>
-                        <td>InternVL3-8B</td>
-                        <td><strong>42.3</strong></td>
-                        <td>27.6</td>
-                        <td>67.9</td>
-                        <td><strong>81.8</strong></td>
-                        <td>38.1</td>
-                        <td>46.4</td>
-                        <td>20.8</td>
-                        <td>23.9</td>
-                        <td>32.5</td>
-                        <td><strong>54.9</strong></td>
-                        <td>32.3</td>
-                        <td>42.4</td>
-                        <td>15.9</td>
-                    </tr>
-                    <tr>
-                        <td>LLaVA-OV-7B</td>
-                        <td>34.0</td>
-                        <td><strong>33.3</strong></td>
-                        <td>51.2</td>
-                        <td>57.9</td>
-                        <td>44.9</td>
-                        <td><strong>53.0</strong></td>
-                        <td>19.8</td>
-                        <td><strong>35.2</strong></td>
-                        <td>49.1</td>
-                        <td>44.1</td>
-                        <td>40.4</td>
-                        <td>42.0</td>
-                        <td>15.9</td>
-                    </tr>
-                    <tr>
-                        <td>Eagle-X4-8B</td>
-                        <td>39.1</td>
-                        <td>17.1</td>
-                        <td>46.9</td>
-                        <td>47.7</td>
-                        <td><strong>65.3</strong></td>
-                        <td>37.1</td>
-                        <td>18.2</td>
-                        <td>32.9</td>
-                        <td><strong>68.4</strong></td>
-                        <td>37.7</td>
-                        <td><strong>44.4</strong></td>
-                        <td>41.4</td>
-                        <td><strong>55.3</strong></td>
-                    </tr>
-                    <tr>
-                        <td>InternVL2-8B</td>
-                        <td>33.3</td>
-                        <td>19.5</td>
-                        <td>59.3</td>
-                        <td>73.3</td>
-                        <td>27.1</td>
-                        <td>36.4</td>
-                        <td><strong>42.5</strong></td>
-                        <td>22.1</td>
-                        <td>48.2</td>
-                        <td>46.4</td>
-                        <td>35.3</td>
-                        <td>40.2</td>
-                        <td>7.9</td>
-                    </tr>
-                    <tr>
-                        <td>LLaVA-Next-m-7B</td>
-                        <td>35.9</td>
-                        <td>21.1</td>
-                        <td>35.2</td>
-                        <td>50.5</td>
-                        <td>17.7</td>
-                        <td>37.7</td>
-                        <td>15.6</td>
-                        <td>27.2</td>
-                        <td>46.5</td>
-                        <td>35.7</td>
-                        <td>28.9</td>
-                        <td>31.9</td>
-                        <td>16.4</td>
-                    </tr>
-                    <tr>
-                        <td>Eagle-X5-7B</td>
-                        <td>25.0</td>
-                        <td>26.0</td>
-                        <td>24.7</td>
-                        <td>34.7</td>
-                        <td>22.1</td>
-                        <td>46.4</td>
-                        <td>15.6</td>
-                        <td>20.7</td>
-                        <td>42.1</td>
-                        <td>27.6</td>
-                        <td>29.4</td>
-                        <td>28.6</td>
-                        <td>15.9</td>
-                    </tr>
-                    <tr>
-                        <td>LLaVA-Next-v-7B</td>
-                        <td>16.7</td>
-                        <td>20.3</td>
-                        <td>40.7</td>
-                        <td>39.6</td>
-                        <td>16.3</td>
-                        <td>44.4</td>
-                        <td>19.8</td>
-                        <td>16.4</td>
-                        <td>7.0</td>
-                        <td>29.3</td>
-                        <td>20.8</td>
-                        <td>24.6</td>
-                        <td>16.4</td>
-                    </tr>
-                    <tr style="background-color: #e9edf6;">
-                        <td colspan="14" style="text-align: center;"><em>MLLMs: 10B - 30B</em></td>
-                    </tr>
-                    <tr>
-                        <td>InternVL2.5-26B</td>
-                        <td>41.7</td>
-                        <td><strong>35.0</strong></td>
-                        <td>55.6</td>
-                        <td><strong>81.8</strong></td>
-                        <td>65.5</td>
-                        <td><strong>46.4</strong></td>
-                        <td>43.5</td>
-                        <td><strong>34.3</strong></td>
-                        <td>46.5</td>
-                        <td><strong>53.5</strong></td>
-                        <td><strong>47.2</strong></td>
-                        <td><strong>50.0</strong></td>
-                        <td>33.7</td>
-                    </tr>
-                    <tr>
-                        <td>InternVL3-14B</td>
-                        <td>39.1</td>
-                        <td>26.0</td>
-                        <td><strong>73.5</strong></td>
-                        <td>73.3</td>
-                        <td>36.5</td>
-                        <td>34.4</td>
-                        <td><strong>54.5</strong></td>
-                        <td>28.2</td>
-                        <td>54.4</td>
-                        <td>53.0</td>
-                        <td>41.6</td>
-                        <td>46.7</td>
-                        <td>13.5</td>
-                    </tr>
-                    <tr>
-                        <td>InternVL2-26B</td>
-                        <td>28.2</td>
-                        <td><strong>35.0</strong></td>
-                        <td>61.1</td>
-                        <td>74.0</td>
-                        <td>50.7</td>
-                        <td>41.7</td>
-                        <td>28.9</td>
-                        <td>28.6</td>
-                        <td>43.0</td>
-                        <td>49.6</td>
-                        <td>38.6</td>
-                        <td>43.5</td>
-                        <td>26.5</td>
-                    </tr>
-                    <tr>
-                        <td>Eagle-X4-13B</td>
-                        <td><strong>42.3</strong></td>
-                        <td>26.8</td>
-                        <td>41.4</td>
-                        <td>44.6</td>
-                        <td>65.8</td>
-                        <td>20.5</td>
-                        <td>28.2</td>
-                        <td>31.0</td>
-                        <td><strong>57.9</strong></td>
-                        <td>38.8</td>
-                        <td>40.7</td>
-                        <td>39.8</td>
-                        <td><strong>53.8</strong></td>
-                    </tr>
-                    <tr>
-                        <td>LLaVA-Next-13B</td>
-                        <td>7.7</td>
-                        <td>17.1</td>
-                        <td>54.3</td>
-                        <td>34.7</td>
-                        <td><strong>66.7</strong></td>
-                        <td>24.5</td>
-                        <td>13.0</td>
-                        <td>26.8</td>
-                        <td>43.9</td>
-                        <td>28.5</td>
-                        <td>35.0</td>
-                        <td>32.1</td>
-                        <td>51.1</td>
-                    </tr>
-                    <tr style="background-color: #e9edf6;">
-                        <td colspan="14" style="text-align: center;"><em>MLLMs: 30B - 70B</em></td>
-                    </tr>
-                    <tr>
-                        <td>InternVL2.5-38B</td>
-                        <td><strong>46.8</strong></td>
-                        <td><strong>36.6</strong></td>
-                        <td>67.9</td>
-                        <td>89.5</td>
-                        <td>58.4</td>
-                        <td>51.7</td>
-                        <td>38.3</td>
-                        <td><strong>44.1</strong></td>
-                        <td>44.7</td>
-                        <td>60.2</td>
-                        <td><strong>47.5</strong></td>
-                        <td><strong>53.1</strong></td>
-                        <td>19.1</td>
-                    </tr>
-                    <tr>
-                        <td>InternVL3-38B</td>
-                        <td>45.5</td>
-                        <td>35.0</td>
-                        <td><strong>71.0</strong></td>
-                        <td><strong>90.9</strong></td>
-                        <td>37.3</td>
-                        <td>43.0</td>
-                        <td><strong>56.8</strong></td>
-                        <td>37.6</td>
-                        <td>43.0</td>
-                        <td><strong>60.6</strong></td>
-                        <td>43.5</td>
-                        <td>51.1</td>
-                        <td>9.1</td>
-                    </tr>
-                    <tr>
-                        <td>Qwen2.5-VL-32B</td>
-                        <td>35.9</td>
-                        <td>22.8</td>
-                        <td>68.5</td>
-                        <td>73.7</td>
-                        <td><strong>62.0</strong></td>
-                        <td>37.7</td>
-                        <td>33.8</td>
-                        <td>35.2</td>
-                        <td>45.6</td>
-                        <td>50.2</td>
-                        <td>42.9</td>
-                        <td>46.1</td>
-                        <td><strong>25.5</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Eagle-X5-34B</td>
-                        <td>36.5</td>
-                        <td>28.5</td>
-                        <td>60.5</td>
-                        <td>79.6</td>
-                        <td>19.5</td>
-                        <td>51.0</td>
-                        <td>24.0</td>
-                        <td>39.0</td>
-                        <td><strong>63.2</strong></td>
-                        <td>51.3</td>
-                        <td>39.3</td>
-                        <td>44.6</td>
-                        <td>16.0</td>
-                    </tr>
-                    <tr>
-                        <td>InternVL2-40B</td>
-                        <td>26.3</td>
-                        <td>22.0</td>
-                        <td>66.0</td>
-                        <td>76.1</td>
-                        <td>43.2</td>
-                        <td><strong>55.0</strong></td>
-                        <td>27.3</td>
-                        <td>25.8</td>
-                        <td>47.4</td>
-                        <td>47.6</td>
-                        <td>39.7</td>
-                        <td>43.2</td>
-                        <td>12.6</td>
-                    </tr>
-                    <tr style="background-color: #e9edf6;">
-                        <td colspan="14" style="text-align: center;"><em>MLLMs: > 70B</em></td>
-                    </tr>
-                    <tr>
-                        <td>InternVL3-78B</td>
-                        <td>43.6</td>
-                        <td><strong>39.8</strong></td>
-                        <td>69.8</td>
-                        <td>89.1</td>
-                        <td>55.9</td>
-                        <td><strong>57.6</strong></td>
-                        <td>40.3</td>
-                        <td>38.0</td>
-                        <td><strong>42.1</strong></td>
-                        <td><strong>60.6</strong></td>
-                        <td>46.8</td>
-                        <td><strong>52.9</strong></td>
-                        <td>25.5</td>
-                    </tr>
-                    <tr>
-                        <td>InternVL2.5-72B</td>
-                        <td><strong>47.4</strong></td>
-                        <td>30.1</td>
-                        <td>67.3</td>
-                        <td>89.5</td>
-                        <td>65.2</td>
-                        <td>53.6</td>
-                        <td><strong>41.9</strong></td>
-                        <td>32.4</td>
-                        <td>37.7</td>
-                        <td>58.6</td>
-                        <td>46.2</td>
-                        <td>51.7</td>
-                        <td>29.7</td>
-                    </tr>
-                    <tr>
-                        <td>Qwen2.5-VL-72B</td>
-                        <td>41.7</td>
-                        <td>31.7</td>
-                        <td>67.9</td>
-                        <td>82.1</td>
-                        <td>65.3</td>
-                        <td>38.4</td>
-                        <td>39.9</td>
-                        <td><strong>39.0</strong></td>
-                        <td>38.6</td>
-                        <td>55.8</td>
-                        <td>44.3</td>
-                        <td>49.4</td>
-                        <td>24.3</td>
-                    </tr>
-                    <tr>
-                        <td>Qwen2-VL-72B</td>
-                        <td>34.6</td>
-                        <td>18.7</td>
-                        <td>70.4</td>
-                        <td>82.5</td>
-                        <td>68.8</td>
-                        <td>52.3</td>
-                        <td>38.6</td>
-                        <td>35.2</td>
-                        <td><strong>42.1</strong></td>
-                        <td>51.5</td>
-                        <td><strong>47.4</strong></td>
-                        <td>49.2</td>
-                        <td>25.0</td>
-                    </tr>
-                    <tr>
-                        <td>LLaVA-OV-72B</td>
-                        <td>25.6</td>
-                        <td>26.0</td>
-                        <td><strong>75.9</strong></td>
-                        <td>81.1</td>
-                        <td><strong>81.4</strong></td>
-                        <td>55.6</td>
-                        <td>22.4</td>
-                        <td>28.2</td>
-                        <td>31.6</td>
-                        <td>52.2</td>
-                        <td>43.8</td>
-                        <td>47.5</td>
-                        <td><strong>53.1</strong></td>
-                    </tr>
-                    <tr>
-                        <td>LLaVA-Next-72B</td>
-                        <td>21.8</td>
-                        <td>21.1</td>
-                        <td>66.0</td>
-                        <td>32.3</td>
-                        <td>65.7</td>
-                        <td>49.7</td>
-                        <td>22.4</td>
-                        <td>27.2</td>
-                        <td>30.7</td>
-                        <td>35.3</td>
-                        <td>39.1</td>
-                        <td>37.4</td>
-                        <td>33.2</td>
-                    </tr>
-                    <tr>
-                        <td>InternVL2-72B</td>
-                        <td>26.9</td>
-                        <td>18.7</td>
-                        <td>57.4</td>
-                        <td>56.8</td>
-                        <td>56.1</td>
-                        <td>47.0</td>
-                        <td>24.7</td>
-                        <td>24.4</td>
-                        <td>7.9</td>
-                        <td>40.0</td>
-                        <td>32.0</td>
-                        <td>35.6</td>
-                        <td>22.9</td>
-                    </tr>
-                    <tr style="background-color: #e9edf6;">
-                        <td colspan="14" style="text-align: center;"><em>MLLMs: Proprietary</em></td>
-                    </tr>
-                    <tr>
-                        <td>Gemini-2-flash (CoT)</td>
-                        <td><strong>69.2</strong></td>
-                        <td><strong>49.6</strong></td>
-                        <td>72.8</td>
-                        <td>87.4</td>
-                        <td>78.7</td>
-                        <td>32.5</td>
-                        <td><strong>40.9</strong></td>
-                        <td>39.9</td>
-                        <td>43.9</td>
-                        <td><strong>69.8</strong></td>
-                        <td><strong>47.2</strong></td>
-                        <td><strong>57.2</strong></td>
-                        <td>45.9</td>
-                    </tr>
-                    <tr>
-                        <td>GPT-4o (CoT)</td>
-                        <td>45.5</td>
-                        <td>46.3</td>
-                        <td>70.4</td>
-                        <td><strong>88.8</strong></td>
-                        <td>81.4</td>
-                        <td><strong>47.0</strong></td>
-                        <td>34.4</td>
-                        <td>37.6</td>
-                        <td>34.2</td>
-                        <td>62.7</td>
-                        <td>46.9</td>
-                        <td>54.0</td>
-                        <td><strong>49.9</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Gemini-2-flash</td>
-                        <td>64.7</td>
-                        <td>35.0</td>
-                        <td><strong>73.5</strong></td>
-                        <td>87.0</td>
-                        <td>71.3</td>
-                        <td>34.4</td>
-                        <td>29.9</td>
-                        <td><strong>40.8</strong></td>
-                        <td>41.2</td>
-                        <td>65.0</td>
-                        <td>43.5</td>
-                        <td>53.1</td>
-                        <td>30.7</td>
-                    </tr>
-                    <tr>
-                        <td>GPT-4o</td>
-                        <td>42.9</td>
-                        <td>35.0</td>
-                        <td>66.0</td>
-                        <td>86.0</td>
-                        <td><strong>82.0</strong></td>
-                        <td>41.7</td>
-                        <td>29.9</td>
-                        <td>33.8</td>
-                        <td>32.5</td>
-                        <td>57.5</td>
-                        <td>44.0</td>
-                        <td>50.0</td>
-                        <td><strong>49.9</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Gemini-1.5-flash (CoT)</td>
-                        <td>30.1</td>
-                        <td>28.5</td>
-                        <td>66.7</td>
-                        <td>79.3</td>
-                        <td>51.0</td>
-                        <td>39.7</td>
-                        <td>20.1</td>
-                        <td>31.5</td>
-                        <td>35.1</td>
-                        <td>51.1</td>
-                        <td>35.5</td>
-                        <td>42.4</td>
-                        <td>15.3</td>
-                    </tr>
-                    <tr>
-                        <td>GPT-4o-mini</td>
-                        <td>35.3</td>
-                        <td>24.4</td>
-                        <td>43.2</td>
-                        <td>71.6</td>
-                        <td>43.1</td>
-                        <td>29.8</td>
-                        <td>14.6</td>
-                        <td>31.0</td>
-                        <td><strong>45.6</strong></td>
-                        <td>43.6</td>
-                        <td>32.8</td>
-                        <td>37.6</td>
-                        <td>10.8</td>
-                    </tr>
-                    <tr>
-                        <td>Gemini-1.5-flash</td>
-                        <td>26.9</td>
-                        <td>25.2</td>
-                        <td>59.3</td>
-                        <td>70.5</td>
-                        <td>26.4</td>
-                        <td>27.8</td>
-                        <td>18.2</td>
-                        <td>26.8</td>
-                        <td>22.8</td>
-                        <td>45.5</td>
-                        <td>24.4</td>
-                        <td>33.8</td>
-                        <td>10.6</td>
-                    </tr>
-                </tbody>
-            </table>
         </div>
+      </div>
+      <!--/ Abstract. -->
 
-  </div>
-</section>
+    </div>
+  </section>
 
-<!-- DATASET SECTION -->
-<section class="hero is-light is-small">
-  <div class="hero-body has-text-centered">
-  <h1 class="title is-1 mathvista_other">
-    <span class="mathvista_other" style="vertical-align: middle">Benchmark</span>
-  </h1>
-  </div>
-</section>
-            
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered has-text-centered">
+  <!-- DATASET SECTION -->
+  <section class="hero is-light is-small">
+    <div class="hero-body has-text-centered">
+      <h1 class="title is-1 mathvista_other">
+        <span class="mathvista_other" style="vertical-align: middle">Method</span>
+      </h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths" style="width: 100%;height: 80%;">
-        <h2 class="title is-3">Data Examples</h2>
-        <div class="content has-text-justified">
-          <p style="text-align: center;", class="mt-3"><strong></strong>
-          </p>
 
-        <div id="results-carousel" class="carousel results-carousel">  
+
+
+          <!-- <div id="results-carousel" class="carousel results-carousel">  
           
             <div class="content has-text-centered">
 
               <img src="static/images/samples/CLP.png" style="width: 90%;"/>
-              <!-- <p style="margin-bottom: 30px;">Critical Line Perception</p> -->
-              <!-- <p style="margin-bottom: 30px;">🔗<a href="https://www.youtube.com/watch?v=VFntoBRGF1A">Full Video Link</a></p> -->
             
             </div>
           
             <div class="content has-text-centered">
 
               <img src="static/images/samples/LDP.png" style="width: 78%;"/>
-              <!-- <p style="margin-bottom: 30px;">Len Distortion Perception</p> -->
             
             </div>
 
             <div class="content has-text-centered">
 
               <img src="static/images/samples/LRR.png" style="width: 95%;"/>
-              <!-- <p style="margin-bottom: 30px;">Line Relationship Reasoning</p> -->
             
             </div>
 
             <div class="content has-text-centered">
 
               <img src="static/images/samples/OVR.png" style="width: 95%;"/>
-              <!-- <p style="margin-bottom: 30px;">Out-of-View Reasoning</p> -->
             
             </div>
-
 
             <div class="content has-text-centered">
 
               <img src="static/images/samples/PTR.png" style="width: 95%;"/>
-              <!-- <p style="margin-bottom: 30px;">Perspective Type Reasoning</p> -->
             
             </div>
-
 
             <div class="content has-text-centered">
 
               <img src="static/images/samples/PTS.png" style="width: 95%;"/>
-              <!-- <p style="margin-bottom: 30px;">Perspective Transformation Spotting</p> -->
             
             </div>
-
 
             <div class="content has-text-centered">
 
               <img src="static/images/samples/VAP.png" style="width: 85%;"/>
-              <!-- <p style="margin-bottom: 30px;">View Angle Perception</p> -->
             
             </div>
-
 
             <div class="content has-text-centered">
 
               <img src="static/images/samples/VPC.png" style="width: 85%;"/>
-              <!-- <p style="margin-bottom: 30px;">Vanishing Point Perception</p> -->
             
             </div>
-
 
             <div class="content has-text-centered">
 
               <img src="static/images/samples/VPP.png" style="width: 95%;"/>
-              <!-- <p style="margin-bottom: 30px;">Vanishing Point Perception</p> -->
             
             </div>
 
@@ -1157,49 +363,108 @@
             
             </div>
 
+        </div> -->
+
+
 
         </div>
 
-          
-        </div>
-      </div> 
-
-        </div>
       </div>
     </div>
-    
+    </div>
 
+    <!-- <br><br> -->
     <div class="columns is-centered">
       <div class="column">
         <div class="content has-text-centered">
-          <h2 class="title is-3" style="margin-top: 30px;">Benchmark Statistics</h2>
-          
-          <!-- bing tu -->
-          <div class="container-wrapper">
-            <div id="container"></div>
-            <div id="image-container">
-              <img src="static/images/radar_half.png" alt="data-composition" style="max-width: 50%; display: inline-block; margin-right: 200px;"/>
-            </div>
-          </div>
-        <script type="text/javascript" src="https://registry.npmmirror.com/echarts/5.5.0/files/dist/echarts.min.js"></script>
-        <script type="text/javascript" src="static/js/bingtu.js"></script>
-
-        <p style="text-align: center; margin-left: auto; margin-right: auto; width: 50%;"> 
-            (Left) <strong>Task Categorie Hierarchy</strong>: MMPerspective consists of 3 key task types and 10 subcategories. <br> (Right) <strong>SOTA Comparison</strong>: Performance of SOTA MLLMs on MMPerspective.<br/>
-        </p>
-
+          <h2 class="title is-3">📊 Data Curation Pipeline</h2>
+          <img src="static/images/data_pipeline.png" alt="data-composition" style="max-width: 60%;" />
+          <p style="text-align: center; margin-left: auto; margin-right: auto; width: 50%;">
+            The data curation pipeline creates two datasets: Video-R4-CoT-17k (for supervised practice) and
+            Video-R4-RL-30k (for reinforcement learning). The pipeline processes training data with OCR and object
+            detection results, uses rule-based matching, trajectory synthesis, and quality control to generate
+            high-quality training examples.
+          </p>
         </div>
       </div>
     </div>
 
-    <br><br>
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">🎯 Reward Design</h2>
+        <div class="content has-text-justified">
+          <p>
+            Our reward function combines four components: the original reward \(R\) (e.g., answer correctness and
+            format), Diversity Reward \(R_{\text{div}}\), Representativeness Reward \(R_{\text{rep}}\), and Curiosity
+            Reward \(R_{\text{cur}}\). The overall reward is:
+          </p>
+          <p style="text-align: center; margin: 25px 0; padding: 15px; background-color: #f5f5f5; border-radius: 5px;">
+            \[R' = R + \lambda_{\text{div}} R_{\text{div}} + \lambda_{\text{rep}} R_{\text{rep}} + \lambda_{\text{cur}}
+            R_{\text{cur}}\]
+          </p>
+
+          <h3 class="title is-5" style="margin-top: 30px;">Diversity Reward</h3>
+          <p>
+            Following prior unsupervised summarization objectives, we encourage selected regions to be mutually
+            dissimilar in feature space. Let \(V\) denote the set of features of the input frames and \(\hat{V} =
+            \hat{V}^{f} \cup \hat{V}^{r}\) denote the set of features of the selected frames (\(\hat{V}^{f}\)) and
+            regions (\(\hat{V}^{r}\)). We define diversity reward to encourage the policy to avoid redundant region
+            selections:
+          </p>
+          <p style="text-align: center; margin: 20px 0; padding: 15px; background-color: #f5f5f5; border-radius: 5px;">
+            \[R_{\mathrm{div}}(\hat{V}^{r}) = \frac{1}{|\hat{V}^{r}| (|\hat{V}^{r}| - 1)} \sum_{i=1}^{|\hat{V}^{r}|}
+            \sum_{j \ne i}^{|\hat{V}^{r}|-1} d(v_i, v_{j})\]
+          </p>
+          <p>
+            where \(d(\cdot,\cdot)\) denotes cosine similarity:
+            \[d(v_i, v_{j}) = 1 - \frac{v_i^{\top} v_{j}}{\|v_i\|_2 \|v_{j}\|_2}.\]
+            This objective computes the average pairwise distance between all selected region features, making the
+            reward depend on the orientation of features rather than their magnitude.
+          </p>
+
+          <h3 class="title is-5" style="margin-top: 30px;">Representativeness Reward</h3>
+          <p>
+            To ensure the selected frames \(\hat{V}^{f}\) remain informative, we encourage them to represent the global
+            video frame set \(V\):
+          </p>
+          <p style="text-align: center; margin: 20px 0; padding: 15px; background-color: #f5f5f5; border-radius: 5px;">
+            \[R_{\mathrm{rep}}(V,\hat{V}^f) = \exp\!\left(-\frac{1}{|V|} \sum_{i=1}^{|V|} \min_{v_j \in \hat{V}^{f[-1]}}
+            \| v_i - v_{j} \|_2\right)\]
+          </p>
+          <p>
+            where \(\|\cdot\|_2\) denotes the Euclidean distance in the feature space and \(\hat{V}^{f[-1]}\) is the set
+            of frame features selected in the last clipping operation. This reward measures how well the selected frames
+            cover the entire video in feature space.
+          </p>
+
+          <h3 class="title is-5" style="margin-top: 30px;">Curiosity Reward</h3>
+          <p>
+            To balance exploration and prevent overuse of visual operations, we incorporate a curiosity reward:
+          </p>
+          <p style="text-align: center; margin: 20px 0; padding: 15px; background-color: #f5f5f5; border-radius: 5px;">
+            \[R_{\text{cur}}(\hat{V}_i) = \alpha \left( H - \frac{1}{K}\sum_{j=1}^{K} \mathbb{I}\big[|\hat{V}_j| >
+            0\big] \right)_+ \cdot \mathbb{I}\big[|\hat{V}_i| > 0\big] - \beta \left(\,|\hat{V}_i| - N\,\right)_+\]
+          </p>
+          <p>
+            where \(K\) is the number of rollouts, \((\cdot)_+\) is the ReLU function, \(\mathbb{I}[\cdot]\) is the
+            indicator function, \(\alpha\) and \(\beta\) are coefficients, and \(H\) is the threshold. The first term
+            encourages exploration when visual operations are under-utilized, while the second term penalizes excessive
+            calls to prevent over-reliance on visual operations.
+          </p>
+        </div>
+      </div>
+    </div>
+
     <div class="columns is-centered">
       <div class="column">
         <div class="content has-text-centered">
-          <h2 class="title is-3">Data Curation Pipeline</h2>
-          <img src="static/images/data_pipeline.png" alt="data-composition" style="max-width: 60%;"/>
-          <p style="text-align: center; margin-left: auto; margin-right: auto; width: 50%;" >
-            The data curation pipeline for MMPerspective.
+          <br><br>
+          <h2 class="title is-3">✈️ Training Framework</h2>
+          <img src="static/images/training_framework.png" alt="training-framework" style="max-width: 60%;" />
+          <p style="text-align: center; margin-left: auto; margin-right: auto; width: 50%;">
+            Multi-stage rumination training framework: (1) Deliberate Rumination Practice (DRP) SFT, (2) RL after
+            DRP-SFT, (3) Compositional Rumination Practice (CRP) SFT, (4) RL after CRP-SFT. The framework uses
+            GRPO-based reinforcement learning with rewards for accuracy, diversity, repetition, and curiosity.
           </p>
 
           <!-- <img src="static/images/dataset_comparison.png" alt="data-composition" style="max-width: 50%;"/> -->
@@ -1213,36 +478,35 @@
         </div>
       </div>
     </div>
-    
-  </div>
-</section>
+
+    </div>
+  </section>
 
 
 
-<!-- RESULTS SECTION -->
-<section class="hero is-light is-small">
-  <div class="hero-body has-text-centered">
-    <h1 class="title is-1 mathvista_other">Experiment Results</h1>
-  </div>
-</section>
+  <!-- RESULTS SECTION -->
+  <section class="hero is-light is-small">
+    <div class="hero-body has-text-centered">
+      <h1 class="title is-1 mathvista_other">Experiment Results</h1>
+    </div>
+  </section>
 
 
-<section class="section">
-  <div class="container">
-    <div class="columns is-centered has-text-centered">
+  <section class="section">
+    <div class="container">
+      <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths" style="width: 100%;height: 80%;">
-        <h2 class="title is-3">Results Analysis</h2>
-        <div class="content has-text-justified">
-          <p style="text-align: center;", class="mt-3"><strong></strong>
-          </p>
 
-        <div id="results-carousel" class="carousel results-carousel">  
+          <div class="content has-text-justified">
+            <p style="text-align: center;" , class="mt-3"><strong></strong>
+            </p>
+
+            <!-- <div id="results-carousel" class="carousel results-carousel">  
           
             <div class="content has-text-centered">
 
               <img src="static/images/results/all_radar.png" style="width: 80%;"/>
               <p style="margin-bottom: 30px;">SOTA Models Performance on MMPerspective</p>
-              <!-- <p style="margin-bottom: 30px;">🔗<a href="https://www.youtube.com/watch?v=VFntoBRGF1A">Full Video Link</a></p> -->
             
             </div>
           
@@ -1253,7 +517,6 @@
             
             </div>
 
-
             <div class="content has-text-centered">
 
               <img src="static/images/results/vlm2_00.png" style="width: 80%;"/>
@@ -1261,14 +524,12 @@
             
             </div>
 
-
             <div class="content has-text-centered">
 
               <img src="static/images/results/within-cross_a.png" style="width: 50%;"/>
               <p style="margin-bottom: 30px;">Error pattern analysis across model families: Cumulative distribution of phi coefficients shows significantly higher correlations within families than across families (Cohen's d=0.33, p < 0.001).</p>
             
             </div>
-
 
             <div class="content has-text-centered">
 
@@ -1284,161 +545,655 @@
             
             </div>
 
+        </div> -->
 
 
-
+          </div>
         </div>
 
-          
-        </div>
-      </div> 
-
-        </div>
       </div>
+    </div>
     </div>
 
     <section class="section">
       <div class="container">
         <div class="columns is-centered has-text-centered">
-            <div class="column is-four-fifths" style="width: 100%;height: 80%;">
-            <h2 class="title is-3">Chain-of-Thought Examples</h2>
+          <div class="column is-four-fifths" style="width: 100%;height: 80%;">
+            <!-- <h2 class="title is-3">Chain-of-Thought Examples</h2> -->
             <div class="content has-text-justified">
-              <p style="text-align: center;", class="mt-3"><strong></strong>
+              <p style="text-align: center;" , class="mt-3"><strong></strong>
               </p>
-    
-            <div id="results-carousel" class="carousel results-carousel">    
+
+              <!-- <div id="results-carousel" class="carousel results-carousel">    
     
                 <div class="content has-text-centered">
     
                   <img src="static/images/CoT/cot_gpt_1.png" style="width: 75%;"/>
-                  <!-- <p style="margin-bottom: 30px;">View Angle Perception</p> -->
                 
                 </div>
-    
     
                 <div class="content has-text-centered">
     
                   <img src="static/images/CoT/cot_gpt_2.png" style="width: 85%;"/>
-                  <!-- <p style="margin-bottom: 30px;">Vanishing Point Perception</p> -->
                 
                 </div>
     
                 <div class="content has-text-centered">
     
                   <img src="static/images/CoT/cot_gemini_1.png" style="width: 70%;"/>
-                  <!-- <p style="margin-bottom: 30px;">Perspective Transformation Spotting</p> -->
                 
                 </div>
-    
     
                 <div class="content has-text-centered">
     
                   <img src="static/images/CoT/cot_gemini_2.png" style="width: 60%;"/>
-                  <!-- <p style="margin-bottom: 30px;">Vanishing Point Perception</p> -->
                 
                 </div>
 
                 <div class="content has-text-centered">
     
                   <img src="static/images/CoT/cot_failure_gemini2_lrr_00.png" style="width: 60%;"/>
-                  <!-- <p style="margin-bottom: 30px;">Vanishing Point Perception</p> -->
                 
                 </div>
     
                 <div class="content has-text-centered">
     
                   <img src="static/images/CoT/cot_failure_gemini2_pts_00.png" style="width: 60%;"/>
-                  <!-- <p style="margin-bottom: 30px;">Perspective Transformation Spotting</p> -->
                 
                 </div>
-    
     
                 <div class="content has-text-centered">
     
                   <img src="static/images/CoT/cot_failure_gpt4o_ptr_00.png" style="width: 60%;"/>
-                  <!-- <p style="margin-bottom: 30px;">Vanishing Point Perception</p> -->
                 
                 </div>
     
-    
-            </div>
-    
-              
-            </div>
-          </div> 
-    
+            </div> -->
+
+
             </div>
           </div>
+
         </div>
+      </div>
+      </div>
+
+      <section class="section">
+        <div class="container">
+          <div class="columns is-centered">
+            <div class="column is-full has-text-centered content">
+              <h2 class="title is-3" id="leaderboard">🏆 Performance on M4-ViteVQA</h2>
+              <div class="content">
+                <p>
+                  <strong>Performance comparison on the testset of the M4-ViteVQA dataset.</strong> Best non-human
+                  scores in <strong>bold</strong>. The parameters of the LMM-based models are 7B or 8B. All the RL-based
+                  models compared are based on Qwen2.5-VL. The human performances are from the original dataset paper.
+                </p>
+                <div style="overflow-x: auto;">
+                  <table class="js-sort-table js-sort-asc" id="results"
+                    style="margin-left: auto; margin-right: auto; width: 100%; border-collapse: collapse;">
+                    <thead>
+                      <tr>
+                        <th rowspan="2" style="vertical-align: middle; text-align: left; padding: 8px;">
+                          <strong>Models</strong></th>
+                        <th rowspan="2" style="vertical-align: middle; text-align: center; padding: 8px;">
+                          <strong>LMM-Based</strong></th>
+                        <th rowspan="2" style="vertical-align: middle; text-align: center; padding: 8px;">
+                          <strong>Visual-Grounded</strong></th>
+                        <th rowspan="2" style="vertical-align: middle; text-align: center; padding: 8px;">
+                          <strong>RL-Based</strong></th>
+                        <th colspan="2" style="vertical-align: middle; text-align: center; padding: 8px;"><strong>Task 1
+                            - Split 1</strong></th>
+                        <th colspan="2" style="vertical-align: middle; text-align: center; padding: 8px;"><strong>Task 1
+                            - Split 2</strong></th>
+                        <th colspan="2" style="vertical-align: middle; text-align: center; padding: 8px;"><strong>Task
+                            2</strong></th>
+                      </tr>
+                      <tr>
+                        <th style="vertical-align: middle; text-align: center; padding: 8px;">Acc. (%)</th>
+                        <th style="vertical-align: middle; text-align: center; padding: 8px;">ANLS (%)</th>
+                        <th style="vertical-align: middle; text-align: center; padding: 8px;">Acc. (%)</th>
+                        <th style="vertical-align: middle; text-align: center; padding: 8px;">ANLS (%)</th>
+                        <th style="vertical-align: middle; text-align: center; padding: 8px;">Acc. (%)</th>
+                        <th style="vertical-align: middle; text-align: center; padding: 8px;">ANLS (%)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">JustAsk</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">10.05</td>
+                        <td style="text-align: center; padding: 8px;">14.10</td>
+                        <td style="text-align: center; padding: 8px;">5.47</td>
+                        <td style="text-align: center; padding: 8px;">8.60</td>
+                        <td style="text-align: center; padding: 8px;">3.60</td>
+                        <td style="text-align: center; padding: 8px;">6.70</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">All-in-one-B</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">10.87</td>
+                        <td style="text-align: center; padding: 8px;">14.80</td>
+                        <td style="text-align: center; padding: 8px;">5.66</td>
+                        <td style="text-align: center; padding: 8px;">7.80</td>
+                        <td style="text-align: center; padding: 8px;">3.28</td>
+                        <td style="text-align: center; padding: 8px;">4.60</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">Video-LLaVA-7B</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">15.43</td>
+                        <td style="text-align: center; padding: 8px;">17.15</td>
+                        <td style="text-align: center; padding: 8px;">11.19</td>
+                        <td style="text-align: center; padding: 8px;">12.02</td>
+                        <td style="text-align: center; padding: 8px;">9.38</td>
+                        <td style="text-align: center; padding: 8px;">11.80</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">T5-ViteVQA</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">22.17</td>
+                        <td style="text-align: center; padding: 8px;">29.10</td>
+                        <td style="text-align: center; padding: 8px;">16.68</td>
+                        <td style="text-align: center; padding: 8px;">23.80</td>
+                        <td style="text-align: center; padding: 8px;">9.29</td>
+                        <td style="text-align: center; padding: 8px;">13.60</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">VideoLLaMA2-7B</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">20.76</td>
+                        <td style="text-align: center; padding: 8px;">23.55</td>
+                        <td style="text-align: center; padding: 8px;">18.33</td>
+                        <td style="text-align: center; padding: 8px;">20.45</td>
+                        <td style="text-align: center; padding: 8px;">16.54</td>
+                        <td style="text-align: center; padding: 8px;">21.08</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">Qwen2-VL-7B</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">35.22</td>
+                        <td style="text-align: center; padding: 8px;">45.84</td>
+                        <td style="text-align: center; padding: 8px;">27.25</td>
+                        <td style="text-align: center; padding: 8px;">38.45</td>
+                        <td style="text-align: center; padding: 8px;">21.23</td>
+                        <td style="text-align: center; padding: 8px;">28.79</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">TEA-L</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">34.78</td>
+                        <td style="text-align: center; padding: 8px;">43.71</td>
+                        <td style="text-align: center; padding: 8px;">28.43</td>
+                        <td style="text-align: center; padding: 8px;">38.13</td>
+                        <td style="text-align: center; padding: 8px;">18.83</td>
+                        <td style="text-align: center; padding: 8px;">28.90</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">NVILA-8B</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">37.73</td>
+                        <td style="text-align: center; padding: 8px;">47.23</td>
+                        <td style="text-align: center; padding: 8px;">30.10</td>
+                        <td style="text-align: center; padding: 8px;">41.52</td>
+                        <td style="text-align: center; padding: 8px;">22.89</td>
+                        <td style="text-align: center; padding: 8px;">30.34</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">GAT-L</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">38.30</td>
+                        <td style="text-align: center; padding: 8px;">48.23</td>
+                        <td style="text-align: center; padding: 8px;">30.90</td>
+                        <td style="text-align: center; padding: 8px;">41.81</td>
+                        <td style="text-align: center; padding: 8px;">22.13</td>
+                        <td style="text-align: center; padding: 8px;">30.75</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">Video-R1-7B</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">37.10</td>
+                        <td style="text-align: center; padding: 8px;">48.25</td>
+                        <td style="text-align: center; padding: 8px;">33.67</td>
+                        <td style="text-align: center; padding: 8px;">44.94</td>
+                        <td style="text-align: center; padding: 8px;">43.16</td>
+                        <td style="text-align: center; padding: 8px;">53.37</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">Qwen2.5-VL</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">26.53</td>
+                        <td style="text-align: center; padding: 8px;">44.91</td>
+                        <td style="text-align: center; padding: 8px;">24.34</td>
+                        <td style="text-align: center; padding: 8px;">39.60</td>
+                        <td style="text-align: center; padding: 8px;">32.81</td>
+                        <td style="text-align: center; padding: 8px;">50.82</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">Pixel-Reasoner</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">52.91</td>
+                        <td style="text-align: center; padding: 8px;">61.44</td>
+                        <td style="text-align: center; padding: 8px;">48.88</td>
+                        <td style="text-align: center; padding: 8px;">58.23</td>
+                        <td style="text-align: center; padding: 8px;">58.97</td>
+                        <td style="text-align: center; padding: 8px;">65.32</td>
+                      </tr>
+                      <tr style="background-color: #e3f2fd;">
+                        <td style="text-align: left; padding: 8px;"><strong>Video-R4-7B (ours)</strong></td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;"><strong>56.17</strong></td>
+                        <td style="text-align: center; padding: 8px;"><strong>65.22</strong></td>
+                        <td style="text-align: center; padding: 8px;"><strong>52.69</strong></td>
+                        <td style="text-align: center; padding: 8px;"><strong>61.89</strong></td>
+                        <td style="text-align: center; padding: 8px;"><strong>64.21</strong></td>
+                        <td style="text-align: center; padding: 8px;"><strong>69.99</strong></td>
+                      </tr>
+                      <tr style="background-color: #f5f5f5;">
+                        <td style="text-align: left; padding: 8px; font-weight: normal;">Human</td>
+                        <td style="text-align: center; padding: 8px; font-weight: normal;">--</td>
+                        <td style="text-align: center; padding: 8px; font-weight: normal;">--</td>
+                        <td style="text-align: center; padding: 8px; font-weight: normal;">--</td>
+                        <td style="text-align: center; padding: 8px; font-weight: normal;">85.27</td>
+                        <td style="text-align: center; padding: 8px; font-weight: normal;">89.30</td>
+                        <td style="text-align: center; padding: 8px; font-weight: normal;">78.41</td>
+                        <td style="text-align: center; padding: 8px; font-weight: normal;">82.80</td>
+                        <td style="text-align: center; padding: 8px; font-weight: normal;">82.26</td>
+                        <td style="text-align: center; padding: 8px; font-weight: normal;">85.10</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="columns is-centered">
+            <div class="column is-full has-text-centered content">
+              <h2 class="title is-3">🕹️ Generalization to Other Tasks</h2>
+              <div class="content">
+                <p>
+                  Fine-tuning on <strong>Video-R4-CoT-17k</strong> and <strong>Video-R4-RL-30k</strong>, Video-R4
+                  demonstrates strong generalization capabilities, effectively handling not only <strong>general video
+                    QA</strong> but also <strong>multi-page document QA</strong> and <strong>slides QA</strong>, without
+                  the need for further dataset-specific training.
+                </p>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 30px;">
+                  <!-- Left Column: General Video QA and MP-DocVQA -->
+                  <div style="flex: 1; min-width: 300px; max-width: 48%;">
+                    <h3 class="title is-5" style="margin-bottom: 15px;">Results on general video QA benchmarks</h3>
+                    <div style="overflow-x: auto;">
+                      <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                        <thead>
+                          <tr>
+                            <th style="text-align: left; padding: 8px; border-bottom: 2px solid #ddd;">
+                              <strong>Models</strong></th>
+                            <th style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;">
+                              <strong>MVBench</strong></th>
+                            <th style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;">
+                              <strong>Video-MME</strong></th>
+                            <th style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;">
+                              <strong>Video-MMMU</strong></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">Video-LLaVA-7B</td>
+                            <td style="text-align: center; padding: 8px;">42.9</td>
+                            <td style="text-align: center; padding: 8px;">39.9</td>
+                            <td style="text-align: center; padding: 8px;">--</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">VideoLLaMA2-7B</td>
+                            <td style="text-align: center; padding: 8px;">54.6</td>
+                            <td style="text-align: center; padding: 8px;">46.6</td>
+                            <td style="text-align: center; padding: 8px;">--</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">Qwen2.5-VL-7B</td>
+                            <td style="text-align: center; padding: 8px;">57.4</td>
+                            <td style="text-align: center; padding: 8px;">53.1</td>
+                            <td style="text-align: center; padding: 8px;">47.8</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">Video-R1-7B</td>
+                            <td style="text-align: center; padding: 8px;">62.7</td>
+                            <td style="text-align: center; padding: 8px;"><strong>57.4</strong></td>
+                            <td style="text-align: center; padding: 8px; text-decoration: underline;">49.8</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">Pixel-Reasoner</td>
+                            <td style="text-align: center; padding: 8px;"><strong>65.4</strong></td>
+                            <td style="text-align: center; padding: 8px; text-decoration: underline;">54.6</td>
+                            <td style="text-align: center; padding: 8px;">47.7</td>
+                          </tr>
+                          <tr style="background-color: #e3f2fd;">
+                            <td style="text-align: left; padding: 8px;"><strong>Video-R4-7B (ours)</strong></td>
+                            <td style="text-align: center; padding: 8px; text-decoration: underline;">64.5</td>
+                            <td style="text-align: center; padding: 8px;">54.5</td>
+                            <td style="text-align: center; padding: 8px;"><strong>52.2</strong></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <h3 class="title is-5" style="margin-bottom: 15px; margin-top: 30px;">Results on the validation set
+                      of the MP-DocVQA dataset</h3>
+                    <div style="overflow-x: auto;">
+                      <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                          <tr>
+                            <th style="text-align: left; padding: 8px; border-bottom: 2px solid #ddd;">
+                              <strong>Models</strong></th>
+                            <th style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;">
+                              <strong>Zero-Shot</strong></th>
+                            <th style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;"><strong>Acc.
+                                (%)</strong></th>
+                            <th style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;"><strong>ANLS
+                                (%)</strong></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">LayoutLMv3</td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">38.47</td>
+                            <td style="text-align: center; padding: 8px;">45.38</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">Big-Bird</td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">41.06</td>
+                            <td style="text-align: center; padding: 8px;">49.29</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">Hi-VT5 (w/o train)</td>
+                            <td style="text-align: center; padding: 8px;">✓</td>
+                            <td style="text-align: center; padding: 8px;">42.10</td>
+                            <td style="text-align: center; padding: 8px;">58.64</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">Longformer</td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">43.91</td>
+                            <td style="text-align: center; padding: 8px;">52.87</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">Hi-VT5</td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">48.28</td>
+                            <td style="text-align: center; padding: 8px;">62.01</td>
+                          </tr>
+                          <tr style="background-color: #e3f2fd;">
+                            <td style="text-align: left; padding: 8px;"><strong>Video-R4-7B (ours)</strong></td>
+                            <td style="text-align: center; padding: 8px;">✓</td>
+                            <td style="text-align: center; padding: 8px;"><strong>53.21</strong></td>
+                            <td style="text-align: center; padding: 8px;"><strong>62.22</strong></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <!-- Right Column: SlidesVQA -->
+                  <div style="flex: 1; min-width: 300px; max-width: 48%;">
+                    <h3 class="title is-5" style="margin-bottom: 15px;">Results on the test set of SlidesVQA</h3>
+                    <div style="overflow-x: auto;">
+                      <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                          <tr>
+                            <th rowspan="2"
+                              style="text-align: left; padding: 8px; border-bottom: 2px solid #ddd; vertical-align: middle;">
+                              <strong>Models</strong></th>
+                            <th rowspan="2"
+                              style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd; vertical-align: middle;">
+                              <strong>Zero-Shot</strong></th>
+                            <th colspan="2" style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;">
+                              <strong>Dev</strong></th>
+                            <th colspan="2" style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;">
+                              <strong>Test</strong></th>
+                          </tr>
+                          <tr>
+                            <th style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;">EM</th>
+                            <th style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;">F1</th>
+                            <th style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;">EM</th>
+                            <th style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;">F1</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">Q-only</td>
+                            <td style="text-align: center; padding: 8px;">✓</td>
+                            <td style="text-align: center; padding: 8px;">9.4</td>
+                            <td style="text-align: center; padding: 8px;">11.4</td>
+                            <td style="text-align: center; padding: 8px;">10.7</td>
+                            <td style="text-align: center; padding: 8px;">13.5</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">UniVL</td>
+                            <td style="text-align: center; padding: 8px;">✓</td>
+                            <td style="text-align: center; padding: 8px;">8.8</td>
+                            <td style="text-align: center; padding: 8px;">12.1</td>
+                            <td style="text-align: center; padding: 8px;">10.6</td>
+                            <td style="text-align: center; padding: 8px;">14.1</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">PreasM</td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">36.3</td>
+                            <td style="text-align: center; padding: 8px;">41.9</td>
+                            <td style="text-align: center; padding: 8px;">30.7</td>
+                            <td style="text-align: center; padding: 8px;">38.2</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">T5</td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">35.2</td>
+                            <td style="text-align: center; padding: 8px;">41.3</td>
+                            <td style="text-align: center; padding: 8px;">29.3</td>
+                            <td style="text-align: center; padding: 8px;">37.9</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">T5 + z<sup>lay</sup></td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">36.9</td>
+                            <td style="text-align: center; padding: 8px;">43.2</td>
+                            <td style="text-align: center; padding: 8px;">31.0</td>
+                            <td style="text-align: center; padding: 8px;">39.7</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">LayoutT5</td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">38.9</td>
+                            <td style="text-align: center; padding: 8px;">44.8</td>
+                            <td style="text-align: center; padding: 8px;">31.7</td>
+                            <td style="text-align: center; padding: 8px;">39.9</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">LayoutLMv2</td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">26.5</td>
+                            <td style="text-align: center; padding: 8px;">33.4</td>
+                            <td style="text-align: center; padding: 8px;">21.4</td>
+                            <td style="text-align: center; padding: 8px;">29.3</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">FiD</td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">37.6</td>
+                            <td style="text-align: center; padding: 8px;">42.9</td>
+                            <td style="text-align: center; padding: 8px;">30.4</td>
+                            <td style="text-align: center; padding: 8px;">38.9</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">FiD + z<sup>lay</sup></td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">38.1</td>
+                            <td style="text-align: center; padding: 8px;">43.3</td>
+                            <td style="text-align: center; padding: 8px;">30.6</td>
+                            <td style="text-align: center; padding: 8px;">38.9</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">M3D</td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">41.3</td>
+                            <td style="text-align: center; padding: 8px;">47.1</td>
+                            <td style="text-align: center; padding: 8px;">33.5</td>
+                            <td style="text-align: center; padding: 8px;">41.7</td>
+                          </tr>
+                          <tr style="background-color: #e3f2fd;">
+                            <td style="text-align: left; padding: 8px;"><strong>Video-R4-7B (ours)</strong></td>
+                            <td style="text-align: center; padding: 8px;">✓</td>
+                            <td style="text-align: center; padding: 8px;"><strong>49.5</strong></td>
+                            <td style="text-align: center; padding: 8px;"><strong>56.0</strong></td>
+                            <td style="text-align: center; padding: 8px;"><strong>43.0</strong></td>
+                            <td style="text-align: center; padding: 8px;"><strong>52.2</strong></td>
+                          </tr>
+                          <tr style="background-color: #f5f5f5;">
+                            <td style="text-align: left; padding: 8px; font-weight: normal;">Human</td>
+                            <td style="text-align: center; padding: 8px; font-weight: normal;">--</td>
+                            <td style="text-align: center; padding: 8px; font-weight: normal;">--</td>
+                            <td style="text-align: center; padding: 8px; font-weight: normal;">--</td>
+                            <td style="text-align: center; padding: 8px; font-weight: normal;">89.8</td>
+                            <td style="text-align: center; padding: 8px; font-weight: normal;">93.0</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+      </section>
+
+      <!-- <section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-full has-text-centered content">
+        <h2 class="title is-3" id="leaderboard">🏆 Leaderboard</h2>
+        <div class="content">
+            <p>
+              <strong>Performance of MLLMs on MMPerspective.</strong> Models are grouped by size and ranked by overall accuracy. Best scores in each group are bolded.
+            </p> -->
 
 
 
 
-<br><br>
+      <h2 class="title is-3 has-text-centered"> 📺 Visualizations</h2>
+      <img src="static/images/vis_1.png" alt="visualization-1"
+        style="max-width: 60%; display: block; margin: 0 auto;" />
+      <p style="text-align: center; margin-left: auto; margin-right: auto; width: 50%;">
+        Visualization of the iterative visual rumination process.
+      </p>
+      <br><br>
+      <img src="static/images/vis_2.png" alt="visualization-2"
+        style="max-width: 60%; display: block; margin: 0 auto;" />
+      <p style="text-align: center; margin-left: auto; margin-right: auto; width: 50%;">
+        Visualization of the iterative visual rumination process.
+      </p>
 
-<section class="hero is-light is-small">
-  <div class="hero-body has-text-centered">
-  <h1 class="title is-1 mathvista_other">
-    <span class="mathvista_other" style="vertical-align: middle" id="citation">Citation</span>
-  </h1>
-  </div>
-</section>
-<!-- </section> -->
-<!-- <section class="hero is-light is-small">
+
+      <br><br>
+
+      <section class="hero is-light is-small">
+        <div class="hero-body has-text-centered">
+          <h1 class="title is-1 mathvista_other">
+            <span class="mathvista_other" style="vertical-align: middle" id="citation">📃 Citation</span>
+          </h1>
+        </div>
+      </section>
+      <!-- </section> -->
+      <!-- <section class="hero is-light is-small">
   <div class="hero-body has-text-centered">
     <h1 class="title is-1 mathvista_other" id="citation">Citation</h1>
   </div>
 </section> -->
 
-<section class="section" id="BibTeX">
-  <div class="container is-max-desktop content">
-    <pre><code>
+      <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+          <pre><code>
       @article{tang2025mmperspective,
-        title={MMPerspective: Do MLLMs Understand Perspective? A Comprehensive Benchmark for Perspective Perception, Reasoning, and Robustness},
-        author={Tang, Yunlong and Liu, Pinxin and Tan, Zhangyun and Feng, Mingqian and Mao, Rui and Huang, Chao and Bi, Jing and Xiao, Yunzhong and Liang, Susan and Hua, Hang and others},
-        journal={The Thirty-ninth Annual Conference on Neural Information Processing Systems Datasets and Benchmarks Track},
+        title={Video-R4: Reinforcing Text-Rich Video Reasoning with Visual Rumination},
+        author={Tang, Yolo Yunlong and Shimada, Daiki and Hua, Hang and Huang, Chao and Bi, Jing and Feris, Rogerio and Xu, Chenliang},
+        journal={arXiv preprint arXiv:2511.xxxxx},
         year={2025}
       }
 </code></pre>
-  </div>
-</section>
-
-<section class="section">
-  <div class="container" style="width: 60%;">
-  <style>
-      pre {
-        background-color: #f4f4f4;
-        padding: 5px; /* 调整padding为5px */
-        border: 1px solid #ddd;
-        border-radius: 5px;
-        overflow-x: auto; /* 允许水平滚动 */
-    }
-    code {
-        font-family: Consolas, "Courier New", monospace;
-        color: #d63384; /* 代码文本颜色 */
-    }
-  </style>
-
-  </div>
-</section>
-
-<footer class="footer">
-  <!-- <div class="container"> -->
-    <div class="content has-text-centered">
-    </div>
-    <div class="columns is-centered">
-      <div class="column is-8">
-        <div class="content">
-          <p style="text-align: center;">
-            This website is adapted from <a href="https://mathvista.github.io/">MathVista</a>, licensed under a <a rel="license"
-                                                href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
-            Commons Attribution-ShareAlike 4.0 International License</a>.
-          </p>
         </div>
-      </div>
-    </div>
-  <!-- </div> -->
-</footer>
+      </section>
+
+      <section class="section">
+        <div class="container" style="width: 60%;">
+          <style>
+            pre {
+              background-color: #f4f4f4;
+              padding: 5px;
+              /* 调整padding为5px */
+              border: 1px solid #ddd;
+              border-radius: 5px;
+              overflow-x: auto;
+              /* 允许水平滚动 */
+            }
+
+            code {
+              font-family: Consolas, "Courier New", monospace;
+              color: #d63384;
+              /* 代码文本颜色 */
+            }
+          </style>
+
+        </div>
+      </section>
+
+      <footer class="footer">
+        <!-- <div class="container"> -->
+        <div class="content has-text-centered">
+        </div>
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content">
+              <p style="text-align: center;">
+                This website is adapted from <a href="https://mathvista.github.io/">MathVista</a>, licensed under a <a
+                  rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                  Commons Attribution-ShareAlike 4.0 International License</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- </div> -->
+      </footer>
 
 </body>
+
 </html>
