@@ -19,6 +19,8 @@
   </a>
 </p>
 
+<img src="assets/bar.png" width="100%">
+
 ## 🌟 News
 - [2025-11-23] Introducing Video-R4, a reinforced video agent with visual rumination for text-rich video reasoning. The [arXiv paper](https://arxiv.org/abs/2511.xxxxx) has been released. Code, model, and dataset are coming soon.
 
@@ -30,9 +32,6 @@
 ## 📊 Data Curation Pipeline
 <img src="assets/data_pipeline.png" width="100%">
 
-
-## 📈 Performance
-<img src="assets/bar.png" width="100%">
 
 ## 📦 Installation
 ```bash
