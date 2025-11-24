@@ -5,7 +5,7 @@
 > *<sup>1</sup>University of Rochester, <sup>2</sup>Sony Group Corporation, <sup>3</sup>MIT-IBM Watson AI Lab*
 
 <p align="left">
-  <a href="https://arxiv.org/abs/XXXX.XXXXX" target="_blank">
+  <a href="https://arxiv.org/abs/2511.17490" target="_blank">
     <img src="https://img.shields.io/badge/arXiv-Paper-ff7575.svg?style=for-the-badge&logo=arxiv" alt="arXiv Paper">
   </a>
   <a href="https://yunlong10.github.io/Video-R4" target="_blank">
@@ -20,7 +20,7 @@
 </p>
 
 ## 🌟 News
-- [2025-11-23] Introducing Video-R4, a reinforced video agent with visual rumination for text-rich video reasoning. The [arXiv paper](https://arxiv.org/abs/2511.xxxxx) has been released. Code, model, and dataset are coming soon.
+- [2025-11-23] Introducing Video-R4, a reinforced video agent with visual rumination for text-rich video reasoning. The [arXiv paper](https://arxiv.org/abs/2511.17490) has been released. Code, model, and dataset are coming soon.
 
 
 ## 🚀 Video-R4 Training Framework
@@ -50,7 +50,7 @@ If you find this work useful, please consider citing:
 @article{tang2025video-r4,
   title={Video-R4: Reinforcing Text-Rich Video Reasoning with Visual Rumination},
   author={Tang, Yunlong and Shimada, Daiku and Hua, Hang and Huang, Chao and Bi, Jing and Feris, Rogerio and Xu, Chenliang},
-  journal={arXiv preprint arXiv:2511.xxxxx},
+  journal={arXiv preprint arXiv:2511.17490},
   year={2025}
 }
 ```
