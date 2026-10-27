@@ -95,6 +95,1349 @@
           </a>
           <div class="navbar-dropdown" style="text-align: center;">
 
+            <a class="navbar-item" href="https://github.com/yoloytang/Awesome-LLMs-for-Video-Understanding" style="text-align: center;">
+              <b>Video Understanding with LLMs Survey</b>
+            </a>
+
+            <a class="navbar-item" href="https://github.com/yoloytang/Awesome-Video-LMM-Post-Training" style="text-align: center;">
+              <b>Video-LMM Post-Training Survey</b>
+            </a>
+
+            <a class="navbar-item" href="https://github.com/yoloytang/VidComposition" style="text-align: center;">
+              <b>VidComposition Benchmark</b>
+            </a>
+           
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </nav>
+
+  <style>
+    /* Color Scheme: Pink, Blue, Purple */
+    :root {
+      --pink-primary: #ff6b9d;
+      --pink-light: #ffb3d1;
+      --pink-dark: #e6397a;
+      --blue-primary: #4a90e2;
+      --blue-light: #87ceeb;
+      --blue-dark: #2c5aa0;
+      --purple-primary: #9b59b6;
+      --purple-light: #c39bd3;
+      --purple-dark: #7d3c98;
+      --gradient-primary: linear-gradient(135deg, #ff6b9d 0%, #4a90e2 50%, #9b59b6 100%);
+      --gradient-primary-transparent: linear-gradient(135deg, rgba(255, 107, 157, 0.6) 0%, rgba(74, 144, 226, 0.6) 50%, rgba(155, 89, 182, 0.6) 100%);
+      --gradient-soft: linear-gradient(135deg, #ffb3d1 0%, #87ceeb 50%, #c39bd3 100%);
+      --gradient-soft-transparent: linear-gradient(135deg, rgba(255, 179, 209, 0.6) 0%, rgba(135, 206, 235, 0.6) 50%, rgba(195, 155, 211, 0.6) 100%);
+      --bg-light: #faf5ff;
+      --bg-section: #fff5f9;
+    }
+
+    /* Body and Background */
+    body {
+      background: linear-gradient(180deg, #faf5ff 0%, #fff5f9 50%, #f0f4ff 100%);
+      background-attachment: fixed;
+      min-height: 100vh;
+    }
+
+    /* Navbar Styling */
+    .navbar {
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 2px 20px rgba(255, 107, 157, 0.1);
+      border-bottom: 2px solid transparent;
+      border-image: var(--gradient-primary);
+      border-image-slice: 1;
+    }
+
+    .navbar-item, .navbar-link {
+      color: #333 !important;
+      transition: all 0.3s ease;
+    }
+
+    .navbar-item:hover, .navbar-link:hover {
+      color: var(--pink-primary) !important;
+      background: linear-gradient(135deg, rgba(255, 107, 157, 0.1), rgba(74, 144, 226, 0.1));
+    }
+
+    .navbar-dropdown {
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid rgba(255, 107, 157, 0.2);
+      box-shadow: 0 8px 32px rgba(155, 89, 182, 0.15);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: var(--gradient-soft);
+      padding: 0.75rem 1.2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 107, 157, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(74, 144, 226, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 40% 20%, rgba(155, 89, 182, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-body {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Title Styling */
+    .publication-title {
+      background: var(--gradient-primary);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      font-weight: 700;
+      text-shadow: none;
+    }
+
+    /* Rainbow text animation - updated with pink/blue/purple */
+    .rainbow {
+      text-align: center;
+      text-decoration: underline;
+      font-size: 32px;
+      font-family: monospace;
+      letter-spacing: 5px;
+    }
+
+    .rainbow_text_animated {
+      background: linear-gradient(to right, #ff6b9d, #4a90e2, #9b59b6, #ff6b9d, #4a90e2);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      animation: rainbow_animation 6s ease-in-out infinite;
+      background-size: 400% 100%;
+    }
+
+    @keyframes rainbow_animation {
+      0%, 100% {
+        background-position: 0 0;
+      }
+      50% {
+        background-position: 100% 0;
+      }
+    }
+
+    /* Author Links */
+    .publication-authors {
+      color: white !important;
+    }
+
+    .publication-authors a {
+      color: white !important;
+      transition: all 0.3s ease;
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    }
+
+    .publication-authors a:hover {
+      color: var(--pink-light) !important;
+      text-decoration: underline;
+      text-shadow: 0 2px 5px rgba(255, 107, 157, 0.3);
+    }
+
+    .publication-authors sup {
+      text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+      font-weight: bold;
+    }
+
+    /* Buttons */
+    .button.is-dark {
+      background: var(--gradient-primary);
+      border: none;
+      color: white;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 15px rgba(255, 107, 157, 0.3);
+    }
+
+    .button.is-dark:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(155, 89, 182, 0.4);
+      background: linear-gradient(135deg, #ff8bb3 0%, #6ba3e8 50%, #b373d3 100%);
+    }
+
+    /* Section Headers */
+    .hero.is-light {
+      background: var(--gradient-soft-transparent);
+      border-radius: 15px;
+      margin: 2rem 0;
+      box-shadow: 0 4px 20px rgba(255, 107, 157, 0.15);
+      padding: 1rem 1.5rem;
+    }
+
+    .hero.is-light .title {
+      color: white;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Section Backgrounds */
+    .section {
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 20px;
+      margin: 2rem 0;
+      padding: 2rem;
+      box-shadow: 0 4px 25px rgba(155, 89, 182, 0.1);
+      backdrop-filter: blur(10px);
+    }
+
+    /* Hide empty sections */
+    .section:empty {
+      display: none;
+    }
+
+    /* Tables */
+    table {
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(74, 144, 226, 0.15);
+    }
+
+    table thead {
+      background: var(--gradient-primary-transparent) !important;
+      color: white;
+    }
+
+    table thead th {
+      color: white !important;
+      font-weight: 600;
+      border: none;
+      background: var(--gradient-primary-transparent) !important;
+    }
+
+    table thead th strong {
+      color: white !important;
+    }
+
+    /* Ensure all table headers have white text and gradient background */
+    table th {
+      color: white !important;
+      background: var(--gradient-primary-transparent) !important;
+    }
+
+    table th strong {
+      color: white !important;
+    }
+
+    table tbody tr {
+      transition: all 0.3s ease;
+    }
+
+    table tbody tr:hover {
+      background: linear-gradient(90deg, rgba(255, 107, 157, 0.1), rgba(74, 144, 182, 0.1));
+      transform: scale(1.01);
+    }
+
+    table tbody tr[style*="background-color: #e3f2fd"] {
+      background: linear-gradient(90deg, rgba(255, 107, 157, 0.2), rgba(74, 144, 226, 0.2)) !important;
+    }
+
+    table tbody td {
+      border-color: rgba(255, 107, 157, 0.1);
+    }
+
+    /* Math Formula Boxes */
+    p[style*="background-color: #f5f5f5"] {
+      background: var(--gradient-soft) !important;
+      border: 2px solid rgba(255, 107, 157, 0.3);
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(155, 89, 182, 0.1);
+    }
+
+    /* Images */
+    img {
+      border-radius: 15px;
+      box-shadow: 0 8px 30px rgba(155, 89, 182, 0.2);
+      transition: transform 0.3s ease;
+    }
+
+    img:hover {
+      transform: scale(1.02);
+    }
+
+    /* Titles */
+    .title.is-3, .title.is-5 {
+      color: var(--purple-dark);
+    }
+
+    /* Code Blocks */
+    pre {
+      background: linear-gradient(135deg, #2d1b3d 0%, #1a1a2e 100%);
+      border: 2px solid rgba(255, 107, 157, 0.3);
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(155, 89, 182, 0.2);
+      color: white;
+    }
+
+    code {
+      color: white !important;
+    }
+
+    pre code {
+      color: white !important;
+    }
+
+    /* Copy Button */
+    #BibTeX {
+      position: relative;
+    }
+
+    .copy-button {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: var(--gradient-primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 15px;
+      cursor: pointer;
+      font-size: 14px;
+      box-shadow: 0 4px 12px rgba(155, 89, 182, 0.3);
+      transition: all 0.3s ease;
+      z-index: 10;
+      opacity: 0.9;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .copy-button:hover {
+      opacity: 1;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(155, 89, 182, 0.4);
+    }
+
+    .copy-button:active {
+      transform: translateY(0);
+    }
+
+    .copy-button i {
+      font-size: 14px;
+    }
+
+    /* Footer */
+    .footer {
+      background: var(--gradient-soft);
+      border-top: 3px solid transparent;
+      border-image: var(--gradient-primary);
+      border-image-slice: 1;
+      margin-top: 3rem;
+      padding: 2rem;
+    }
+
+    /* Links */
+    a {
+      color: var(--blue-primary);
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--pink-primary);
+    }
+
+    /* Content Boxes */
+    .content {
+      background: rgba(255, 255, 255, 0.7);
+      padding: 1.5rem;
+      border-radius: 12px;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 2rem 1rem;
+      }
+      
+      .section {
+        padding: 1.5rem;
+        margin: 1rem 0;
+      }
+    }
+  </style>
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title is-bold">
+              <span class="rainbow_text_animated" style="vertical-align: middle">Video-R4: Reinforcing Text-Rich Video
+                Reasoning with Visual Rumination</span>
+            </h1>
+            <!-- <h2 class="subtitle is-3 publication-subtitle" style="margin-bottom: 0px;">
+            Reinforcing Text-Rich Video Reasoning with Visual Rumination
+          </h2> -->
+            <!-- <br> -->
+            <!-- <p class="rainbow" style="font-size: 1.3em; margin-bottom: 10px; text-decoration: none;"> -->
+            <!-- <span class="rainbow_text_animated" style="text-decoration: none;">arXiv 2025</span> -->
+            <!-- </p> -->
+            <div class="is-size-5 publication-authors" style="width: 80%; margin: 20px auto;">
+              <span class="author-block"><a href="https://yoloytang.me">Yolo Yunlong Tang</a><sup
+                  style="color:#4a90e2;">1</sup>,</span>
+              <span class="author-block"><a href="https://scholar.google.com/citations?user=1uAwouQAAAAJ&hl=en">Daiki
+                  Shimada</a><sup style="color:#9b59b6;">2</sup>,</span>
+              <span class="author-block"><a href="https://hanghuacs.owlstown.net/">Hang Hua</a><sup
+                  style="color:#ff6b9d;">3</sup>,</span>
+              <span class="author-block"><a href="https://wikichao.github.io/">Chao Huang</a><sup
+                  style="color:#4a90e2;">1</sup>,</span>
+              <span class="author-block"><a href="https://jing-bi.github.io/">Jing Bi</a><sup
+                  style="color:#4a90e2;">1</sup>,</span><br>
+              <span class="author-block"><a href="https://www.rogerioferis.org/">Rogerio Feris</a><sup
+                  style="color:#ff6b9d;">3</sup>,</span>
+              <span class="author-block"><a href="https://www.cs.rochester.edu/~cxu22/index.html">Chenliang Xu</a><sup
+                  style="color:#4a90e2;">1</sup></span>
+              <!-- <span class="author-block" style="font-size:18px">&dagger; Corresponding Author</span> -->
+
+            </div>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup style="color:#4a90e2; font-weight: bold;">1</sup>University of Rochester,</span>
+              <span class="author-block"><sup style="color:#9b59b6; font-weight: bold;">2</sup>Sony Group Corporation,</span>
+              <span class="author-block"><sup style="color:#ff6b9d; font-weight: bold;">3</sup>MIT-IBM Watson AI Lab</span>
+              <!-- <span class="paper-block"><b style="color:#f41c1c">ICLR 2024 Oral</b> (85 in 7304, 1.2%)</span> -->
+            </div>
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://arxiv.org/abs/2511.17490" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/yoloytang/Video-R4"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                  </a>
+                </span>
+                <!-- Dataset Link. -->
+                <span class="link-block">
+                  <a href="https://huggingface.co/datasets/YOUR_DATASET_PATH"
+                    class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <!-- <i class="far fa-images"></i> -->
+                      <p style="font-size:18px">📊</p>
+                    </span>
+                    <span>Dataset</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="#citation" class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                      <p style="font-size:18px">📃</p>
+                    </span>
+                    <span>Cite</span>
+                  </a>
+                </span>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+
+    </div>
+  </section>
+
+
+  <section class="section" style="padding-top: 1.5rem;">
+    <div class="container" style="margin-bottom: 2vh;">
+      <!-- Abstract. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3" style="margin-top: 0px;">Introduction</h2>
+          <div class="content has-text-justified" style="margin-top: -1.5rem;">
+            Understanding small, transient textual cues in videos is crucial for text-rich video reasoning tasks.
+            Current video QA models often rely on single-pass perception, which can lead to hallucinations when dealing
+            with complex visual-textual content. We introduce <strong>Video-R4</strong>, a video reasoning Large
+            Multimodal Model (LMM) that performs <strong>visual rumination</strong>—an iterative process that mimics how
+            humans process visual information by selecting frames, zooming into informative regions, re-encoding
+            retrieved pixels, and updating the reasoning state, forming a closed-loop read-retrieve-refocus-reinforce
+            cycle for grounded video reasoning. We develop two datasets (<strong>Video-R4-CoT-17k</strong> and
+            <strong>Video-R4-RL-30k</strong>) and a multi-stage rumination learning framework that progressively
+            finetunes a 7B LMM using Supervised Fine-Tuning (SFT) and GRPO-based Reinforcement Learning (RL).
+            <strong>Video-R4-7B</strong> achieves state-of-the-art results on M4-ViteVQA and demonstrates strong
+            generalization to multi-page document QA, slides QA, and generic video QA, proving the effectiveness of
+            iterative rumination for pixel-grounded multimodal reasoning.
+
+            <div class="content has-text-centered">
+              <img src="static/images/bar.png" alt="performance" style="max-width: 100%;" />
+              <p style="margin-top: 15px; font-style: italic; color: #7d3c98; text-align: center;">
+                Video-R4-7B achieves state-of-the-art performance on the text-rich video understanding, and is also
+                compatible with the LMMs with the same size on the general video QA benchmarks.
+              </p>
+            </div>
+
+          </div>
+          <!-- <img src="static/images/mmperspective.png" /> -->
+
+        </div>
+      </div>
+      <!--/ Abstract. -->
+
+    </div>
+  </section>
+
+  <!-- DATASET SECTION -->
+  <section class="hero is-light is-small">
+    <div class="hero-body has-text-centered">
+      <h1 class="title is-1 mathvista_other">
+        <span class="mathvista_other" style="vertical-align: middle">🔬 Method</span>
+      </h1>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
+    <!-- <br><br> -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3" style="margin-bottom: -15px">📊 Data Curation Pipeline</h2>
+        <div class="content has-text-justified" style="max-width: 100%; margin: 0 auto;">
+          <div class="content has-text-centered">
+            <img src="static/images/data_pipeline.png" alt="data-composition" style="max-width: 100%;" />
+            <p style="margin-top: 15px; font-style: italic; color: #7d3c98; text-align: center; max-width: 100%; margin-left: auto; margin-right: auto;">
+              The data curation pipeline creates two datasets: Video-R4-CoT-17k (for supervised practice) and Video-R4-RL-30k (for reinforcement learning). The pipeline processes training data with OCR and object detection results, uses rule-based matching, trajectory synthesis, and quality control to generate high-quality training examples.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3" style="margin-bottom: -5px">🎯 Reward Design</h2>
+        <div class="content has-text-justified" style="max-width: 100%; margin: 0 auto;">
+          <p>
+            Our reward function combines four components: the original reward \(R\) (e.g., answer correctness and
+            format), Diversity Reward \(R_{\text{div}}\), Representativeness Reward \(R_{\text{rep}}\), and Curiosity
+            Reward \(R_{\text{cur}}\). The overall reward is:
+          </p>
+          <p style="text-align: center; margin: 25px 0; padding: 15px; background: linear-gradient(135deg, rgba(255, 179, 209, 0.3), rgba(135, 206, 235, 0.3), rgba(195, 155, 211, 0.3)); border: 2px solid rgba(255, 107, 157, 0.3); border-radius: 10px; box-shadow: 0 2px 10px rgba(155, 89, 182, 0.1);">
+            \[R' = R + \lambda_{\text{div}} R_{\text{div}} + \lambda_{\text{rep}} R_{\text{rep}} + \lambda_{\text{cur}}
+            R_{\text{cur}}\]
+          </p>
+
+          <h3 class="title is-5" style="margin-top: 30px;">Diversity Reward</h3>
+          <p>
+            Following prior unsupervised summarization objectives, we encourage selected regions to be mutually
+            dissimilar in feature space. Let \(V\) denote the set of features of the input frames and \(\hat{V} =
+            \hat{V}^{f} \cup \hat{V}^{r}\) denote the set of features of the selected frames (\(\hat{V}^{f}\)) and
+            regions (\(\hat{V}^{r}\)). We define diversity reward to encourage the policy to avoid redundant region
+            selections:
+          </p>
+          <p style="text-align: center; margin: 20px 0; padding: 15px; background: linear-gradient(135deg, rgba(255, 179, 209, 0.3), rgba(135, 206, 235, 0.3), rgba(195, 155, 211, 0.3)); border: 2px solid rgba(255, 107, 157, 0.3); border-radius: 10px; box-shadow: 0 2px 10px rgba(155, 89, 182, 0.1);">
+            \[R_{\mathrm{div}}(\hat{V}^{r}) = \frac{1}{|\hat{V}^{r}| (|\hat{V}^{r}| - 1)} \sum_{i=1}^{|\hat{V}^{r}|}
+            \sum_{j \ne i}^{|\hat{V}^{r}|-1} d(v_i, v_{j})\]
+          </p>
+          <p>
+            where \(d(\cdot,\cdot)\) denotes cosine similarity:
+            \[d(v_i, v_{j}) = 1 - \frac{v_i^{\top} v_{j}}{\|v_i\|_2 \|v_{j}\|_2}.\]
+            This objective computes the average pairwise distance between all selected region features, making the
+            reward depend on the orientation of features rather than their magnitude.
+          </p>
+
+          <h3 class="title is-5" style="margin-top: 30px;">Representativeness Reward</h3>
+          <p>
+            To ensure the selected frames \(\hat{V}^{f}\) remain informative, we encourage them to represent the global
+            video frame set \(V\):
+          </p>
+          <p style="text-align: center; margin: 20px 0; padding: 15px; background: linear-gradient(135deg, rgba(255, 179, 209, 0.3), rgba(135, 206, 235, 0.3), rgba(195, 155, 211, 0.3)); border: 2px solid rgba(255, 107, 157, 0.3); border-radius: 10px; box-shadow: 0 2px 10px rgba(155, 89, 182, 0.1);">
+            \[R_{\mathrm{rep}}(V,\hat{V}^f) = \exp\!\left(-\frac{1}{|V|} \sum_{i=1}^{|V|} \min_{v_j \in \hat{V}^{f[-1]}}
+            \| v_i - v_{j} \|_2\right)\]
+          </p>
+          <p>
+            where \(\|\cdot\|_2\) denotes the Euclidean distance in the feature space and \(\hat{V}^{f[-1]}\) is the set
+            of frame features selected in the last clipping operation. This reward measures how well the selected frames
+            cover the entire video in feature space.
+          </p>
+
+          <h3 class="title is-5" style="margin-top: 30px;">Curiosity Reward</h3>
+          <p>
+            To balance exploration and prevent overuse of visual operations, we incorporate a curiosity reward:
+          </p>
+          <p style="text-align: center; margin: 20px 0; padding: 15px; background: linear-gradient(135deg, rgba(255, 179, 209, 0.3), rgba(135, 206, 235, 0.3), rgba(195, 155, 211, 0.3)); border: 2px solid rgba(255, 107, 157, 0.3); border-radius: 10px; box-shadow: 0 2px 10px rgba(155, 89, 182, 0.1);">
+            \[R_{\text{cur}}(\hat{V}_i) = \alpha \left( H - \frac{1}{K}\sum_{j=1}^{K} \mathbb{I}\big[|\hat{V}_j| >
+            0\big] \right)_+ \cdot \mathbb{I}\big[|\hat{V}_i| > 0\big] - \beta \left(\,|\hat{V}_i| - N\,\right)_+\]
+          </p>
+          <p>
+            where \(K\) is the number of rollouts, \((\cdot)_+\) is the ReLU function, \(\mathbb{I}[\cdot]\) is the
+            indicator function, \(\alpha\) and \(\beta\) are coefficients, and \(H\) is the threshold. The first term
+            encourages exploration when visual operations are under-utilized, while the second term penalizes excessive
+            calls to prevent over-reliance on visual operations.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3" style="margin-bottom: -15px">✈️ Training Framework</h2>
+        <div class="content has-text-justified" style="max-width: 100%; margin: 0 auto;">
+          <div class="content has-text-centered">
+            <img src="static/images/training_framework.png" alt="training-framework" style="max-width: 100%;" />
+            <p style="margin-top: 15px; font-style: italic; color: #7d3c98; text-align: center; max-width: 100%; margin-left: auto; margin-right: auto;">
+              Multi-stage rumination training framework: (1) Deliberate Rumination Practice (DRP) SFT, (2) RL after DRP-SFT, (3) Compositional Rumination Practice (CRP) SFT, (4) RL after CRP-SFT. The framework uses GRPO-based reinforcement learning with rewards for accuracy, diversity, repetition, and curiosity.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+          <!-- <img src="static/images/dataset_comparison.png" alt="data-composition" style="max-width: 50%;"/> -->
+          <!-- <p style="text-align: center; margin-left: auto; margin-right: auto; width: 50%;" >
+            The comparison of various benchmarks encompasses several key aspects: 
+                the total number of videos, the number of clips, the average duration of the videos, the method of video annotation (manual denoted as M, automated as A), 
+                the average number of QA pair tokens, the average number of subtitle tokens, whether the videos cover multiple duration levels, 
+                whether the videos are sourced from a broad range of open domains, and whether provide subtitle together with audio information. 
+                It is important to note that if a dataset includes multiple task formats, our comparison focuses solely on the multiple-choice segment.
+          </p> -->
+        </div>
+      </div>
+    </div>
+    </div>
+  </section>
+
+
+
+  <!-- RESULTS SECTION -->
+  <section class="hero is-light is-small">
+    <div class="hero-body has-text-centered">
+      <h1 class="title is-1 mathvista_other">📊 Experiment Results</h1>
+    </div>
+  </section>
+
+  <section class="section">
+        <div class="container">
+          <div class="columns is-centered">
+            <div class="column is-full has-text-centered content">
+              <h2 class="title is-3" id="leaderboard" style="margin-bottom: -10px">🏆 Performance on M4-ViteVQA</h2>
+              <div class="content">
+                <p>
+                  <strong>Performance comparison on the testset of the M4-ViteVQA dataset.</strong> Best non-human
+                  scores in <strong>bold</strong>. The parameters of the LMM-based models are 7B or 8B. All the RL-based
+                  models compared are based on Qwen2.5-VL. The human performances are from the original dataset paper.
+                </p>
+                <div style="overflow-x: auto;">
+                  <table class="js-sort-table js-sort-asc" id="results"
+                    style="margin-left: auto; margin-right: auto; width: 100%; border-collapse: collapse;">
+                    <thead>
+                      <tr>
+                        <th rowspan="2" style="vertical-align: middle; text-align: left; padding: 8px;">
+                          <strong>Models</strong></th>
+                        <th rowspan="2" style="vertical-align: middle; text-align: center; padding: 8px;">
+                          <strong>LMM-Based</strong></th>
+                        <th rowspan="2" style="vertical-align: middle; text-align: center; padding: 8px;">
+                          <strong>Visual-Grounded</strong></th>
+                        <th rowspan="2" style="vertical-align: middle; text-align: center; padding: 8px;">
+                          <strong>RL-Based</strong></th>
+                        <th colspan="2" style="vertical-align: middle; text-align: center; padding: 8px;"><strong>Task 1
+                            - Split 1</strong></th>
+                        <th colspan="2" style="vertical-align: middle; text-align: center; padding: 8px;"><strong>Task 1
+                            - Split 2</strong></th>
+                        <th colspan="2" style="vertical-align: middle; text-align: center; padding: 8px;"><strong>Task
+                            2</strong></th>
+                      </tr>
+                      <tr>
+                        <th style="vertical-align: middle; text-align: center; padding: 8px;"><strong>Acc. (%)</strong></th>
+                        <th style="vertical-align: middle; text-align: center; padding: 8px;"><strong>ANLS (%)</strong></th>
+                        <th style="vertical-align: middle; text-align: center; padding: 8px;"><strong>Acc. (%)</strong></th>
+                        <th style="vertical-align: middle; text-align: center; padding: 8px;"><strong>ANLS (%)</strong></th>
+                        <th style="vertical-align: middle; text-align: center; padding: 8px;"><strong>Acc. (%)</strong></th>
+                        <th style="vertical-align: middle; text-align: center; padding: 8px;"><strong>ANLS (%)</strong></th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">JustAsk</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">10.05</td>
+                        <td style="text-align: center; padding: 8px;">14.10</td>
+                        <td style="text-align: center; padding: 8px;">5.47</td>
+                        <td style="text-align: center; padding: 8px;">8.60</td>
+                        <td style="text-align: center; padding: 8px;">3.60</td>
+                        <td style="text-align: center; padding: 8px;">6.70</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">All-in-one-B</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">10.87</td>
+                        <td style="text-align: center; padding: 8px;">14.80</td>
+                        <td style="text-align: center; padding: 8px;">5.66</td>
+                        <td style="text-align: center; padding: 8px;">7.80</td>
+                        <td style="text-align: center; padding: 8px;">3.28</td>
+                        <td style="text-align: center; padding: 8px;">4.60</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">Video-LLaVA-7B</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">15.43</td>
+                        <td style="text-align: center; padding: 8px;">17.15</td>
+                        <td style="text-align: center; padding: 8px;">11.19</td>
+                        <td style="text-align: center; padding: 8px;">12.02</td>
+                        <td style="text-align: center; padding: 8px;">9.38</td>
+                        <td style="text-align: center; padding: 8px;">11.80</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">T5-ViteVQA</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">22.17</td>
+                        <td style="text-align: center; padding: 8px;">29.10</td>
+                        <td style="text-align: center; padding: 8px;">16.68</td>
+                        <td style="text-align: center; padding: 8px;">23.80</td>
+                        <td style="text-align: center; padding: 8px;">9.29</td>
+                        <td style="text-align: center; padding: 8px;">13.60</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">VideoLLaMA2-7B</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">20.76</td>
+                        <td style="text-align: center; padding: 8px;">23.55</td>
+                        <td style="text-align: center; padding: 8px;">18.33</td>
+                        <td style="text-align: center; padding: 8px;">20.45</td>
+                        <td style="text-align: center; padding: 8px;">16.54</td>
+                        <td style="text-align: center; padding: 8px;">21.08</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">Qwen2-VL-7B</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">35.22</td>
+                        <td style="text-align: center; padding: 8px;">45.84</td>
+                        <td style="text-align: center; padding: 8px;">27.25</td>
+                        <td style="text-align: center; padding: 8px;">38.45</td>
+                        <td style="text-align: center; padding: 8px;">21.23</td>
+                        <td style="text-align: center; padding: 8px;">28.79</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">TEA-L</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">34.78</td>
+                        <td style="text-align: center; padding: 8px;">43.71</td>
+                        <td style="text-align: center; padding: 8px;">28.43</td>
+                        <td style="text-align: center; padding: 8px;">38.13</td>
+                        <td style="text-align: center; padding: 8px;">18.83</td>
+                        <td style="text-align: center; padding: 8px;">28.90</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">NVILA-8B</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">37.73</td>
+                        <td style="text-align: center; padding: 8px;">47.23</td>
+                        <td style="text-align: center; padding: 8px;">30.10</td>
+                        <td style="text-align: center; padding: 8px;">41.52</td>
+                        <td style="text-align: center; padding: 8px;">22.89</td>
+                        <td style="text-align: center; padding: 8px;">30.34</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">GAT-L</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">38.30</td>
+                        <td style="text-align: center; padding: 8px;">48.23</td>
+                        <td style="text-align: center; padding: 8px;">30.90</td>
+                        <td style="text-align: center; padding: 8px;">41.81</td>
+                        <td style="text-align: center; padding: 8px;">22.13</td>
+                        <td style="text-align: center; padding: 8px;">30.75</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">Video-R1-7B</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">37.10</td>
+                        <td style="text-align: center; padding: 8px;">48.25</td>
+                        <td style="text-align: center; padding: 8px;">33.67</td>
+                        <td style="text-align: center; padding: 8px;">44.94</td>
+                        <td style="text-align: center; padding: 8px;">43.16</td>
+                        <td style="text-align: center; padding: 8px;">53.37</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">Qwen2.5-VL</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">✗</td>
+                        <td style="text-align: center; padding: 8px;">26.53</td>
+                        <td style="text-align: center; padding: 8px;">44.91</td>
+                        <td style="text-align: center; padding: 8px;">24.34</td>
+                        <td style="text-align: center; padding: 8px;">39.60</td>
+                        <td style="text-align: center; padding: 8px;">32.81</td>
+                        <td style="text-align: center; padding: 8px;">50.82</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: left; padding: 8px;">Pixel-Reasoner</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">52.91</td>
+                        <td style="text-align: center; padding: 8px;">61.44</td>
+                        <td style="text-align: center; padding: 8px;">48.88</td>
+                        <td style="text-align: center; padding: 8px;">58.23</td>
+                        <td style="text-align: center; padding: 8px;">58.97</td>
+                        <td style="text-align: center; padding: 8px;">65.32</td>
+                      </tr>
+                      <tr style="background: linear-gradient(90deg, rgba(255, 107, 157, 0.2), rgba(74, 144, 226, 0.2));">
+                        <td style="text-align: left; padding: 8px;"><strong>Video-R4-7B (ours)</strong></td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;">✓</td>
+                        <td style="text-align: center; padding: 8px;"><strong>56.17</strong></td>
+                        <td style="text-align: center; padding: 8px;"><strong>65.22</strong></td>
+                        <td style="text-align: center; padding: 8px;"><strong>52.69</strong></td>
+                        <td style="text-align: center; padding: 8px;"><strong>61.89</strong></td>
+                        <td style="text-align: center; padding: 8px;"><strong>64.21</strong></td>
+                        <td style="text-align: center; padding: 8px;"><strong>69.99</strong></td>
+                      </tr>
+                      <tr style="background: linear-gradient(90deg, rgba(155, 89, 182, 0.15), rgba(74, 144, 226, 0.15));">
+                        <td style="text-align: left; padding: 8px; font-weight: normal;">Human</td>
+                        <td style="text-align: center; padding: 8px; font-weight: normal;">--</td>
+                        <td style="text-align: center; padding: 8px; font-weight: normal;">--</td>
+                        <td style="text-align: center; padding: 8px; font-weight: normal;">--</td>
+                        <td style="text-align: center; padding: 8px; font-weight: normal;">85.27</td>
+                        <td style="text-align: center; padding: 8px; font-weight: normal;">89.30</td>
+                        <td style="text-align: center; padding: 8px; font-weight: normal;">78.41</td>
+                        <td style="text-align: center; padding: 8px; font-weight: normal;">82.80</td>
+                        <td style="text-align: center; padding: 8px; font-weight: normal;">82.26</td>
+                        <td style="text-align: center; padding: 8px; font-weight: normal;">85.10</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="columns is-centered">
+            <div class="column is-full has-text-centered content">
+              <h2 class="title is-3">🕹️ Generalization to Other Tasks</h2>
+              <div class="content">
+                <p>
+                  Fine-tuning on <strong>Video-R4-CoT-17k</strong> and <strong>Video-R4-RL-30k</strong>, Video-R4
+                  demonstrates strong generalization capabilities, effectively handling not only <strong>general video
+                    QA</strong> but also <strong>multi-page document QA</strong> and <strong>slides QA</strong>, without
+                  the need for further dataset-specific training.
+                </p>
+
+                <div style="display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin-top: 30px;">
+                  <!-- Left Column: General Video QA and MP-DocVQA -->
+                  <div style="flex: 1; min-width: 300px; max-width: 48%;">
+                    <h3 class="title is-5" style="margin-bottom: 15px;">Results on general video QA benchmarks</h3>
+                    <div style="overflow-x: auto;">
+                      <table style="width: 100%; border-collapse: collapse; margin-bottom: 30px;">
+                        <thead>
+                          <tr>
+                            <th style="text-align: left; padding: 8px; border-bottom: 2px solid #ddd;">
+                              <strong>Models</strong></th>
+                            <th style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;">
+                              <strong>MVBench</strong></th>
+                            <th style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;">
+                              <strong>Video-MME</strong></th>
+                            <th style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;">
+                              <strong>Video-MMMU</strong></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">Video-LLaVA-7B</td>
+                            <td style="text-align: center; padding: 8px;">42.9</td>
+                            <td style="text-align: center; padding: 8px;">39.9</td>
+                            <td style="text-align: center; padding: 8px;">--</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">VideoLLaMA2-7B</td>
+                            <td style="text-align: center; padding: 8px;">54.6</td>
+                            <td style="text-align: center; padding: 8px;">46.6</td>
+                            <td style="text-align: center; padding: 8px;">--</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">Qwen2.5-VL-7B</td>
+                            <td style="text-align: center; padding: 8px;">57.4</td>
+                            <td style="text-align: center; padding: 8px;">53.1</td>
+                            <td style="text-align: center; padding: 8px;">47.8</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">Video-R1-7B</td>
+                            <td style="text-align: center; padding: 8px;">62.7</td>
+                            <td style="text-align: center; padding: 8px;"><strong>57.4</strong></td>
+                            <td style="text-align: center; padding: 8px; text-decoration: underline;">49.8</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">Pixel-Reasoner</td>
+                            <td style="text-align: center; padding: 8px;"><strong>65.4</strong></td>
+                            <td style="text-align: center; padding: 8px; text-decoration: underline;">54.6</td>
+                            <td style="text-align: center; padding: 8px;">47.7</td>
+                          </tr>
+                          <tr style="background: linear-gradient(90deg, rgba(255, 107, 157, 0.2), rgba(74, 144, 226, 0.2));">
+                            <td style="text-align: left; padding: 8px;"><strong>Video-R4-7B (ours)</strong></td>
+                            <td style="text-align: center; padding: 8px; text-decoration: underline;">64.5</td>
+                            <td style="text-align: center; padding: 8px;">54.5</td>
+                            <td style="text-align: center; padding: 8px;"><strong>52.2</strong></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+
+                    <h3 class="title is-5" style="margin-bottom: 15px; margin-top: 30px;">Results on the validation set
+                      of the MP-DocVQA dataset</h3>
+                    <div style="overflow-x: auto;">
+                      <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                          <tr>
+                            <th style="text-align: left; padding: 8px; border-bottom: 2px solid #ddd;">
+                              <strong>Models</strong></th>
+                            <th style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;">
+                              <strong>Zero-Shot</strong></th>
+                            <th style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;"><strong>Acc.
+                                (%)</strong></th>
+                            <th style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;"><strong>ANLS
+                                (%)</strong></th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">LayoutLMv3</td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">38.47</td>
+                            <td style="text-align: center; padding: 8px;">45.38</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">Big-Bird</td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">41.06</td>
+                            <td style="text-align: center; padding: 8px;">49.29</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">Hi-VT5 (w/o train)</td>
+                            <td style="text-align: center; padding: 8px;">✓</td>
+                            <td style="text-align: center; padding: 8px;">42.10</td>
+                            <td style="text-align: center; padding: 8px;">58.64</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">Longformer</td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">43.91</td>
+                            <td style="text-align: center; padding: 8px;">52.87</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">Hi-VT5</td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">48.28</td>
+                            <td style="text-align: center; padding: 8px;">62.01</td>
+                          </tr>
+                          <tr style="background: linear-gradient(90deg, rgba(255, 107, 157, 0.2), rgba(74, 144, 226, 0.2));">
+                            <td style="text-align: left; padding: 8px;"><strong>Video-R4-7B (ours)</strong></td>
+                            <td style="text-align: center; padding: 8px;">✓</td>
+                            <td style="text-align: center; padding: 8px;"><strong>53.21</strong></td>
+                            <td style="text-align: center; padding: 8px;"><strong>62.22</strong></td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+
+                  <!-- Right Column: SlidesVQA -->
+                  <div style="flex: 1; min-width: 300px; max-width: 48%;">
+                    <h3 class="title is-5" style="margin-bottom: 15px;">Results on the test set of SlidesVQA</h3>
+                    <div style="overflow-x: auto;">
+                      <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                          <tr>
+                            <th rowspan="2"
+                              style="text-align: left; padding: 8px; border-bottom: 2px solid #ddd; vertical-align: middle;">
+                              <strong>Models</strong></th>
+                            <th rowspan="2"
+                              style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd; vertical-align: middle;">
+                              <strong>Zero-Shot</strong></th>
+                            <th colspan="2" style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;">
+                              <strong>Dev</strong></th>
+                            <th colspan="2" style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;">
+                              <strong>Test</strong></th>
+                          </tr>
+                          <tr>
+                            <th style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;">EM</th>
+                            <th style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;">F1</th>
+                            <th style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;">EM</th>
+                            <th style="text-align: center; padding: 8px; border-bottom: 2px solid #ddd;">F1</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">Q-only</td>
+                            <td style="text-align: center; padding: 8px;">✓</td>
+                            <td style="text-align: center; padding: 8px;">9.4</td>
+                            <td style="text-align: center; padding: 8px;">11.4</td>
+                            <td style="text-align: center; padding: 8px;">10.7</td>
+                            <td style="text-align: center; padding: 8px;">13.5</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">UniVL</td>
+                            <td style="text-align: center; padding: 8px;">✓</td>
+                            <td style="text-align: center; padding: 8px;">8.8</td>
+                            <td style="text-align: center; padding: 8px;">12.1</td>
+                            <td style="text-align: center; padding: 8px;">10.6</td>
+                            <td style="text-align: center; padding: 8px;">14.1</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">PreasM</td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">36.3</td>
+                            <td style="text-align: center; padding: 8px;">41.9</td>
+                            <td style="text-align: center; padding: 8px;">30.7</td>
+                            <td style="text-align: center; padding: 8px;">38.2</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">T5</td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">35.2</td>
+                            <td style="text-align: center; padding: 8px;">41.3</td>
+                            <td style="text-align: center; padding: 8px;">29.3</td>
+                            <td style="text-align: center; padding: 8px;">37.9</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">T5 + z<sup>lay</sup></td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">36.9</td>
+                            <td style="text-align: center; padding: 8px;">43.2</td>
+                            <td style="text-align: center; padding: 8px;">31.0</td>
+                            <td style="text-align: center; padding: 8px;">39.7</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">LayoutT5</td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">38.9</td>
+                            <td style="text-align: center; padding: 8px;">44.8</td>
+                            <td style="text-align: center; padding: 8px;">31.7</td>
+                            <td style="text-align: center; padding: 8px;">39.9</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">LayoutLMv2</td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">26.5</td>
+                            <td style="text-align: center; padding: 8px;">33.4</td>
+                            <td style="text-align: center; padding: 8px;">21.4</td>
+                            <td style="text-align: center; padding: 8px;">29.3</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">FiD</td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">37.6</td>
+                            <td style="text-align: center; padding: 8px;">42.9</td>
+                            <td style="text-align: center; padding: 8px;">30.4</td>
+                            <td style="text-align: center; padding: 8px;">38.9</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">FiD + z<sup>lay</sup></td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">38.1</td>
+                            <td style="text-align: center; padding: 8px;">43.3</td>
+                            <td style="text-align: center; padding: 8px;">30.6</td>
+                            <td style="text-align: center; padding: 8px;">38.9</td>
+                          </tr>
+                          <tr>
+                            <td style="text-align: left; padding: 8px;">M3D</td>
+                            <td style="text-align: center; padding: 8px;">✗</td>
+                            <td style="text-align: center; padding: 8px;">41.3</td>
+                            <td style="text-align: center; padding: 8px;">47.1</td>
+                            <td style="text-align: center; padding: 8px;">33.5</td>
+                            <td style="text-align: center; padding: 8px;">41.7</td>
+                          </tr>
+                          <tr style="background: linear-gradient(90deg, rgba(255, 107, 157, 0.2), rgba(74, 144, 226, 0.2));">
+                            <td style="text-align: left; padding: 8px;"><strong>Video-R4-7B (ours)</strong></td>
+                            <td style="text-align: center; padding: 8px;">✓</td>
+                            <td style="text-align: center; padding: 8px;"><strong>49.5</strong></td>
+                            <td style="text-align: center; padding: 8px;"><strong>56.0</strong></td>
+                            <td style="text-align: center; padding: 8px;"><strong>43.0</strong></td>
+                            <td style="text-align: center; padding: 8px;"><strong>52.2</strong></td>
+                          </tr>
+                          <tr style="background-color: #f5f5f5;">
+                            <td style="text-align: left; padding: 8px; font-weight: normal;">Human</td>
+                            <td style="text-align: center; padding: 8px; font-weight: normal;">--</td>
+                            <td style="text-align: center; padding: 8px; font-weight: normal;">--</td>
+                            <td style="text-align: center; padding: 8px; font-weight: normal;">--</td>
+                            <td style="text-align: center; padding: 8px; font-weight: normal;">89.8</td>
+                            <td style="text-align: center; padding: 8px; font-weight: normal;">93.0</td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+      </section>
+
+      <!-- <section class="section">
+  <div class="container">
+    <div class="columns is-centered">
+      <div class="column is-full has-text-centered content">
+        <h2 class="title is-3" id="leaderboard">🏆 Leaderboard</h2>
+        <div class="content">
+            <p>
+              <strong>Performance of MLLMs on MMPerspective.</strong> Models are grouped by size and ranked by overall accuracy. Best scores in each group are bolded.
+            </p> -->
+
+
+
+
+      <h2 class="title is-3 has-text-centered"> 📺 Visualizations</h2>
+      <img src="static/images/vis_1.png" alt="visualization-1"
+        style="max-width: 60%; display: block; margin: 0 auto;" />
+      <p style="margin-top: 15px; font-style: italic; color: #7d3c98; text-align: center;">
+        Visualization of the iterative visual rumination process.
+      </p>
+      <br><br>
+      <img src="static/images/vis_2.png" alt="visualization-2"
+        style="max-width: 60%; display: block; margin: 0 auto;" />
+      <p style="margin-top: 15px; font-style: italic; color: #7d3c98; text-align: center;">
+        Visualization of the iterative visual rumination process.
+      </p>
+
+
+
+      <section class="hero is-light is-small">
+        <div class="hero-body has-text-centered">
+          <h1 class="title is-1 mathvista_other">
+            <span class="mathvista_other" style="vertical-align: middle">🙏 Acknowledgments</span>
+          </h1>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="container">
+          <div class="columns is-centered has-text-centered">
+            <div class="column is-four-fifths">
+              <div class="content has-text-justified" style="max-width: 100%; margin: 0 auto;">
+                <p style="text-align: center;">
+                  This work was supported by Sony Group Corporation. We would like to thank Sayaka Nakamura and Jerry Jun Yokono for their insightful discussion. We also thank the authors of the following projects for their contributions: <a href="https://github.com/bytedance/VTVQA" target="_blank" style="margin: 0 0px;">M4-ViteVQA</a>,
+                    <a href="https://github.com/nttmdlab-nlp/SlideVQA" target="_blank" style="margin: 0 0px;">SlideVQA</a>,
+                    <a href="https://github.com/rubenpt91/MP-DocVQA-Framework" target="_blank" style="margin: 0 0px;">MP-DocVQA</a>,
+                    <a href="https://github.com/huggingface/open-r1" target="_blank" style="margin: 0 0px;">Open-R1</a>,
+                    <a href="https://github.com/OpenRLHF/OpenRLHF" target="_blank" style="margin: 0 0px;">OpenRLHF</a>,
+                    <a href="https://github.com/ray-project/ray" target="_blank" style="margin: 0 0px;">Ray</a>,
+                    <a href="https://huggingface.co/collections/Qwen/qwen25-vl" target="_blank" style="margin: 0 0px;">Qwen2.5-VL</a>,
+                    <a href="https://github.com/tulerfeng/Video-R1" target="_blank" style="margin: 0 0px;">Video-R1</a>,
+                    <a href="https://github.com/TIGER-AI-Lab/Pixel-Reasoner" target="_blank" style="margin: 0 0px;">Pixel-Reasoner</a>,
+                    <a href="https://github.com/deepseek-ai/DeepSeek-R1" target="_blank" style="margin: 0 0px;">DeepSeek-R1</a>,
+                    <a href="https://huggingface.co/datasets/OpenGVLab/MVBench" target="_blank" style="margin: 0 0px;">MVBench</a>,
+                    <a href="https://github.com/MME-Benchmarks/Video-MME" target="_blank" style="margin: 0 0px;">Video-MME</a>,
+                    <a href="https://videommmu.github.io/" target="_blank" style="margin: 0 0px;">Video-MMMU</a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="hero is-light is-small">
+        <div class="hero-body has-text-centered">
+          <h1 class="title is-1 mathvista_other">
+            <span class="mathvista_other" style="vertical-align: middle" id="citation">📃 Citation</span>
+          </h1>
+        </div>
+      </section>
+      <!-- </section> -->
+      <!-- <section class="hero is-light is-small">
+  <div class="hero-body has-text-centered">
+    <h1 class="title is-1 mathvista_other" id="citation">Citation</h1>
+  </div>
+</section> -->
+
+      <section class="section" id="BibTeX">
+        <div class="container is-max-desktop content">
+          <button id="copyBibtexBtn" class="copy-button" onclick="copyBibtex()" title="Copy to clipboard">
+            <i class="fas fa-copy"></i>
+            <span>Copy</span>
+          </button>
+          <pre><code id="bibtexCode">
+      @article{tang2025videor4,
+        title={Video-R4: Reinforcing Text-Rich Video Reasoning with Visual Rumination},
+        author={Tang, Yolo Yunlong and Shimada, Daiki and Hua, Hang and Huang, Chao and Bi, Jing and Feris, Rogerio and Xu, Chenliang},
+        journal={arXiv preprint arXiv:2511.17490},
+        year={2025}
+      }
+</code></pre>
+        </div>
+      </section>
+
+
+      <footer class="footer">
+        <!-- <div class="container"> -->
+        <div class="columns is-centered">
+          <div class="column is-8">
+            <div class="content">
+              <p style="text-align: center;">
+                This website is adapted from <a href="https://mathvista.github.io/">MathVista</a>, licensed under a <a
+                  rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative
+                  Commons Attribution-ShareAlike 4.0 International License</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+        <!-- </div> -->
+      </footer>
+
+  <script>
+    function copyBibtex() {
+      const bibtexCode = document.getElementById('bibtexCode').textContent;
+      const textToCopy = bibtexCode.trim();
+      
+      navigator.clipboard.writeText(textToCopy).then(function() {
+        const btn = document.getElementById('copyBibtexBtn');
+        const originalHTML = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-check"></i> <span>Copied!</span>';
+        btn.style.background = 'linear-gradient(135deg, #4a90e2 0%, #9b59b6 100%)';
+        
+        setTimeout(function() {
+          btn.innerHTML = originalHTML;
+          btn.style.background = '';
+        }, 2000);
+      }).catch(function(err) {
+        console.error('Failed to copy: ', err);
+        alert('Failed to copy to clipboard');
+      });
+    }
+  </script>
+
+</body>
+
+</html><html>
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title> Video-R4 </title>
+
+  <link rel="icon" href="./static/images/logo.png">
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+
+  <!-- MathJax -->
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']]
+      }
+    };
+  </script>
+  <link rel="stylesheet" href="./static/css/leaderboard.css">
+  <link rel="stylesheet" href="./static/css/video-player.css">
+
+  <!-- <link href="https://unpkg.com/tabulator-tables@5.5.2/dist/css/tabulator_bulma.min.css" rel="stylesheet">
+  <script type="text/javascript" src="https://unpkg.com/tabulator-tables@5.5.2/dist/js/tabulator.min.js"></script> -->
+  <script type="text/javascript" src="static/js/sort-table.js" defer></script>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/explorer-index.js"></script>
+  <script src="./static/js/question_card.js"></script>
+
+  <script src="./static/js/leaderboard_testmini.js"></script>
+  <!-- <script src="./data/results/output_folders.js" defer></script>
+  <script src="./data/results/model_scores.js" defer></script>
+
+  <script src="./visualizer/data/data_public.js" defer></script> -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const columns = [4, 5, 6, 7, 8, 9];
+      columns.forEach(colIndex => {
+        let maxVal = -Infinity;
+        let maxCell = null;
+        let cells = document.querySelectorAll(`#results tbody tr td:nth-child(${colIndex + 1})`);
+        cells.forEach(cell => {
+          // Skip Human row - check if the row contains "Human" in the first cell
+          const row = cell.parentElement;
+          const firstCell = row.querySelector('td:first-child');
+          if (firstCell && firstCell.textContent.trim() === 'Human') {
+            return; // Skip this cell
+          }
+
+          let cellValue = parseFloat(cell.textContent);
+          if (!isNaN(cellValue) && cellValue > maxVal) {
+            maxVal = cellValue;
+            maxCell = cell;
+          }
+        });
+        if (maxCell) {
+          maxCell.style.fontWeight = "bold";
+        }
+      });
+    });
+  </script>
+
+</head>
+
+<body>
+
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+
+        <div class="navbar-item has-dropdown is-hoverable">
+          <p style="font-size:18px; display: inline; margin-right: -2px; margin-top: 12px;">🔥</p>
+          <a class="navbar-link">
+            More Research
+          </a>
+          <div class="navbar-dropdown" style="text-align: center;">
+
             <a class="navbar-item" href="https://github.com/yunlong10/Awesome-LLMs-for-Video-Understanding" style="text-align: center;">
               <b>Video Understanding with LLMs Survey</b>
             </a>
