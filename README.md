@@ -1,6 +1,6 @@
 # Video-R4: Reinforcing Text-Rich Video Reasoning with Visual Rumination
 
-> *[Yolo Yunlong Tang](https://yoloytang.me/)<sup>1</sup>,  [Daiki Shimada](https://scholar.google.com/citations?user=1uAwouQAAAAJ&hl=en)<sup>2</sup>, [Hang Hua](https://hanghuacs.notion.site/)<sup>3</sup>, [Chao Huang](https://wikichao.github.io/)<sup>1</sup>, [Jing Bi](https://jing.vision/)<sup>1</sup>, [Rogerio Feris](https://www.rogerioferis.org/)<sup>3</sup>, [Chenliang Xu](https://www.cs.rochester.edu/u/cxu22/)<sup>1</sup>*
+> *[Yolo Y. Tang](https://yoloytang.me/)<sup>1</sup>,  [Daiki Shimada](https://scholar.google.com/citations?user=1uAwouQAAAAJ&hl=en)<sup>2</sup>, [Hang Hua](https://hanghuacs.notion.site/)<sup>3</sup>, [Chao Huang](https://wikichao.github.io/)<sup>1</sup>, [Jing Bi](https://jing.vision/)<sup>1</sup>, [Rogerio Feris](https://www.rogerioferis.org/)<sup>3</sup>, [Chenliang Xu](https://www.cs.rochester.edu/u/cxu22/)<sup>1</sup>*
 
 > *<sup>1</sup>University of Rochester, <sup>2</sup>Sony Group Corporation, <sup>3</sup>MIT-IBM Watson AI Lab*
 
@@ -49,7 +49,7 @@ If you find this work useful, please consider citing:
 ```bibtex
 @article{tang2025video-r4,
   title={Video-R4: Reinforcing Text-Rich Video Reasoning with Visual Rumination},
-  author={Tang, Yunlong and Shimada, Daiku and Hua, Hang and Huang, Chao and Bi, Jing and Feris, Rogerio and Xu, Chenliang},
+  author={Tang, Yolo Y. and Shimada, Daiku and Hua, Hang and Huang, Chao and Bi, Jing and Feris, Rogerio and Xu, Chenliang},
   journal={arXiv preprint arXiv:2511.17490},
   year={2025}
 }
