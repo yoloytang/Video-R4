@@ -1,6 +1,6 @@
 # Video-R4: Reinforcing Text-Rich Video Reasoning with Visual Rumination
 
-> *[Yolo Yunlong Tang](https://yunlong10.github.io/)<sup>1</sup>,  [Daiki Shimada](https://scholar.google.com/citations?user=1uAwouQAAAAJ&hl=en)<sup>2</sup>, [Hang Hua](https://hanghuacs.notion.site/)<sup>3</sup>, [Chao Huang](https://wikichao.github.io/)<sup>1</sup>, [Jing Bi](https://jing.vision/)<sup>1</sup>, [Rogerio Feris](https://www.rogerioferis.org/)<sup>3</sup>, [Chenliang Xu](https://www.cs.rochester.edu/u/cxu22/)<sup>1</sup>*
+> *[Yolo Yunlong Tang](https://yoloytang.me/)<sup>1</sup>,  [Daiki Shimada](https://scholar.google.com/citations?user=1uAwouQAAAAJ&hl=en)<sup>2</sup>, [Hang Hua](https://hanghuacs.notion.site/)<sup>3</sup>, [Chao Huang](https://wikichao.github.io/)<sup>1</sup>, [Jing Bi](https://jing.vision/)<sup>1</sup>, [Rogerio Feris](https://www.rogerioferis.org/)<sup>3</sup>, [Chenliang Xu](https://www.cs.rochester.edu/u/cxu22/)<sup>1</sup>*
 
 > *<sup>1</sup>University of Rochester, <sup>2</sup>Sony Group Corporation, <sup>3</sup>MIT-IBM Watson AI Lab*
 
@@ -8,7 +8,7 @@
   <a href="https://arxiv.org/abs/2511.17490" target="_blank">
     <img src="https://img.shields.io/badge/arXiv-Paper-ff7575.svg?style=for-the-badge&logo=arxiv" alt="arXiv Paper">
   </a>
-  <a href="https://yunlong10.github.io/Video-R4" target="_blank">
+  <a href="https://yoloytang.me/Video-R4" target="_blank">
     <img src="https://img.shields.io/badge/Project%20Page-ffb6c1.svg?style=for-the-badge&logo=github&logoColor=000" alt="Project Page">
   </a>
   <a href="https://huggingface.co/datasets/YOUR_DATASET_PATH" target="_blank">
@@ -38,7 +38,7 @@
 ```bash
 conda create -n video-r4 python=3.10
 conda activate video-r4
-git clone https://github.com/yunlong10/Video-R4.git
+git clone https://github.com/yoloytang/Video-R4.git
 cd Video-R4
 pip install -r requirements.txt
 ```
